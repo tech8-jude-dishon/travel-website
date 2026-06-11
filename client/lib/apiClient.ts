@@ -3,7 +3,10 @@
 // All calls go to our Node.js/Express backend at localhost:4000
 // ============================================================
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+// Fall back to the live API if VITE_API_BASE wasn't inlined at build time
+// (e.g. building on a server without .env.production). A missing value here
+// would otherwise crash the whole app at module load with `undefined.replace`.
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://api-travel.globalconnectworldtravel.com//api';
 
 // Strip /api suffix to get the server origin for static files like /uploads/...
 const API_ORIGIN = API_BASE.replace(/\/api\/?$/, '');
