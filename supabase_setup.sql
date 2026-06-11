@@ -66,3 +66,17 @@ VALUES
   '["/images/delhiicityTwo.png", "/images/delhiiCityThree.png"]'::jsonb,
   '[{"day": "Day 1", "title": "Old Delhi Heritage", "detail": "Visit Red Fort"}]'::jsonb
 );
+
+-- ============================================================
+-- 5. Storage bucket for image uploads
+-- The Node server uploads images here (with the service_role key) and stores
+-- only the public URL in MySQL. Run this once in the SQL Editor.
+-- ============================================================
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('uploads', 'uploads', true)
+ON CONFLICT (id) DO UPDATE SET public = true;
+
+-- Allow anyone to read files from the public bucket
+DROP POLICY IF EXISTS "Public read uploads" ON storage.objects;
+CREATE POLICY "Public read uploads" ON storage.objects
+  FOR SELECT USING (bucket_id = 'uploads');
