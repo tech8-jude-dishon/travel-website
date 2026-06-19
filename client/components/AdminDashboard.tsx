@@ -34,6 +34,7 @@ interface TourPackage {
   region: string;
   category: string;
   image_url: string;
+  flyer_url: string;
   rating: string;
   duration: string;
   guest_capacity: string;
@@ -87,6 +88,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [formStep, setFormStep] = useState(1);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const flyerInputRef = useRef<HTMLInputElement>(null);
   const galleryInputRef = useRef<HTMLInputElement>(null);
   const trendingInputRef = useRef<HTMLInputElement>(null);
   const trendingEditInputRef = useRef<HTMLInputElement>(null);
@@ -551,7 +553,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             <button
               onClick={() => {
                 setView('packages'); setError('');
-                setSelectedPackage({ title: '', slug: '', location: '', region: 'India', category: 'Standard', image_url: '', rating: '5.0 (0)', duration: '', guest_capacity: '4-6 guest', tag: 'Tour', price: '', is_featured: false, overview: '', highlights: [], inclusions: [], exclusions: [], gallery: [], itinerary: [] });
+                setSelectedPackage({ title: '', slug: '', location: '', region: 'India', category: 'Standard', image_url: '', flyer_url: '', rating: '5.0 (0)', duration: '', guest_capacity: '4-6 guest', tag: 'Tour', price: '', is_featured: false, overview: '', highlights: [], inclusions: [], exclusions: [], gallery: [], itinerary: [] });
                 setIsEditingPackage(true); setFormStep(1);
               }}
               className={`w-full text-left px-3 py-2 rounded-lg text-[12px] font-semibold transition-all flex items-center gap-2.5 ${view === 'packages' && isEditingPackage && !selectedPackage?.id ? 'text-[#38BDF8]' : 'text-slate-500 hover:text-slate-300'}`}
@@ -606,7 +608,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           <button
             onClick={() => {
               setView('packages'); setError('');
-              setSelectedPackage({ title: '', slug: '', location: '', region: 'India', category: 'Standard', image_url: '', rating: '5.0 (0)', duration: '', guest_capacity: '4-6 guest', tag: 'Tour', price: '', is_featured: false, overview: '', highlights: [], inclusions: [], exclusions: [], gallery: [], itinerary: [] });
+              setSelectedPackage({ title: '', slug: '', location: '', region: 'India', category: 'Standard', image_url: '', flyer_url: '', rating: '5.0 (0)', duration: '', guest_capacity: '4-6 guest', tag: 'Tour', price: '', is_featured: false, overview: '', highlights: [], inclusions: [], exclusions: [], gallery: [], itinerary: [] });
               setIsEditingPackage(true); setFormStep(1);
             }}
             className="w-full bg-[#38BDF8]/10 hover:bg-[#38BDF8]/20 border border-[#38BDF8]/20 text-[#38BDF8] px-4 py-3 rounded-xl text-[12px] font-bold flex items-center justify-center gap-2 transition-all"
@@ -986,7 +988,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         onClick={() => {
                           setSelectedPackage({
                             title: '', slug: '', location: '', region: 'India', category: 'Standard',
-                            image_url: '', rating: '5.0 (0)', duration: '', guest_capacity: '4-6 guest',
+                            image_url: '', flyer_url: '', rating: '5.0 (0)', duration: '', guest_capacity: '4-6 guest',
                             tag: 'Tour', price: '', is_featured: false, overview: '',
                             highlights: [], inclusions: [], exclusions: [], gallery: [], itinerary: []
                           });
@@ -1235,6 +1237,69 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                                 )}
                               </div>
                             </div>
+
+                            {/* Downloadable Flyer */}
+                            <div className="space-y-4 pt-8 mt-2 border-t border-slate-100">
+                              <div>
+                                <label className="text-[11px] font-black text-slate-500 uppercase">Tour Flyer (Download)</label>
+                                <p className="text-[10px] text-slate-400 font-bold mt-1">Shown as a "Download Flyer" button on the package page. Leave empty to hide it.</p>
+                              </div>
+                              <div className="space-y-6">
+                                <div className="w-full max-w-xl relative group">
+                                  <input
+                                    value={selectedPackage.flyer_url}
+                                    onChange={e => setSelectedPackage({ ...selectedPackage, flyer_url: e.target.value })}
+                                    className="w-full bg-[#F3F4F6] border border-transparent focus:bg-white focus:border-indigo-500 rounded-lg px-4 py-3 text-sm font-bold outline-none transition-all pr-32"
+                                    placeholder="Paste flyer image URL or upload..."
+                                  />
+                                  <div className="absolute right-2 top-2 bottom-2">
+                                    <input
+                                      type="file"
+                                      ref={flyerInputRef}
+                                      className="hidden"
+                                      accept="image/*"
+                                      onChange={async (e) => {
+                                        const file = e.target.files?.[0];
+                                        if (file) {
+                                          const url = await handleFileUpload(file);
+                                          if (url) setSelectedPackage({ ...selectedPackage, flyer_url: url });
+                                        }
+                                      }}
+                                    />
+                                    <button
+                                      type="button"
+                                      onClick={() => flyerInputRef.current?.click()}
+                                      disabled={isUploading}
+                                      className="h-full bg-white text-indigo-600 px-4 rounded-md text-[10px] font-black uppercase flex items-center gap-2 border border-slate-200 hover:border-indigo-300 transition-all shadow-sm"
+                                    >
+                                      {isUploading ? <RefreshCcw className="w-3 h-3 animate-spin" /> : <Upload className="w-3 h-3" />}
+                                      Upload
+                                    </button>
+                                  </div>
+                                </div>
+
+                                <div className="w-full max-w-sm h-44 rounded-2xl bg-slate-50 border-2 border-dashed border-slate-200 overflow-hidden flex items-center justify-center relative group">
+                                  {selectedPackage.flyer_url ? (
+                                    <>
+                                      <img loading="lazy" src={resolveImageUrl(selectedPackage.flyer_url)} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" />
+                                      <button
+                                        type="button"
+                                        onClick={() => setSelectedPackage({ ...selectedPackage, flyer_url: '' })}
+                                        className="absolute top-2 right-2 bg-red-500 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:scale-110"
+                                      >
+                                        <Trash2 className="w-3.5 h-3.5" />
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <div className="text-center space-y-2">
+                                      <ImageIcon className="w-10 h-10 text-slate-300 mx-auto" />
+                                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">No Flyer Selected</p>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+
                             <div className="flex justify-between items-center pt-8 border-t border-slate-100 mt-8">
                               <button
                                 type="button"

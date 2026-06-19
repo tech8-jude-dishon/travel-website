@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS tour_packages (
   region VARCHAR(100),
   category VARCHAR(100),
   image_url TEXT,
+  flyer_url TEXT,
   rating VARCHAR(10),
   duration VARCHAR(100),
   guest_capacity VARCHAR(100),
@@ -56,6 +57,11 @@ CREATE TABLE IF NOT EXISTS tour_packages (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+-- Migration for existing databases: add flyer_url if it does not exist.
+-- (MySQL < 8.0 lacks "ADD COLUMN IF NOT EXISTS"; run this once, ignore the
+-- "Duplicate column name" error if the column already exists.)
+ALTER TABLE tour_packages ADD COLUMN flyer_url TEXT AFTER image_url;
 
 -- ============================================================
 -- Table: travel_details  (booking / general enquiries)

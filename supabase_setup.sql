@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS tour_packages (
   region TEXT, -- 'India', 'Dubai', 'International'
   category TEXT, -- 'Local', 'Standard', 'North', 'South', etc.
   image_url TEXT,
+  flyer_url TEXT,
   rating TEXT,
   duration TEXT,
   guest_capacity TEXT,
