@@ -83,7 +83,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
   ];
 
   return (
-    <footer className="global-page-container">
+    <footer className="global-page-container" style={{ background: 'aliceblue' }}>
 
 
       {/* <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 border-t border-brand-dark/5 pt-20">
@@ -176,9 +176,9 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
           {/* Column 1: Brand */}
           <div className="lg:col-span-2 space-y-6">
             <img loading="lazy"
-              src="/images/logo.png"
+              src="/images/footer-logo.png"
               alt="Global Connect"
-              className="h-16 md:h-20 w-auto object-contai"
+              className="h-16 md:h-20 w-auto object-contain"
             />
             <p className="text-sm text-slate-600 mt-2 leading-relaxed hidden lg:block">
               Travel the world, discover new places, and create unforgettable memories.

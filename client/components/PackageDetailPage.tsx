@@ -156,7 +156,7 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800">
       {/* Hero Section */}
-      <div className="w-full lg:h-[70vh] h-[50vh] flex items-center relative overflow-hidden" style={{
+      <div className="w-full h-[40vh] flex items-center relative overflow-hidden" style={{
         backgroundImage: "url('https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774933647/PackageDetailBg_compressed_rzm1uo.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center right",
@@ -164,19 +164,6 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
       }}>
         <div className="max-w-[1440px] mx-auto w-full px-6 md:px-14 relative z-10 ">
           <div className="flex flex-col lg:gap-8 max-w-5xl">
-            {/* Top row: Badge and Rating */}
-            <div className="flex flex-wrap items-center gap-6">
-
-              <div className="flex items-center gap-1.5 bg-black/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-[#FFB700] text-[#FFB700]" />
-                  ))}
-                </div>
-                <span className="text-white text-xs font-bold ml-2">({packageData.rating?.match(/\(([^)]+)\)/)?.[1] || '4.8'})</span>
-              </div>
-            </div>
-
             {/* Title */}
             <h1 className="text-3xl text-center lg:text-left lg:text-[50px] font-sans font-black text-white leading-[1] tracking-tight drop-shadow-2xl">
               {packageData.title}
@@ -223,43 +210,48 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
         </div> */}
 
         {/* Header Section */}
-        <div className="flex flex-col gap-4 mb-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <h1 className="text-3xl md:text-[36px] font-black text-slate-900 tracking-tight leading-tight">{packageData.title}</h1>
-            <div className="flex items-center gap-2 text-sm font-bold bg-white p-1 rounded-xl">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 rounded-lg">
-                <span className="text-slate-800">{packageData.rating?.split(' ')[0] || '4.8'}</span>
-                <Star className="w-4 h-4 fill-[#FFB100] text-[#FFB100]" />
-                <span className="text-slate-400 font-bold ml-1">({packageData.rating?.match(/\(([^)]+)\)/)?.[1] || '124'})</span>
-              </div>
-              {packageData.flyer_url && (
-                <button
-                  type="button"
-                  onClick={() => setShowFlyer(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#00A9D7] text-white rounded-lg text-[11px] font-black uppercase tracking-widest hover:bg-[#008db3] transition-all shadow-sm"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  Download Flyer
-                </button>
+        <div className="flex flex-col gap-6 mb-10 pb-8 border-b border-slate-100">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
+            <div className="space-y-3">
+              {packageData.location && (
+                <p className="flex items-center gap-1.5 text-[12px] font-medium tracking-wide text-slate-400">
+                  <MapPin className="w-3.5 h-3.5" /> {packageData.location}
+                </p>
               )}
+              <h1 className="text-3xl md:text-[42px] font-serif font-semibold text-slate-900 tracking-tight leading-[1.1]">{packageData.title}</h1>
             </div>
+            {packageData.flyer_url && (
+              <button
+                type="button"
+                onClick={() => setShowFlyer(true)}
+                className="self-start md:self-auto flex items-center gap-2 px-5 py-2.5 border border-slate-300 text-slate-700 rounded-full text-[11px] font-semibold uppercase tracking-[0.15em] hover:border-slate-900 hover:text-slate-900 transition-colors"
+              >
+                <Download className="w-3.5 h-3.5" />
+                Download Flyer
+              </button>
+            )}
           </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-2 border border-slate-200 px-3 py-1.5 rounded-lg bg-white shadow-sm">
-              <Share2 className="w-3.5 h-3.5 text-[#00A9D7]" />
-              <span className="text-[11px] font-black text-slate-600 uppercase tracking-widest">Share</span>
+          <div className="flex flex-wrap items-center gap-5 text-slate-500">
+            <div className="flex items-center gap-1.5">
+              <Star className="w-4 h-4 fill-[#FFB100] text-[#FFB100]" />
+              <span className="text-slate-900 font-semibold text-sm">{packageData.rating?.split(' ')[0] || '4.8'}</span>
+              <span className="text-slate-400 text-sm font-normal">({packageData.rating?.match(/\(([^)]+)\)/)?.[1] || '124'} reviews)</span>
             </div>
-            <div className="flex items-center gap-2 border border-slate-200 px-3 py-1.5 rounded-lg bg-white shadow-sm">
-              <Calendar className="w-3.5 h-3.5 text-slate-400" />
-              <span className="text-[11px] font-black text-slate-800 uppercase tracking-widest">{packageData.duration}</span>
+            <div className="w-px h-4 bg-slate-200" />
+            <div className="flex items-center gap-2 text-[13px] font-medium tracking-wide">
+              <Calendar className="w-4 h-4 text-slate-400" /> {packageData.duration}
             </div>
+            <div className="w-px h-4 bg-slate-200" />
+            <button className="flex items-center gap-2 text-[13px] font-medium tracking-wide hover:text-slate-900 transition-colors">
+              <Share2 className="w-4 h-4 text-slate-400" /> Share
+            </button>
           </div>
         </div>
 
         {/* Gallery Section */}
-        <div className="flex flex-col md:flex-row gap-4 h-auto md:h-[520px] w-full group/gallery mb-12">
+        <div className="flex flex-col md:flex-row gap-3 h-auto md:h-[500px] w-full group/gallery mb-14">
           {/* Left: Main Large Image */}
-          <div className="w-full md:w-1/2 relative h-[350px] md:h-auto overflow-hidden rounded-[2rem]">
+          <div className="w-full md:w-1/2 relative h-[350px] md:h-auto overflow-hidden rounded-xl">
             <img loading="lazy"
               src={allImages[0]}
               alt={packageData.title}
@@ -268,13 +260,13 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
           </div>
 
           {/* Right: 2x2 Grid */}
-          <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-4 h-[450px] md:h-auto">
+          <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-3 h-[450px] md:h-auto">
             {[1, 2, 3, 4].map((idx) => (
-              <div key={idx} className="relative overflow-hidden rounded-[2rem]">
+              <div key={idx} className="relative overflow-hidden rounded-xl">
                 <img loading="lazy"
                   src={allImages[idx] || allImages[0]}
                   alt=""
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
 
               </div>
@@ -287,13 +279,13 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
           {/* Left Column: Overview & Highlights (68%) */}
           <div className="w-full lg:w-[68%] space-y-12">
             {/* Main Tabs */}
-            <div className="overflow-x-auto overflow-y-hidden border-b border-slate-100 mb-10">
-              <div className="flex items-center gap-6 min-w-max">
+            <div className="overflow-x-auto overflow-y-hidden border-b border-slate-200 mb-10">
+              <div className="flex items-center gap-8 min-w-max">
                 {['OVERVIEW', 'ITINERARY', 'INCLUSIONS', 'REVIEWS'].map((tab) => (
                   <button
                     key={tab}
-                    className={`text-[13px] font-black tracking-widest pb-4 transition-all relative whitespace-nowrap ${activeTab === tab.toLowerCase()
-                      ? 'text-[#00A9D7]'
+                    className={`text-[12px] font-semibold uppercase tracking-[0.18em] pb-4 transition-colors relative whitespace-nowrap ${activeTab === tab.toLowerCase()
+                      ? 'text-slate-900'
                       : 'text-slate-400 hover:text-slate-600'
                       }`}
                     onClick={() => setActiveTab(tab.toLowerCase())}
@@ -302,7 +294,7 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                     {activeTab === tab.toLowerCase() && (
                       <motion.div
                         layoutId="activeTab"
-                        className="absolute bottom-0 left-0 right-0 h-1 bg-[#00A9D7] rounded-full"
+                        className="absolute -bottom-px left-0 right-0 h-0.5 bg-slate-900"
                       />
                     )}
                   </button>
@@ -313,10 +305,13 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
             {/* Content Area */}
             <div className="space-y-10 min-h-[400px]">
               {activeTab === 'overview' && (
-                <div className="space-y-10 animate-in fade-in duration-500">
-                  <div className="space-y-6">
-                    <h2 className="text-3xl font-black text-slate-900 tracking-tight">Tour Overview</h2>
-                    <div className="space-y-6 text-slate-600 text-lg leading-relaxed font-bold opacity-80">
+                <div className="space-y-14 animate-in fade-in duration-500">
+                  {/* Overview */}
+                  <div className="space-y-5">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">About this tour</p>
+                    <h2 className="text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Tour Overview</h2>
+                    <div className="w-12 h-px bg-slate-300" />
+                    <div className="space-y-5 text-slate-600 text-[17px] leading-[1.85] font-normal max-w-3xl">
                       <p>
                         {packageData.overview || `Experience the breathtaking beauty of ${packageData.location} with our specially curated tour package. This journey is designed to offer an unparalleled experience, blending adventure with relaxation as you explore the most stunning landscapes and hidden gems of the region.`}
                       </p>
@@ -330,9 +325,12 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                     </div>
                   </div>
 
-                  <div className="pt-4 space-y-8">
-                    <h2 className="text-3xl font-black text-slate-900 tracking-tight">Highlights</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+                  {/* Highlights */}
+                  <div className="space-y-5">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">What's included in the experience</p>
+                    <h2 className="text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Highlights</h2>
+                    <div className="w-12 h-px bg-slate-300" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 border-t border-slate-100 mt-2">
                       {(packageData.highlights || [
                         "Spectacular scenic views throughout the journey",
                         "Complimentary welcome drinks and local snacks",
@@ -341,11 +339,9 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                         "Chance to explore hidden local attractions",
                         "Luxury accommodation in top-rated hotels"
                       ]).map((highlight: string, idx: number) => (
-                        <div key={idx} className="flex items-center gap-4 group">
-                          <div className="w-6 h-6 rounded-full bg-[#00A9D7]/10 flex items-center justify-center shrink-0">
-                            <Check className="w-4 h-4 text-[#00A9D7]" />
-                          </div>
-                          <span className="text-slate-700 font-bold text-base">{highlight}</span>
+                        <div key={idx} className="flex items-start gap-3.5 py-4 border-b border-slate-100">
+                          <Check className="w-[18px] h-[18px] text-[#00A9D7] shrink-0 mt-0.5" strokeWidth={2.5} />
+                          <span className="text-slate-700 font-medium text-[15px] leading-relaxed">{highlight}</span>
                         </div>
                       ))}
                     </div>
@@ -354,23 +350,27 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
               )}
 
               {activeTab === 'itinerary' && (
-                <div className="space-y-10 animate-in fade-in duration-500">
-                  <h2 className="text-3xl font-black text-slate-900 tracking-tight">Itinerary</h2>
+                <div className="space-y-8 animate-in fade-in duration-500">
+                  <div className="space-y-5">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">Day by day plan</p>
+                    <h2 className="text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Itinerary</h2>
+                    <div className="w-12 h-px bg-slate-300" />
+                  </div>
                   <div className="relative pl-1">
-                    <div className="absolute left-[13px] top-6 bottom-6 w-[2px] bg-slate-100" />
-                    <div className="space-y-12">
+                    <div className="absolute left-[15px] top-2 bottom-2 w-px bg-slate-200" />
+                    <div className="space-y-10">
                       {(packageData.itinerary || [
                         { title: "Departure & Sunset Cruise", description: "Board the luxury yacht at the marina. Enjoy a welcome reception as we set sail. Experience the spectacular sunset with live music and dinner." },
                         { title: "Coastal Exploration", description: "Wake up to ocean views and enjoy a gourmet breakfast. Anchor near a secluded cove for swimming and paddleboarding. Evening features a dinner under the stars." },
                         { title: "Return Journey", description: "Morning yoga session on the deck followed by brunch. Leisurely cruise back to the marina, arriving by early afternoon with unforgettable memories." }
                       ]).map((item: any, i: number) => (
                         <div key={i} className="relative pl-12 group">
-                          <div className="absolute left-0 top-1 w-7 h-7 rounded-full bg-[#00A9D7] flex items-center justify-center text-white text-[13px] font-black z-10 shadow-lg shadow-blue-200">
+                          <div className="absolute left-0 top-0 w-8 h-8 rounded-full border border-slate-300 bg-white flex items-center justify-center text-slate-500 text-[13px] font-semibold z-10">
                             {i + 1}
                           </div>
-                          <div className="space-y-3">
-                            <div className="text-xl font-black text-slate-900 group-hover:text-[#00A9D7] transition-colors line-clamp-1">Day {i + 1}: {item.title}</div>
-                            <p className="text-slate-600 text-base font-bold opacity-80 leading-relaxed max-w-2xl">
+                          <div className="space-y-2">
+                            <div className="text-lg font-serif font-semibold text-slate-900">Day {i + 1} · {item.title}</div>
+                            <p className="text-slate-600 text-[15px] font-normal leading-relaxed max-w-2xl">
                               {item.detail || item.description || "Explore the local attractions and enjoy the scenic beauty of the region."}
                             </p>
                           </div>
@@ -382,16 +382,17 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
               )}
 
               {activeTab === 'inclusions' && (
-                <div className="space-y-10 animate-in fade-in duration-500">
-                  <h2 className="text-3xl font-black text-slate-900 tracking-tight">What's Included & Excluded</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div className="space-y-8 animate-in fade-in duration-500">
+                  <div className="space-y-5">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">What's covered</p>
+                    <h2 className="text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Inclusions &amp; Exclusions</h2>
+                    <div className="w-12 h-px bg-slate-300" />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 pt-2">
                     {/* Included */}
-                    <div className="space-y-8 p-8 rounded-3xl bg-green-50/30 border border-green-100/50">
-                      <div className="flex items-center gap-3">
-                        <Check className="w-6 h-6 text-green-600" />
-                        <div className="text-xl font-black text-green-600">Included</div>
-                      </div>
-                      <div className="space-y-5">
+                    <div>
+                      <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500 mb-1">Included</h3>
+                      <div className="border-t border-slate-100">
                         {(packageData.inclusions || [
                           "2 nights luxury cabin accommodation",
                           "All meals (Breakfast, Lunch, Dinner)",
@@ -399,20 +400,17 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                           "Use of water sports equipment",
                           "Professional guide and crew"
                         ]).map((item: string, idx: number) => (
-                          <div key={idx} className="flex items-center gap-4 text-slate-700 font-bold opacity-80">
-                            <Check className="w-4 h-4 text-green-500 shrink-0" />
-                            <span>{item}</span>
+                          <div key={idx} className="flex items-start gap-3.5 py-3.5 border-b border-slate-100">
+                            <Check className="w-[18px] h-[18px] text-slate-800 shrink-0 mt-0.5" strokeWidth={2.5} />
+                            <span className="text-slate-700 font-medium text-[15px] leading-relaxed">{item}</span>
                           </div>
                         ))}
                       </div>
                     </div>
                     {/* Excluded */}
-                    <div className="space-y-8 p-8 rounded-3xl bg-red-50/30 border border-red-100/50">
-                      <div className="flex items-center gap-3">
-                        <Plus className="w-6 h-6 text-red-600 rotate-45" />
-                        <div className="text-xl font-black text-red-600">Excluded</div>
-                      </div>
-                      <div className="space-y-5">
+                    <div>
+                      <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500 mb-1">Not Included</h3>
+                      <div className="border-t border-slate-100">
                         {(packageData.exclusions || [
                           "Flights to/from departure point",
                           "Premium alcoholic beverages",
@@ -420,9 +418,9 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                           "Travel insurance",
                           "Gratuities for crew"
                         ]).map((item: string, idx: number) => (
-                          <div key={idx} className="flex items-center gap-4 text-slate-700 font-bold opacity-80">
-                            <Plus className="w-4 h-4 text-red-400 shrink-0 rotate-45" />
-                            <span>{item}</span>
+                          <div key={idx} className="flex items-start gap-3.5 py-3.5 border-b border-slate-100">
+                            <X className="w-[18px] h-[18px] text-slate-300 shrink-0 mt-0.5" strokeWidth={2.5} />
+                            <span className="text-slate-500 font-medium text-[15px] leading-relaxed">{item}</span>
                           </div>
                         ))}
                       </div>
@@ -432,31 +430,35 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
               )}
 
               {activeTab === 'reviews' && (
-                <div className="space-y-12 animate-in fade-in duration-500">
-                  <h2 className="text-3xl font-black text-slate-900 tracking-tight">Guest Reviews</h2>
+                <div className="space-y-10 animate-in fade-in duration-500">
+                  <div className="space-y-5">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">Traveller stories</p>
+                    <h2 className="text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Guest Reviews</h2>
+                    <div className="w-12 h-px bg-slate-300" />
+                  </div>
 
-                  <div className="flex items-center gap-8 bg-slate-50/50 p-4 lg:p-8 rounded-3xl border border-slate-100">
-                    <div className="text-2xl font-black text-slate-900">4.8</div>
-                    <div className="space-y-2">
+                  <div className="flex items-center gap-6 pb-8 border-b border-slate-100">
+                    <div className="text-5xl font-serif font-semibold text-slate-900">4.8</div>
+                    <div className="space-y-1.5">
                       <div className="flex items-center gap-1">
-                        {[...Array(4)].map((_, i) => <Star key={i} className="w-6 h-6 fill-[#FFB700] text-[#FFB700]" />)}
-                        <Star className="w-6 h-6 text-slate-200 fill-slate-200" />
+                        {[...Array(4)].map((_, i) => <Star key={i} className="w-4 h-4 fill-[#FFB700] text-[#FFB700]" />)}
+                        <Star className="w-4 h-4 text-slate-200 fill-slate-200" />
                       </div>
-                      <p className="text-sm font-black text-slate-400 uppercase tracking-widest pl-1">Based on 124 reviews</p>
+                      <p className="text-xs font-medium text-slate-400 tracking-wide">Based on 124 reviews</p>
                     </div>
                   </div>
 
-                  <div className="space-y-0 divide-y divide-slate-100 pb-10">
+                  <div className="space-y-0 divide-y divide-slate-100">
                     {[1, 2, 3].map((_, i) => (
-                      <div key={i} className="py-10 first:pt-0 space-y-4">
+                      <div key={i} className="py-8 first:pt-0 space-y-3">
                         <div className="flex items-center justify-between">
-                          <h4 className="text-xl font-black text-slate-900">Sarah Johnson</h4>
-                          <span className="text-sm font-bold text-slate-400">October 15, 2023</span>
+                          <h4 className="text-lg font-serif font-semibold text-slate-900">Sarah Johnson</h4>
+                          <span className="text-xs font-medium text-slate-400">October 15, 2023</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-[#FFB700] text-[#FFB700]" />)}
+                          {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-[#FFB700] text-[#FFB700]" />)}
                         </div>
-                        <p className="text-slate-600 text-[17px] font-bold leading-relaxed opacity-80 pr-10">
+                        <p className="text-slate-600 text-[15px] font-normal leading-[1.8] max-w-2xl">
                           Absolutely incredible experience! The views were stunning, the crew was attentive and friendly, and the food was top-notch. Highly recommend this tour for anyone looking for a relaxing and beautiful getaway.
                         </p>
                       </div>
@@ -469,98 +471,89 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
 
           {/* Right Column: Detailed Booking Form (32%) */}
           <div className="w-full lg:w-[32%]">
-            <div className="bg-white border-2 border-slate-50 rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.06)] p-8 sticky top-32 space-y-7">
-              {/* Form Fields from Image 2 */}
+            <div className="bg-white border border-slate-100 rounded-2xl shadow-[0_10px_40px_-12px_rgba(15,23,42,0.15)] p-7 sticky top-[10px]">
+              {/* Form Fields */}
               <div className="space-y-5">
                 {/* Selected Package */}
-                <div className="space-y-2">
-                  <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest pl-1">Selected Package</label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      readOnly
-                      value={packageData.title}
-                      className="w-full px-6 py-4 rounded-2xl border-2 border-slate-50 bg-slate-50/50 text-slate-800 font-bold outline-none cursor-not-allowed"
-                    />
-                  </div>
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.15em]">Selected Package</label>
+                  <input
+                    type="text"
+                    readOnly
+                    value={packageData.title}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-800 font-medium text-sm outline-none cursor-not-allowed"
+                  />
                 </div>
 
                 {/* Full Name */}
-                <div className="space-y-2">
-                  <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest pl-1">Full Name</label>
-                  <div className="relative group">
-                    <input
-                      type="text"
-                      name="full_name"
-                      value={formData.full_name}
-                      onChange={handleChange}
-                      placeholder="John Doe"
-                      className="w-full px-6 py-4 rounded-2xl border-2 border-slate-50 bg-slate-50/50 text-slate-600 font-bold outline-none focus:border-[#00A9D7]/20 focus:bg-white transition-all"
-                    />
-                  </div>
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.15em]">Full Name</label>
+                  <input
+                    type="text"
+                    name="full_name"
+                    value={formData.full_name}
+                    onChange={handleChange}
+                    placeholder="John Doe"
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-slate-700 font-medium text-sm outline-none focus:border-slate-900 transition-colors placeholder:text-slate-300 placeholder:font-normal"
+                  />
                 </div>
 
                 {/* Email Address */}
-                <div className="space-y-2">
-                  <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest pl-1">Email Address</label>
-                  <div className="relative group">
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="john@example.com"
-                      className="w-full px-6 py-4 rounded-2xl border-2 border-slate-50 bg-slate-50/50 text-slate-600 font-bold outline-none focus:border-[#00A9D7]/20 focus:bg-white transition-all"
-                    />
-                  </div>
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.15em]">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="john@example.com"
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-slate-700 font-medium text-sm outline-none focus:border-slate-900 transition-colors placeholder:text-slate-300 placeholder:font-normal"
+                  />
                 </div>
 
                 {/* Travel Date */}
-                <div className="space-y-2">
-                  <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest pl-1">Travel Date</label>
-                  <div className="relative group">
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.15em]">Travel Date</label>
+                  <div className="relative">
                     <input
                       type="date"
                       name="travel_date"
                       value={formData.travel_date}
                       onChange={handleChange}
-                      className="w-full px-6 py-4 rounded-2xl border-2 border-slate-50 bg-slate-50/50 text-slate-600 font-bold outline-none focus:border-[#00A9D7]/20 focus:bg-white transition-all appearance-none"
+                      className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-slate-700 font-medium text-sm outline-none focus:border-slate-900 transition-colors appearance-none"
                     />
-                    <Calendar className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
+                    <Calendar className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
                   </div>
                 </div>
 
                 {/* Phone Number */}
-                <div className="space-y-2">
-                  <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest pl-1">Phone Number</label>
-                  <div className="relative group">
+                <div className="space-y-1.5">
+                  <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.15em]">Phone Number</label>
+                  <div className="relative">
                     <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+1 (555) 000-0000"
-                      className="w-full px-6 py-4 rounded-2xl border-2 border-slate-50 bg-slate-50/50 text-slate-600 font-bold outline-none focus:border-[#00A9D7]/20 focus:bg-white transition-all"
+                      className="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white text-slate-700 font-medium text-sm outline-none focus:border-slate-900 transition-colors placeholder:text-slate-300 placeholder:font-normal"
                     />
-                    <PhoneIcon className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                    <PhoneIcon className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                   </div>
                 </div>
               </div>
 
-              {/* Action Button from Image 1 */}
-              <div className="space-y-4 pt-4">
+              {/* Action Button */}
+              <div className="space-y-3 pt-6">
                 <button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="w-full bg-[#00A9D7] text-white font-black uppercase text-sm tracking-[0.2em] py-5 rounded-2xl shadow-xl shadow-[#00A9D7]/20 hover:bg-[#008db3] hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-slate-900 text-white font-semibold uppercase text-[12px] tracking-[0.2em] py-4 rounded-lg hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Submitting...' : 'Book Now'}
+                  {isSubmitting ? 'Submitting...' : 'Send Enquiry'}
                 </button>
-                {/* <p className="text-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                  You won't be charged yet
-                </p> */}
-                {error && <p className="text-red-500 text-xs font-bold text-center">{error}</p>}
-                {isSubmitted && <p className="text-green-500 text-xs font-bold text-center">Inquiry sent successfully!</p>}
+                {error && <p className="text-red-500 text-xs font-medium text-center">{error}</p>}
+                {isSubmitted && <p className="text-green-600 text-xs font-medium text-center">Enquiry sent successfully!</p>}
               </div>
             </div>
           </div>

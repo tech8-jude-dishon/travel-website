@@ -101,7 +101,7 @@ const App: React.FC = () => {
     
     <AuthProvider>
       <RouteSync />
-      <div className="min-h-screen bg-brand-bg relative w-full overflow-x-hidden">
+      <div className="min-h-screen bg-brand-bg relative w-full overflow-x-clip">
         {location.pathname !== '/admin' && (
           <Navbar
             onNavigate={navigateTo}
