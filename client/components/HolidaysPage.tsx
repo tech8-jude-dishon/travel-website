@@ -224,9 +224,9 @@ const HolidaysPage: React.FC<HolidaysPageProps> = ({ onBack, onExplore, onBookCl
             <section className="relative overflow-hidden py-4 bg-white">
                 <div className="max-w-[1440px] mx-auto relative z-10 px-6 md:px-14">
                     <div className="text-left mb-12">
-                        <h2 className="text-4xl md:text-[38px] font-sans font-black text-slate-900 leading-tight">
+                        <p className="heading text-4xl md:text-[38px] font-sans font-black text-slate-900 leading-tight">
                             Choose Your <br /> <span className="text-[#00A9D7]">Dream Destination</span>
-                        </h2>
+                        </p>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
@@ -237,10 +237,10 @@ const HolidaysPage: React.FC<HolidaysPageProps> = ({ onBack, onExplore, onBookCl
                                 style={{ backgroundImage: `url(${offer.image})` }}
                             >
                                 {/* TITLE */}
-                                <h3 className="text-white font-bold text-[20px] leading-tight">
+                                <p className="heading text-white font-bold text-[20px] leading-tight">
                                     {offer.title.split(' ').slice(0, -1).join(' ')}<br />
                                     {offer.title.split(' ').slice(-1)}
-                                </h3>
+                                </p>
 
                                 {/* BUTTON */}
                                 <button className="absolute bottom-6 left-6 text-xs border border-white text-white px-[20px] py-[10px] rounded-full hover:bg-white/10 transition-colors">
@@ -284,9 +284,9 @@ const HolidaysPage: React.FC<HolidaysPageProps> = ({ onBack, onExplore, onBookCl
 
                                 {/* Content Details */}
                                 <div className="px-5 pb-5 pt-1 flex flex-col flex-grow text-left">
-                                    <h3 className="text-[16px] font-bold text-slate-900 leading-snug mb-3">
+                                    <p className="heading text-[16px] font-bold text-slate-900 leading-snug mb-3">
                                         {pkg.title}
-                                    </h3>
+                                    </p>
                                     <div className="flex items-center gap-4 text-[12px] text-slate-400 mb-4">
                                         <div className="flex items-center gap-1.5">
                                             <svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
@@ -337,9 +337,9 @@ const HolidaysPage: React.FC<HolidaysPageProps> = ({ onBack, onExplore, onBookCl
 
                                 {/* Content Details */}
                                 <div className="px-5 pb-5 pt-1 flex flex-col flex-grow text-left">
-                                    <h3 className="text-[16px] font-bold text-slate-900 leading-snug mb-3">
+                                    <p className="heading text-[16px] font-bold text-slate-900 leading-snug mb-3">
                                         {pkg.title}
-                                    </h3>
+                                    </p>
                                     <div className="flex items-center gap-4 text-[12px] text-slate-400 mb-4">
                                         <div className="flex items-center gap-1.5">
                                             <svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>

@@ -75,7 +75,7 @@ const BlogDetailPage: React.FC = () => {
           <div className="w-full lg:w-7/12 flex flex-col justify-center">
             <div className="flex flex-col gap-8 h-full">
               <div className="space-y-6 flex-grow flex flex-col justify-center">
-                <h2 className="text-2xl font-bold text-brand-dark mb-4">{blog.title}</h2>
+                <p className="heading text-2xl font-bold text-brand-dark mb-4">{blog.title}</p>
                 {contentParagraphs.map((para, idx) => (
                   <p key={idx} className="text-[#64718C] text-lg md:text-xl leading-relaxed font-medium">
                     {para}
@@ -109,7 +109,7 @@ const BlogDetailPage: React.FC = () => {
       {/* Subscription Footer - Clean & Professional */}
       <section className="bg-brand-bg py-24 px-6">
         <div className="max-w-5xl mx-auto text-center bg-white p-12 md:p-20 rounded-[3rem] border border-brand-dark/5 shadow-sm">
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-6">Join the Explorer's Club</h2>
+          <p className="heading text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-6">Join the Explorer's Club</p>
           <p className="text-[#64718C] text-lg mb-10 max-w-xl mx-auto">Get monthly travel insights and early access to our exclusive tour packages directly in your inbox.</p>
           <form className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
             <input

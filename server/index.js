@@ -12,6 +12,7 @@ const packageEnquiriesRoutes = require('./routes/packageEnquiries');
 const uploadRoutes = require('./routes/upload');
 const trendingDestinationsRoutes = require('./routes/trendingDestinations');
 const dreamDestinationsRoutes = require('./routes/dreamDestinations');
+const popupLeadsRoutes = require('./routes/popupLeads');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -56,6 +57,7 @@ app.use('/api/package-enquiries', packageEnquiriesRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/trending-destinations', trendingDestinationsRoutes);
 app.use('/api/dream-destinations', dreamDestinationsRoutes);
+app.use('/api/popup-leads', popupLeadsRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => res.json({ status: 'ok', message: 'Travel API is running.' }));

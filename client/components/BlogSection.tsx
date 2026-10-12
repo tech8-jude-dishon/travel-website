@@ -48,9 +48,9 @@ const BlogCard: React.FC<{ blog: typeof blogs[0]; onClick?: (blog: any) => void 
       </div>
 
       {/* Title */}
-      <h3 className="text-2xl font-bold text-brand-dark mb-8 leading-tight px-2 group-hover:text-brand-gold transition-colors duration-300">
+      <p className="heading text-2xl font-bold text-brand-dark mb-8 leading-tight px-2 group-hover:text-brand-gold transition-colors duration-300">
         {blog.title}
-      </h3>
+      </p>
 
       {/* Button */}
       <div className="px-2">
@@ -78,9 +78,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({ onViewAll, onBlogClick }) => 
         <p className="font-cursive text-brand-gold text-3xl md:text-4xl mb-4">
           news & blogs
         </p>
-        <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-dark mb-6 leading-tight">
+        <p className="heading text-4xl md:text-6xl font-serif font-bold text-brand-dark mb-6 leading-tight">
           Travel Stories & Insights
-        </h2>
+        </p>
         <p className="text-brand-dark/60 text-sm md:text-base leading-relaxed max-w-2xl mx-auto font-medium">
           Stay updated with the latest travel trends, hidden destination guides, and expert tips from our seasoned explorers to help you plan your next perfect escape.
         </p>
@@ -91,9 +91,9 @@ const BlogSection: React.FC<BlogSectionProps> = ({ onViewAll, onBlogClick }) => 
 
         {/* Container Header */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
-          <h3 className="text-xl md:text-2xl font-bold text-brand-dark max-w-xl text-center md:text-left">
+          <p className="heading text-xl md:text-2xl font-bold text-brand-dark max-w-xl text-center md:text-left">
             Inspiration and insights to help you plan your next unforgettable journey better and faster.
-          </h3>
+          </p>
           <button
             onClick={onViewAll}
             className="flex items-center gap-2 bg-brand-gold text-brand-dark px-8 py-4 rounded-full font-bold text-[10px] tracking-widest uppercase shadow-md shadow-brand-gold/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 whitespace-nowrap"

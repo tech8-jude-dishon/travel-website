@@ -129,9 +129,9 @@ const IndiaToursPage: React.FC<IndiaToursPageProps> = ({ onBack, onExplore, onBo
       <section className="relative overflow-hidden lg:py-4 py-2 bg-white">
         <div className="max-w-[1440px] mx-auto relative z-10 px-6 md:px-14">
           <div className="text-left mb-4">
-            <h2 className="text-3xl text-center lg:text-left md:text-[38px] font-sans font-black text-slate-900 leading-tight">
+            <p className="heading text-3xl text-center lg:text-left md:text-[38px] font-sans font-black text-slate-900 leading-tight">
               Choose Your <br /> <span className="text-[#00A9D7]">Dream Destination</span>
-            </h2>
+            </p>
           </div>
 
           <div className="flex flex-col lg:flex-row   lg:gap-12 gap-8 relative">
@@ -239,9 +239,9 @@ const IndiaToursPage: React.FC<IndiaToursPageProps> = ({ onBack, onExplore, onBo
 
         {/* North India Tours Section */}
         <div className="max-w-[1440px] mx-auto lg:pt-16 px-6 md:px-14 lg:mt-[80px] mt-[20px]">
-          <h2 className="text-2xl md:text-[38px] text-center lg:text-left font-sans font-black text-slate-900 leading-tight lg:mb-4 mb-4 lg:pt-[30px]">
+          <p className="heading text-2xl md:text-[38px] text-center lg:text-left font-sans font-black text-slate-900 leading-tight lg:mb-4 mb-4 lg:pt-[30px]">
             North India <span className="text-[#00A9D7]">Tours</span>
-          </h2>
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-[20px]">
             {northTours.map((tour) => (
               <div

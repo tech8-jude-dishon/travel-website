@@ -21,9 +21,9 @@ const StatsSection: React.FC = () => {
               </span>
               
               {/* Foreground Label */}
-              <h3 className="relative z-10 text-xl md:text-2xl font-bold text-brand-dark text-center">
+              <p className="heading relative z-10 text-xl md:text-2xl font-bold text-brand-dark text-center">
                 {stat.label}
-              </h3>
+              </p>
             </div>
           ))}
         </div>

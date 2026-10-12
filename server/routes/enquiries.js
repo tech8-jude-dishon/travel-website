@@ -28,9 +28,12 @@ router.post('/', async (req, res) => {
 
     // 2. Send emails (fire-and-forget — don't fail the request if email errors)
     const data = { full_name, email, phone, travel_origin, destination, travel_date, adults, children, tentative_budget, specific_requirements, message };
-    sendUserEnquiryConfirmation(data)
-      .then(r => console.log('✅ User email:', JSON.stringify(r)))
-      .catch(e => console.error('❌ User email error:', JSON.stringify(e)));
+    // Winter package forms have no email field: only confirm to the customer when we have one.
+    if (email) {
+      sendUserEnquiryConfirmation(data)
+        .then(r => console.log('✅ User email:', JSON.stringify(r)))
+        .catch(e => console.error('❌ User email error:', JSON.stringify(e)));
+    }
     sendAdminEnquiryNotification(data)
       .then(r => console.log('✅ Admin email:', JSON.stringify(r)))
       .catch(e => console.error('❌ Admin email error:', JSON.stringify(e)));

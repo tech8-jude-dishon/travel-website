@@ -111,7 +111,7 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
   }
 
   if (!packageData) {
-    return <div className="p-20 text-center py-40"><h2 className="text-4xl font-serif font-bold text-brand-dark mb-4">Package Not Found</h2><Link to="/" className="text-brand-gold font-bold underline">Return Home</Link></div>;
+    return <div className="p-20 text-center py-40"><p className="heading text-4xl font-serif font-bold text-brand-dark mb-4">Package Not Found</p><Link to="/" className="text-brand-gold font-bold underline">Return Home</Link></div>;
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -218,7 +218,7 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                   <MapPin className="w-3.5 h-3.5" /> {packageData.location}
                 </p>
               )}
-              <h1 className="text-3xl md:text-[42px] font-serif font-semibold text-slate-900 tracking-tight leading-[1.1]">{packageData.title}</h1>
+              <p className="heading text-3xl md:text-[42px] font-serif font-semibold text-slate-900 tracking-tight leading-[1.1]">{packageData.title}</p>
             </div>
             {packageData.flyer_url && (
               <button
@@ -309,7 +309,7 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                   {/* Overview */}
                   <div className="space-y-5">
                     <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">About this tour</p>
-                    <h2 className="text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Tour Overview</h2>
+                    <p className="heading text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Tour Overview</p>
                     <div className="w-12 h-px bg-slate-300" />
                     <div className="space-y-5 text-slate-600 text-[17px] leading-[1.85] font-normal max-w-3xl">
                       <p>
@@ -328,7 +328,7 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                   {/* Highlights */}
                   <div className="space-y-5">
                     <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">What's included in the experience</p>
-                    <h2 className="text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Highlights</h2>
+                    <p className="heading text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Highlights</p>
                     <div className="w-12 h-px bg-slate-300" />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 border-t border-slate-100 mt-2">
                       {(packageData.highlights || [
@@ -353,7 +353,7 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                 <div className="space-y-8 animate-in fade-in duration-500">
                   <div className="space-y-5">
                     <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">Day by day plan</p>
-                    <h2 className="text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Itinerary</h2>
+                    <p className="heading text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Itinerary</p>
                     <div className="w-12 h-px bg-slate-300" />
                   </div>
                   <div className="relative pl-1">
@@ -385,13 +385,13 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                 <div className="space-y-8 animate-in fade-in duration-500">
                   <div className="space-y-5">
                     <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">What's covered</p>
-                    <h2 className="text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Inclusions &amp; Exclusions</h2>
+                    <p className="heading text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Inclusions &amp; Exclusions</p>
                     <div className="w-12 h-px bg-slate-300" />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 pt-2">
                     {/* Included */}
                     <div>
-                      <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500 mb-1">Included</h3>
+                      <p className="heading text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500 mb-1">Included</p>
                       <div className="border-t border-slate-100">
                         {(packageData.inclusions || [
                           "2 nights luxury cabin accommodation",
@@ -409,7 +409,7 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                     </div>
                     {/* Excluded */}
                     <div>
-                      <h3 className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500 mb-1">Not Included</h3>
+                      <p className="heading text-[11px] font-bold uppercase tracking-[0.25em] text-slate-500 mb-1">Not Included</p>
                       <div className="border-t border-slate-100">
                         {(packageData.exclusions || [
                           "Flights to/from departure point",
@@ -433,7 +433,7 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                 <div className="space-y-10 animate-in fade-in duration-500">
                   <div className="space-y-5">
                     <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400">Traveller stories</p>
-                    <h2 className="text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Guest Reviews</h2>
+                    <p className="heading text-[28px] md:text-[34px] font-serif font-semibold text-slate-900 tracking-tight">Guest Reviews</p>
                     <div className="w-12 h-px bg-slate-300" />
                   </div>
 
@@ -452,7 +452,7 @@ const PackageDetailPage: React.FC<PackageDetailPageProps> = ({ onBookClick }) =>
                     {[1, 2, 3].map((_, i) => (
                       <div key={i} className="py-8 first:pt-0 space-y-3">
                         <div className="flex items-center justify-between">
-                          <h4 className="text-lg font-serif font-semibold text-slate-900">Sarah Johnson</h4>
+                          <p className="heading text-lg font-serif font-semibold text-slate-900">Sarah Johnson</p>
                           <span className="text-xs font-medium text-slate-400">October 15, 2023</span>
                         </div>
                         <div className="flex items-center gap-1">

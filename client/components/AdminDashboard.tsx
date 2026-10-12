@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { auth, packages as packagesApi, enquiries as enquiriesApi, packageEnquiries as pkgEnquiriesApi, contact as contactApi, uploadImage, trendingDestinations as trendingApi, dreamDestinations as dreamApi, resolveImageUrl } from '../lib/apiClient';
+import { auth, packages as packagesApi, enquiries as enquiriesApi, packageEnquiries as pkgEnquiriesApi, contact as contactApi, uploadImage, trendingDestinations as trendingApi, dreamDestinations as dreamApi, popupLeads as popupLeadsApi, resolveImageUrl } from '../lib/apiClient';
 import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, Package,
   Settings, RefreshCcw, Bell, LogOut, ChevronRight, MapPin,
   Calendar, Image as ImageIcon, Trash2, Save,
   Upload, X, Plus, Mail, MessageSquare, Eye, EyeOff, Pencil,
-  Search, TrendingUp
+  Search, TrendingUp, UserPlus
 } from 'lucide-react';
 
 interface EnquieryEntry {
@@ -62,6 +62,15 @@ interface PackageEnquiryEntry {
   created_at: string;
 }
 
+interface PopupLeadEntry {
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  source_page: string | null;
+  created_at: string;
+}
+
 interface ContactEntry {
   id: string;
   first_name: string;
@@ -74,11 +83,12 @@ interface ContactEntry {
 
 const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const { profile, loading: authLoading, signOut } = useAuth();
-  const [view, setView] = useState<'leads' | 'packages' | 'package-enquiries' | 'contact' | 'trending' | 'dream'>('leads');
+  const [view, setView] = useState<'leads' | 'popup-leads' | 'packages' | 'package-enquiries' | 'contact' | 'trending' | 'dream'>('leads');
   const [enquiries, setEnquiries] = useState<EnquieryEntry[]>([]);
   const [packages, setPackages] = useState<TourPackage[]>([]);
   const [packageEnquiries, setPackageEnquiries] = useState<PackageEnquiryEntry[]>([]);
   const [contactMessages, setContactMessages] = useState<ContactEntry[]>([]);
+  const [popupLeads, setPopupLeads] = useState<PopupLeadEntry[]>([]);
 
   const [selectedLead, setSelectedLead] = useState<EnquieryEntry | null>(null);
   const [selectedPackage, setSelectedPackage] = useState<TourPackage | null>(null);
@@ -116,10 +126,11 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const [pkgEnqPage, setPkgEnqPage] = useState(1);
   const [contactPage, setContactPage] = useState(1);
   const [packagesPage, setPackagesPage] = useState(1);
+  const [popupLeadsPage, setPopupLeadsPage] = useState(1);
 
   // Reset page-1 on view change or search change
-  useEffect(() => { setLeadsPage(1); setPkgEnqPage(1); setContactPage(1); setPackagesPage(1); }, [view]);
-  useEffect(() => { setLeadsPage(1); setPkgEnqPage(1); setContactPage(1); setPackagesPage(1); }, [searchQuery]);
+  useEffect(() => { setLeadsPage(1); setPkgEnqPage(1); setContactPage(1); setPackagesPage(1); setPopupLeadsPage(1); }, [view]);
+  useEffect(() => { setLeadsPage(1); setPkgEnqPage(1); setContactPage(1); setPackagesPage(1); setPopupLeadsPage(1); }, [searchQuery]);
 
   const q = searchQuery.trim().toLowerCase();
 
@@ -131,6 +142,10 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const filteredPkgEnquiries = packageEnquiries.filter(e =>
     !q || e.name?.toLowerCase().includes(q) || e.email?.toLowerCase().includes(q) ||
     e.package_title?.toLowerCase().includes(q) || e.phone?.includes(q)
+  );
+  const filteredPopupLeads = popupLeads.filter(l =>
+    !q || l.name?.toLowerCase().includes(q) || l.email?.toLowerCase().includes(q) ||
+    l.phone?.includes(q) || l.source_page?.toLowerCase().includes(q)
   );
   const filteredContacts = contactMessages.filter(m =>
     !q || (m.first_name + ' ' + m.last_name).toLowerCase().includes(q) ||
@@ -149,6 +164,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   const pagedEnquiries    = paginate<EnquieryEntry>(filteredEnquiries, leadsPage);
   const pagedPkgEnquiries = paginate<PackageEnquiryEntry>(filteredPkgEnquiries, pkgEnqPage);
   const pagedContacts     = paginate<ContactEntry>(filteredContacts, contactPage);
+  const pagedPopupLeads   = paginate<PopupLeadEntry>(filteredPopupLeads, popupLeadsPage);
   const pagedPackages     = paginate<TourPackage>(filteredPackages, packagesPage);
 
   // ── Shared Pagination UI ─────────────────────────────────────────────────
@@ -277,6 +293,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
   useEffect(() => {
     if (profile) {
       if (view === 'leads') fetchLeads();
+      else if (view === 'popup-leads') fetchPopupLeads();
       else if (view === 'packages') fetchPackages();
       else if (view === 'package-enquiries') fetchPackageEnquiries();
       else if (view === 'contact') fetchContactMessages();
@@ -294,6 +311,20 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     } catch (err: any) {
       console.error('Fetch Error:', err.message);
       setError(`Travel Details: ${err.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchPopupLeads = async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      const data = await popupLeadsApi.getAll();
+      setPopupLeads(data || []);
+    } catch (err: any) {
+      console.error('Fetch Popup Leads Error:', err.message);
+      setError(`Popup Leads: ${err.message}`);
     } finally {
       setIsLoading(false);
     }
@@ -369,6 +400,17 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
         await enquiriesApi.delete(id);
         setEnquiries(prev => prev.filter(e => e.id !== id));
         if (selectedLead?.id === id) setSelectedLead(null);
+      } catch (err: any) {
+        alert('Delete failed: ' + err.message);
+      }
+    }
+  };
+
+  const handleDeletePopupLead = async (id: number) => {
+    if (window.confirm('Delete this lead permanently?')) {
+      try {
+        await popupLeadsApi.delete(id);
+        setPopupLeads(prev => prev.filter(l => l.id !== id));
       } catch (err: any) {
         alert('Delete failed: ' + err.message);
       }
@@ -519,7 +561,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       <aside className="w-[240px] bg-[#1A2332] flex flex-col fixed inset-y-0 z-50">
         {/* Logo + Brand */}
         <div className="px-6 pt-6 pb-4 flex items-center gap-3 border-b border-white/5">
-          <img loading="lazy" src="/images/logo.png" alt="Global Connect" className="h-12 w-auto object-contain" />
+          <img loading="lazy" src="/images/logo.webp" alt="Global Connect" className="h-12 w-auto object-contain" />
         </div>
 
         {/* Digital Dashboard label */}
@@ -534,6 +576,14 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[13px] font-semibold transition-all ${view === 'leads' ? 'bg-[#2D3F55] text-white' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}
           >
             <LayoutDashboard className="w-4 h-4 shrink-0" /> Enquiry Details
+          </button>
+
+          {/* Popup Leads (home + package page popup) */}
+          <button
+            onClick={() => { setView('popup-leads'); setIsEditingPackage(false); setError(''); }}
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[13px] font-semibold transition-all ${view === 'popup-leads' ? 'bg-[#2D3F55] text-white' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}
+          >
+            <UserPlus className="w-4 h-4 shrink-0" /> Popup Leads
           </button>
 
           {/* Catalogs section */}
@@ -641,6 +691,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             <button
               onClick={() => {
                 if (view === 'leads') fetchLeads();
+                else if (view === 'popup-leads') fetchPopupLeads();
                 else if (view === 'packages') fetchPackages();
                 else if (view === 'package-enquiries') fetchPackageEnquiries();
                 else if (view === 'contact') fetchContactMessages();
@@ -686,6 +737,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                 onClick={() => {
                   setError('');
                   if (view === 'leads') fetchLeads();
+                  else if (view === 'popup-leads') fetchPopupLeads();
                   else if (view === 'packages') fetchPackages();
                   else if (view === 'package-enquiries') fetchPackageEnquiries();
                   else if (view === 'contact') fetchContactMessages();
@@ -704,7 +756,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
               <div className="flex justify-between items-start">
                 <div>
                   <div className="flex items-center gap-3">
-                    <h2 className="text-2xl font-bold text-slate-900">Enquiry Details</h2>
+                    <p className="heading text-2xl font-bold text-slate-900">Enquiry Details</p>
                     <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full">
                       {q ? `${filteredEnquiries.length} / ${enquiries.length}` : `${enquiries.length} Total`}
                     </span>
@@ -792,12 +844,103 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             </div>
           )}
 
+          {view === 'popup-leads' && (
+            <div className="space-y-6">
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <p className="heading text-2xl font-bold text-slate-900">Popup Leads</p>
+                    <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full">
+                      {q ? `${filteredPopupLeads.length} / ${popupLeads.length}` : `${popupLeads.length} Total`}
+                    </span>
+                  </div>
+                  <p className="text-slate-500 text-sm mt-1">Name, phone and email collected from the home page and package page popup.</p>
+                </div>
+              </div>
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-slate-100 text-slate-400 text-xs font-semibold uppercase tracking-wider">
+                      <th className="px-6 py-4">Date</th>
+                      <th className="px-6 py-4">Name & Email</th>
+                      <th className="px-6 py-4">Phone Number</th>
+                      <th className="px-6 py-4">Page</th>
+                      <th className="px-6 py-4 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-50">
+                    {isLoading ? (
+                      <tr>
+                        <td colSpan={5} className="px-6 py-16 text-center">
+                          <div className="flex flex-col items-center gap-3">
+                            <div className="w-8 h-8 border-2 border-blue-200 border-t-blue-500 rounded-full animate-spin"></div>
+                            <p className="text-sm text-slate-400">Loading leads...</p>
+                          </div>
+                        </td>
+                      </tr>
+                    ) : filteredPopupLeads.length === 0 ? (
+                      <tr>
+                        <td colSpan={5} className="px-6 py-16 text-center">
+                          <div className="flex flex-col items-center gap-2">
+                            <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center">
+                              <Search className="w-5 h-5 text-slate-300" />
+                            </div>
+                            <p className="text-sm font-semibold text-slate-400">
+                              {q ? `No results for "${searchQuery}"` : 'No leads yet'}
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                    ) : pagedPopupLeads.map((l) => {
+                      const initials = l.name?.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase() || '?';
+                      const colors = ['bg-blue-500', 'bg-purple-500', 'bg-green-500', 'bg-orange-500', 'bg-pink-500', 'bg-teal-500'];
+                      const color = colors[l.name?.charCodeAt(0) % colors.length] || 'bg-blue-500';
+                      return (
+                        <tr key={l.id} className="hover:bg-slate-50/70 transition-colors">
+                          <td className="px-6 py-4">
+                            <p className="text-sm font-medium text-slate-700">{new Date(l.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+                            <p className="text-xs text-slate-400 mt-0.5">{new Date(l.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</p>
+                          </td>
+                          <td className="px-6 py-4">
+                            <div className="flex items-center gap-3">
+                              <div className={`w-9 h-9 ${color} rounded-full flex items-center justify-center shrink-0 shadow-sm`}>
+                                <span className="text-white text-xs font-bold">{initials}</span>
+                              </div>
+                              <div>
+                                <p className="text-sm font-semibold text-slate-800">{l.name}</p>
+                                <a href={`mailto:${l.email}`} className="text-xs text-slate-400 hover:text-blue-600">{l.email}</a>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 text-sm text-slate-600">
+                            <a href={`tel:${l.phone}`} className="hover:text-blue-600">{l.phone}</a>
+                          </td>
+                          <td className="px-6 py-4">
+                            <span className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+                              <MapPin className="w-3 h-3" /> {l.source_page || 'N/A'}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <button onClick={() => handleDeletePopupLead(l.id)} className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all" title="Delete lead">
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+                <PaginationBar total={filteredPopupLeads.length} page={popupLeadsPage} onPage={setPopupLeadsPage} />
+              </div>
+            </div>
+          )}
+
           {view === 'package-enquiries' && (
             <div className="space-y-6">
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <div className="flex items-center gap-3">
-                    <h2 className="text-2xl font-bold text-slate-900">Package Enquiries</h2>
+                    <p className="heading text-2xl font-bold text-slate-900">Package Enquiries</p>
                     <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full">
                       {q ? `${filteredPkgEnquiries.length} / ${packageEnquiries.length}` : `${packageEnquiries.length} Total`}
                     </span>
@@ -886,7 +1029,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <div className="flex items-center gap-3">
-                    <h2 className="text-2xl font-bold text-slate-900">Contact Messages</h2>
+                    <p className="heading text-2xl font-bold text-slate-900">Contact Messages</p>
                     <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full">
                       {q ? `${filteredContacts.length} / ${contactMessages.length}` : `${contactMessages.length} Total`}
                     </span>
@@ -977,7 +1120,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                     <div className="flex justify-between items-center mb-6">
                       <div>
                         <div className="flex items-center gap-3">
-                          <h2 className="text-2xl font-bold text-slate-900">Catalogs / Tour Packages</h2>
+                          <p className="heading text-2xl font-bold text-slate-900">Catalogs / Tour Packages</p>
                           <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-full">
                             {q ? `${filteredPackages.length} / ${packages.length}` : `${packages.length} Total`}
                           </span>
@@ -1089,10 +1232,10 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-4">
                           <button type="button" onClick={() => setIsEditingPackage(false)} className="p-2 text-slate-400 hover:text-slate-900"><ChevronRight className="w-6 h-6 rotate-180" /></button>
-                          <h2 className="text-xl font-black text-slate-900">
+                          <p className="heading text-xl font-black text-slate-900">
                             {selectedPackage.id ? 'Edit Package' : 'Add New Package'}
                             <span className="text-slate-400 ml-3 text-sm font-bold uppercase tracking-widest">/ Phase {formStep} of 5</span>
-                          </h2>
+                          </p>
                         </div>
                         <div className="flex items-center gap-3">
                           {selectedPackage.id && (
@@ -1126,7 +1269,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                       {formStep === 1 && (
                         <div className="bg-white rounded-2xl p-10 border border-slate-200 shadow-sm space-y-10 animate-fade-in">
                           <div>
-                            <h3 className="text-sm font-black text-slate-500 uppercase tracking-widest border-b pb-4 mb-8">Phase 1: Basic Identity & Region</h3>
+                            <p className="heading text-sm font-black text-slate-500 uppercase tracking-widest border-b pb-4 mb-8">Phase 1: Basic Identity & Region</p>
                             <div className="grid grid-cols-2 gap-8">
                               <div className="space-y-2">
                                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Package Title (Public Display)</label>
@@ -1324,7 +1467,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                       {/* PHASE 2: Tour Overview */}
                       {formStep === 2 && (
                         <div className="bg-white rounded-2xl p-10 border border-slate-200 shadow-sm space-y-6 animate-fade-in">
-                          <h3 className="text-sm font-black text-slate-500 uppercase tracking-widest border-b pb-4 mb-4">Phase 2: Experience Detail (Overview)</h3>
+                          <p className="heading text-sm font-black text-slate-500 uppercase tracking-widest border-b pb-4 mb-4">Phase 2: Experience Detail (Overview)</p>
                           <textarea
                             value={selectedPackage.overview}
                             onChange={e => setSelectedPackage({ ...selectedPackage, overview: e.target.value })}
@@ -1356,7 +1499,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                         <div className="bg-white rounded-2xl p-10 border border-slate-200 shadow-sm space-y-6 animate-fade-in">
                           <div className="flex justify-between items-center border-b pb-4 mb-8">
                             <div>
-                              <h3 className="text-sm font-black text-slate-500 uppercase tracking-widest">Phase 3: Day-by-Day Itinerary</h3>
+                              <p className="heading text-sm font-black text-slate-500 uppercase tracking-widest">Phase 3: Day-by-Day Itinerary</p>
                               <p className="text-[10px] text-slate-400 font-bold mt-1">Add activities for each day of the tour</p>
                             </div>
                             <button
@@ -1461,7 +1604,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                       {/* PHASE 4: Logistics & Highlights */}
                       {formStep === 4 && (
                         <div className="bg-white rounded-2xl p-10 border border-slate-200 shadow-sm space-y-10 animate-fade-in">
-                          <h3 className="text-sm font-black text-slate-500 uppercase tracking-widest border-b pb-4 mb-4">Phase 4: Logistics & Highlights</h3>
+                          <p className="heading text-sm font-black text-slate-500 uppercase tracking-widest border-b pb-4 mb-4">Phase 4: Logistics & Highlights</p>
 
                           <div className="grid grid-cols-2 gap-10">
                             <div className="space-y-1.5">
@@ -1516,7 +1659,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                       {formStep === 5 && (
                         <div className="bg-white rounded-2xl p-10 border border-slate-200 shadow-sm space-y-10 animate-fade-in">
                           <div className="flex justify-between items-center border-b pb-6">
-                            <h3 className="text-sm font-black text-slate-500 uppercase tracking-widest">Phase 5: Media Gallery</h3>
+                            <p className="heading text-sm font-black text-slate-500 uppercase tracking-widest">Phase 5: Media Gallery</p>
                             <div className="flex items-center gap-4">
                               <input
                                 type="file"
@@ -1608,7 +1751,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6 animate-fade-in" onClick={() => setSelectedLead(null)}>
             <div className="bg-white rounded-[2rem] w-full max-w-2xl shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
               <div className="p-8 border-b border-slate-100 flex justify-between items-center">
-                <h3 className="text-xl font-black text-slate-900">Enquiry Particulars</h3>
+                <p className="heading text-xl font-black text-slate-900">Enquiry Particulars</p>
                 <button onClick={() => setSelectedLead(null)} className="p-2 text-slate-400 hover:text-slate-900 transition-colors"><X className="w-6 h-6" /></button>
               </div>
               <div className="p-10 space-y-8 max-h-[70vh] overflow-y-auto no-scrollbar">
@@ -1676,7 +1819,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
             <div className="bg-white rounded-[2rem] w-full max-w-2xl shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
               <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-indigo-50/50">
                 <div>
-                  <h3 className="text-xl font-black text-slate-900">Package Enquiry Detail</h3>
+                  <p className="heading text-xl font-black text-slate-900">Package Enquiry Detail</p>
                   <p className="text-[10px] text-indigo-600 font-black uppercase tracking-widest mt-1">Specific Property Interest</p>
                 </div>
                 <button onClick={() => setSelectedPkgEnquiry(null)} className="p-2 text-slate-400 hover:text-slate-900 transition-colors"><X className="w-6 h-6" /></button>
@@ -1729,7 +1872,7 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6 animate-fade-in" onClick={() => setSelectedContact(null)}>
             <div className="bg-white rounded-[2rem] w-full max-w-2xl shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
               <div className="p-8 border-b border-slate-100 flex justify-between items-center">
-                <h3 className="text-xl font-black text-slate-900">General Contact Message</h3>
+                <p className="heading text-xl font-black text-slate-900">General Contact Message</p>
                 <button onClick={() => setSelectedContact(null)} className="p-2 text-slate-400 hover:text-slate-900 transition-colors"><X className="w-6 h-6" /></button>
               </div>
               <div className="p-10 space-y-8 max-h-[70vh] overflow-y-auto no-scrollbar">
@@ -1775,10 +1918,10 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           <div className="space-y-8">
             <div className="flex flex-col gap-4 mb-6">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-black text-slate-900">
+                <p className="heading text-2xl font-black text-slate-900">
                   Trending Destinations{' '}
                   <span className="text-slate-400 ml-2 font-bold">({trendingDestinationsList.length})</span>
-                </h2>
+                </p>
               </div>
               <div className="flex items-center gap-3">
                 <input
@@ -1949,10 +2092,10 @@ const AdminDashboard: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           <div className="space-y-8">
             <div className="flex flex-col gap-4 mb-6">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-black text-slate-900">
+                <p className="heading text-2xl font-black text-slate-900">
                   Dream Destinations{' '}
                   <span className="text-slate-400 ml-2 font-bold">({dreamDestinationsList.length})</span>
-                </h2>
+                </p>
               </div>
               <div className="flex items-center gap-3">
                 <input

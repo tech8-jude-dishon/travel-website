@@ -74,9 +74,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onBookClick }) => {
             <p className="font-cursive text-brand-gold text-3xl md:text-4xl mb-4">
               Our humble beginnings
             </p>
-            <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-dark mb-8 leading-tight">
+            <p className="heading text-4xl md:text-6xl font-serif font-bold text-brand-dark mb-8 leading-tight">
               A Passion for <br /> <span className="brush-highlight">Exploration</span>
-            </h2>
+            </p>
             <div className="space-y-6 text-brand-dark/70 text-base md:text-lg leading-relaxed">
               <p>
                 Founded in 1997, Travelor began as a small family-run agency in the heart of Dubai with a single mission: to provide authentic, high-resonance travel experiences that go beyond the typical tourist paths.
@@ -119,7 +119,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onBookClick }) => {
       <section className="bg-brand-dark py-32 px-6 md:px-12 lg:px-24">
         <div className="max-w-screen-2xl mx-auto text-center mb-20">
           <p className="font-cursive text-brand-gold text-3xl mb-4">What we stand for</p>
-          <h2 className="text-white text-4xl md:text-6xl font-serif font-bold">Our Core Values</h2>
+          <p className="heading text-white text-4xl md:text-6xl font-serif font-bold">Our Core Values</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-screen-xl mx-auto">
@@ -142,7 +142,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onBookClick }) => {
           ].map((value, idx) => (
             <div key={idx} className="bg-white/5 backdrop-blur-md p-10 rounded-[2.5rem] border border-white/10 text-center hover:bg-white/10 transition-all group">
               <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform">{value.icon}</div>
-              <h3 className="text-white text-2xl font-bold mb-4">{value.title}</h3>
+              <p className="heading text-white text-2xl font-bold mb-4">{value.title}</p>
               <p className="text-white/60 text-sm leading-relaxed">{value.desc}</p>
             </div>
           ))}
@@ -154,7 +154,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onBookClick }) => {
         <div className="flex justify-between items-start mb-16">
           <div>
             <p className="font-cursive text-brand-gold text-3xl mb-0">Our team</p>
-            <h2 className="text-5xl md:text-6xl font-serif font-bold text-brand-dark tracking-tight">Meet the Experts</h2>
+            <p className="heading text-5xl md:text-6xl font-serif font-bold text-brand-dark tracking-tight">Meet the Experts</p>
           </div>
           <button className="flex items-center gap-2 bg-brand-gold text-brand-dark px-8 py-3 rounded-full font-bold text-[10px] tracking-[0.15em] uppercase shadow-[0_15px_30px_-5px_rgba(251,176,59,0.4)] hover:shadow-none hover:translate-y-0.5 transition-all">
             Join Our Team <span className="text-lg">→</span>
@@ -171,7 +171,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onBookClick }) => {
                   className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${member.isBW ? 'grayscale' : ''}`}
                 />
               </div>
-              <h4 className="text-xl font-bold text-brand-dark mb-1 leading-none">{member.name}</h4>
+              <p className="heading text-xl font-bold text-brand-dark mb-1 leading-none">{member.name}</p>
               <p className="text-[#8E95A5] text-[10px] font-bold uppercase tracking-[0.2em]">{member.role}</p>
             </div>
           ))}
@@ -182,7 +182,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onBookClick }) => {
       <section className="py-24 px-6 md:px-12 lg:px-24">
         <div className="bg-brand-gold rounded-[3.5rem] p-16 md:p-24 text-center relative overflow-hidden">
           <div className="relative z-10">
-            <h2 className="text-brand-dark text-4xl md:text-7xl font-serif font-bold mb-8">Ready to write your own story?</h2>
+            <p className="heading text-brand-dark text-4xl md:text-7xl font-serif font-bold mb-8">Ready to write your own story?</p>
             <p className="text-brand-dark/70 text-lg md:text-xl max-w-2xl mx-auto mb-12">
               Let us guide you through the most incredible landscapes the world has to offer. Your next adventure starts with a single click.
             </p>

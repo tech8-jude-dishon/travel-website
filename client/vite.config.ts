@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
         },
         cssCodeSplit: true,
         minify: 'esbuild',
-        target: 'es2020',
+        target: 'es2022',
         chunkSizeWarningLimit: 600
       }
     };

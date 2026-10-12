@@ -115,9 +115,9 @@ const ContactPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       <div className="w-full md:w-[80%] mx-auto px-6 py-[30px]">
         <div className="flex flex-col md:flex-row justify-between md:items-start items-center justify-center gap-8">
           <div className="space-y-2">
-            {/* <h2 className="text-2xl md:text-[38px] text-center lg:text-left font-sans font-black text-slate-900 tracking-tight">
+            {/* <p className="heading text-2xl md:text-[38px] text-center lg:text-left font-sans font-black text-slate-900 tracking-tight">
               Get in touch with us
-            </h2> */}
+            </p> */}
             <div className="text-2xl md:text-[38px] text-center lg:text-left font-sans font-black text-[#00A9D7] tracking-tight">
               We’re Here to Help You Plan Every Journey
             </div>
@@ -220,16 +220,16 @@ const ContactPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
           }}
         >
 
-          <h2 className="text-2xl md:text-[38px] font-sans font-black text-white text-center z-10 px-4">
+          <p className="heading text-2xl md:text-[38px] font-sans font-black text-white text-center z-10 px-4">
             We are always happy to assist you
-          </h2>
+          </p>
 
           {/* Floating Contact Card */}
           <div className="absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2 w-[90%] md:w-[80%] bg-white rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] p-6 border border-slate-50 z-20">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-[#00A9D7]/30">
               {/* Office Section */}
               <div className="md:pr-10">
-                <h4 className="text-xl font-bold text-slate-900 mb-6">Our Office</h4>
+                <p className="heading text-xl font-bold text-slate-900 mb-6">Our Office</p>
                 <div className="w-8 h-1 bg-[#00A9D7] mb-8"></div>
                 <div className="text-slate-600 text-[14px] leading-relaxed">
                   <p>Dream Destinas Tours & Travels</p>
@@ -240,7 +240,7 @@ const ContactPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
               {/* Phone Section */}
               <div className="md:px-3">
-                <h4 className="text-xl font-bold text-slate-900 mb-6">Phone Support</h4>
+                <p className="heading text-xl font-bold text-slate-900 mb-6">Phone Support</p>
                 <div className="w-8 h-1 bg-[#00A9D7] mb-8"></div>
                 <div className="">
                   <p className="text-slate-600 text-[14px]">
@@ -254,7 +254,7 @@ const ContactPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
               {/* Email Section */}
               <div className="md:pl-3">
-                <h4 className="text-xl font-bold text-slate-900 mb-6">Email Address</h4>
+                <p className="heading text-xl font-bold text-slate-900 mb-6">Email Address</p>
                 <div className="w-8 h-1 bg-[#00A9D7] mb-8"></div>
                 <p className="text-slate-600 text-[14px] break-all leading-relaxed">
                   santhosh@globalconnectworldtravel.com
@@ -279,7 +279,7 @@ const ContactPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
               {/* Office */}
               <div className="lg:pt-6">
-                <h4 className="text-lg font-bold text-slate-900 lg:mb-4">Our Office</h4>
+                <p className="heading text-lg font-bold text-slate-900 lg:mb-4">Our Office</p>
                 <div className="w-8 h-1 bg-[#00A9D7] mb-6 mx-auto"></div>
 
                 <div className="text-slate-600 text-[12px] leading-relaxed pb-2">
@@ -292,7 +292,7 @@ const ContactPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
               {/* Phone */}
               <div className="lg:pt-6">
-                <h4 className="text-lg font-bold text-slate-900 mb-4 pb-[2px]">Phone Support</h4>
+                <p className="heading text-lg font-bold text-slate-900 mb-4 pb-[2px]">Phone Support</p>
                 <div className="w-8 h-1 bg-[#00A9D7] mb-6 mx-auto "></div>
 
                 <p className="text-slate-600 text-[12px]">
@@ -307,7 +307,7 @@ const ContactPage: React.FC<{ onBack: () => void }> = ({ onBack }) => {
 
               {/* Email */}
               <div className="lg:pt-6">
-                <h4 className="text-lg font-bold text-slate-900 mb-4">Email Address</h4>
+                <p className="heading text-lg font-bold text-slate-900 mb-4">Email Address</p>
                 <div className="w-8 h-1 bg-[#00A9D7] mb-6 mx-auto"></div>
 
                 <p className="text-slate-600 text-[12px] break-all">

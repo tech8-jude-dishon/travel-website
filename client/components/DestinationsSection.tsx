@@ -40,9 +40,9 @@ export const DestinationCard: React.FC<{ destination: typeof destinationsList[0]
 
       {/* Text Content Right */}
       <div className="flex flex-col flex-1 justify-center">
-        <h3 className="text-2xl lg:text-[28px] font-serif font-bold text-brand-dark group-hover:text-brand-gold transition-colors leading-tight">
+        <p className="heading text-2xl lg:text-[28px] font-serif font-bold text-brand-dark group-hover:text-brand-gold transition-colors leading-tight">
           {destination.name}
-        </h3>
+        </p>
       </div>
     </div>
   );
@@ -61,9 +61,9 @@ const DestinationsSection: React.FC<DestinationsSectionProps> = ({ onExplore }) 
           <p className="font-cursive text-brand-gold text-3xl md:text-4xl mb-2">
             Our Services
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-[64px] font-serif font-bold text-brand-dark mb-6 leading-tight tracking-tight">
+          <p className="heading text-4xl md:text-5xl lg:text-[64px] font-serif font-bold text-brand-dark mb-6 leading-tight tracking-tight">
            Premium Travel Solutions
-          </h2>
+          </p>
           <p className="text-brand-dark/60 text-sm md:text-base leading-relaxed max-w-md font-medium">
             Discover breathtaking landscapes and iconic landmarks across the globe with our meticulously planned tours designed for unforgettable memories.
           </p>

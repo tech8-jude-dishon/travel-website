@@ -103,7 +103,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
             </div>
 
             <div className="flex flex-col gap-8 lg:border-l border-brand-dark/5 ">
-              <h4 className="text-[17px]  font-serif font-bold text-brand-dark">Quick Links</h4>
+              <p className="heading text-[17px]  font-serif font-bold text-brand-dark">Quick Links</p>
               <ul className="space-y-3">
                 {['Home', 'About Us', 'Destinations', 'Packages', 'Blog', 'Contact'].map(link => (
                   <li key={link}>
@@ -132,7 +132,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
           </div>
 
           <div className="lg:col-span-3 flex flex-col gap-8 md:border-l border-brand-dark/5 md:pl-8 lg:pl-12">
-            <h4 className="text-2xl font-serif font-bold text-brand-dark">Dream Destinas Tours & Travels</h4>
+            <p className="heading text-2xl font-serif font-bold text-brand-dark">Dream Destinas Tours & Travels</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10">
               {addresses.map((addr, idx) => (
                 <div key={idx} className="space-y-2">
@@ -176,7 +176,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
           {/* Column 1: Brand */}
           <div className="lg:col-span-2 space-y-6">
             <img loading="lazy"
-              src="/images/footer-logo.png"
+              src="/images/footer-logo.webp"
               alt="Global Connect"
               className="h-16 md:h-20 w-auto object-contain"
             />
@@ -202,7 +202,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
 
           {/* Column 2: Product */}
           <div className="lg:col-span-2 space-y-6">
-            <h4 className="text-[#00A9D7] font-bold text-lg">Links</h4>
+            <p className="heading text-[#00A9D7] font-bold text-lg">Links</p>
             <ul className="space-y-4">
               {[
                 { label: 'Home', path: '/' },
@@ -226,7 +226,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
 
           {/* Column 3: Services */}
           <div className="lg:col-span-4 space-y-6">
-            <h4 className="text-[#00A9D7] font-bold text-lg">Services</h4>
+            <p className="heading text-[#00A9D7] font-bold text-lg">Services</p>
             <div className="flex gap-6">
               <ul className="space-y-4 flex-1">
                 {[
@@ -253,7 +253,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
 
           {/* Column 4: Contacts us */}
           <div className="lg:col-span-4 space-y-6">
-            <h4 className="text-[#00A9D7] font-bold text-lg">Contacts us</h4>
+            <p className="heading text-[#00A9D7] font-bold text-lg">Contacts us</p>
             <div className="space-y-4">
               <a href="mailto:booking@globalconnectworldtravel.com" className="flex items-center gap-3 text-slate-600 hover:text-[#00A9D7] text-sm transition-colors">
                 <Mail className="w-5 h-5 text-[#00A9D7]" />
@@ -295,13 +295,13 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
 
         {/* Our Branches */}
         <div className="mt-8 pt-8 border-t border-slate-100">
-          <h4 className="text-[#00A9D7] font-bold text-lg mb-6">Our Branches</h4>
+          <p className="heading text-[#00A9D7] font-bold text-lg mb-6">Our Branches</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Gurgaon */}
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-[#00A9D7] mt-1 shrink-0" />
               <div>
-                <h5 className="font-semibold text-slate-800 text-sm mb-1">Gurgaon</h5>
+                <p className="heading font-semibold text-slate-800 text-sm mb-1">Gurgaon</p>
                 <p className="text-slate-600 text-sm leading-relaxed">
                   DLF Forum, DLF Cyber City, Phase III, Gurugram, Haryana, Pincode - 122002
                 </p>
@@ -311,7 +311,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-[#00A9D7] mt-1 shrink-0" />
               <div>
-                <h5 className="font-semibold text-slate-800 text-sm mb-1">Coimbatore</h5>
+                <p className="heading font-semibold text-slate-800 text-sm mb-1">Coimbatore</p>
                 <p className="text-slate-600 text-sm leading-relaxed">
                   1st Floor, Baba Complex, Vivekananda Rd, Ram Nagar, Gandhipuram, Coimbatore, TN, Pincode - 641009
                 </p>
@@ -321,7 +321,7 @@ const Footer: React.FC<FooterProps> = ({ onContactClick, onNavigate }) => {
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-[#00A9D7] mt-1 shrink-0" />
               <div>
-                <h5 className="font-semibold text-slate-800 text-sm mb-1">Hyderabad</h5>
+                <p className="heading font-semibold text-slate-800 text-sm mb-1">Hyderabad</p>
                 <p className="text-slate-600 text-sm leading-relaxed">
                   Suite - B1003, 10th Floor, The Platina, Banjara Basthi, Jayabheri Enclave, Gachibowli, Hyderabad, Telangana 500032
                 </p>

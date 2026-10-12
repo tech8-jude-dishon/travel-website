@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
-        serif: ['Poppins', 'sans-serif'],
+        sans: ['Karla', 'sans-serif'],
+        serif: ['Fraunces', 'serif'],
         cursive: ['Dancing Script', 'cursive'],
       },
       colors: {

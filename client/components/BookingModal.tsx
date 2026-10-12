@@ -128,7 +128,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) => {
           {isSubmitted ? (
             <div className="py-16 text-center flex flex-col items-center gap-6">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-3xl">✓</div>
-              <h2 className="text-2xl font-serif font-bold text-brand-dark">Enquiry Sent!</h2>
+              <p className="heading text-2xl font-serif font-bold text-brand-dark">Enquiry Sent!</p>
               <p className="text-[#64718C] text-base max-w-xs mx-auto">
                 Thank you! Our consultant will contact you shortly.
               </p>
@@ -136,7 +136,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) => {
           ) : (
             <>
               <div className="">
-                <h2 className="text-[32px] font-serif font-bold text-brand-dark leading-tight">Enquiry Form</h2>
+                <p className="heading text-[32px] font-serif font-bold text-brand-dark leading-tight">Enquiry Form</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">

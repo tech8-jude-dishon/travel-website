@@ -13,8 +13,9 @@ const API_ORIGIN = API_BASE.replace(/\/api\/?$/, '');
 
 /**
  * Resolve an image URL — handles relative paths, old localhost URLs, and full URLs.
+ * `width` sets the Cloudinary resize width; pass a smaller value for cards/thumbnails.
  */
-export const resolveImageUrl = (url: string | undefined | null): string => {
+export const resolveImageUrl = (url: string | undefined | null, width = 1600): string => {
   if (!url) return '';
   // Fix old localhost URLs stored in DB (e.g. http://localhost:4000/uploads/...)
   const localhostMatch = url.match(/^https?:\/\/localhost:\d+(\/uploads\/.+)$/);
@@ -22,7 +23,8 @@ export const resolveImageUrl = (url: string | undefined | null): string => {
   // Cloudinary: inject auto format + auto quality so it serves an optimized
   // webp/avif instead of the full-size original. Idempotent (only matches /upload/v).
   if (url.includes('res.cloudinary.com/')) {
-    return url.replace(/\/image\/upload\/v(\d)/, '/image/upload/f_auto,q_auto,c_limit,w_1600/v$1');
+    if (/\/c_limit,w_\d+\//.test(url)) return url.replace(/\/c_limit,w_\d+\//, `/c_limit,w_${width}/`);
+    return url.replace(/\/image\/upload\/v(\d)/, `/image/upload/f_auto,q_auto,c_limit,w_${width}/v$1`);
   }
   // Already a full URL pointing to production or external — return as-is
   if (url.startsWith('http://') || url.startsWith('https://')) return url;
@@ -158,6 +160,31 @@ export const enquiries = {
 
   async delete(id: string | number) {
     return apiFetch(`/enquiries/${id}`, { method: 'DELETE' });
+  },
+};
+
+// ============================================================
+// POPUP LEADS (home page + winter package popup)
+// ============================================================
+export const popupLeads = {
+  async getAll() {
+    return apiFetch<any[]>('/popup-leads');
+  },
+
+  async submit(data: { name: string; phone: string; email: string; source_page?: string }) {
+    return apiFetch<{ message: string; client_token: string }>('/popup-leads', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  /** Whether the lead saved with this browser token still exists (admin may have deleted it). */
+  async status(token: string) {
+    return apiFetch<{ exists: boolean }>(`/popup-leads/status/${encodeURIComponent(token)}`);
+  },
+
+  async delete(id: string | number) {
+    return apiFetch(`/popup-leads/${id}`, { method: 'DELETE' });
   },
 };
 

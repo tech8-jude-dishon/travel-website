@@ -84,9 +84,9 @@ const CategoryCard: React.FC<{ category: typeof categories[0] }> = ({ category }
         {category.icon}
       </div>
       
-      <h3 className="text-xl font-bold text-[#3D3014] mb-4">
+      <p className="heading text-xl font-bold text-[#3D3014] mb-4">
         {category.title}
-      </h3>
+      </p>
       
       <div className="bg-white px-5 py-1.5 rounded-full text-[10px] font-bold text-[#3D3014]/60 shadow-sm mb-8">
         {category.tours}
@@ -112,9 +112,9 @@ const TourCategories: React.FC = () => {
         <p className="font-cursive text-[#FEF9F3] text-3xl md:text-4xl mb-6">
           tour catagorires
         </p>
-        <h2 className="text-white text-4xl md:text-6xl font-serif font-bold mb-8 leading-tight max-w-4xl mx-auto">
+        <p className="heading text-white text-4xl md:text-6xl font-serif font-bold mb-8 leading-tight max-w-4xl mx-auto">
           Shelter of Love, Compassion, <br /> and New Beginnings
-        </h2>
+        </p>
         <p className="text-white/70 text-sm md:text-base leading-relaxed max-w-3xl mx-auto mb-20 font-medium">
           communication and utilizes cutting edge logistic planning to get your shipment completed on time. itself founded of backgrounds, which simply.
         </p>

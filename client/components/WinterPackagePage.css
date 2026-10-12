@@ -1,0 +1,520 @@
+/* Winter package landing pages (/services/:slug).
+   Ported from "GCWT Winter Packages - 6 Landing Pages.html"; every rule is
+   scoped under .wp so nothing leaks into the rest of the site. */
+.wp{
+  --ink:#11212E;
+  --paper:#FAF6EF;
+  --surface:#FFFFFF;
+  --line:#E4DACB;
+  --muted:#5C6B75;
+  --accent:#0B5C9E;
+  --radius:14px;
+  background:var(--paper);color:var(--ink);
+  font-family:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.6;
+}
+.wp h1,.wp .wp-h2,.wp .wp-h3{font-family:"Fraunces","Georgia",serif;font-weight:600;line-height:1.1;margin:0}
+.wp p:where(:not(.heading)){margin:0}
+.wp a{color:inherit}
+.wp img,.wp svg{max-width:100%}
+.wp :focus-visible{outline:3px solid #E0701F;outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){.wp *{animation:none!important;transition:none!important}}
+
+
+.wp .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.wp .hero{position:relative;background:var(--accent);color:#fff;overflow:hidden}
+/* ---------- rich photo hero (pages with d.photo) ---------- */
+.wp .hero-x{background:#0A3F7A}
+.wp .hero-x .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 75%}
+.wp .hero-x .shade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(10,74,140,.62) 0,rgba(18,100,175,.42) max(24%,560px),rgba(40,140,210,.16) max(38%,720px),rgba(40,140,210,0) max(50%,900px)),
+  linear-gradient(180deg,rgba(4,30,60,.25),transparent 28%)}
+.wp .hero-x .swoosh{position:absolute;left:0;bottom:0;width:70%;height:100%;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,#000 55%,transparent);mask-image:linear-gradient(90deg,#000 55%,transparent)}
+.wp .hero-x .divider{position:absolute;left:0;bottom:-1px;width:100%;height:clamp(22px,3.2vw,48px);fill:var(--paper);pointer-events:none;filter:drop-shadow(0 -6px 14px rgba(4,36,80,.18))}
+.wp .hero-x .hero-in{max-width:1760px;grid-template-columns:minmax(0,1fr) 520px;gap:56px;align-items:center;padding:70px clamp(24px,5vw,100px) 96px}
+.wp .x-eyebrow{display:flex;align-items:center;gap:18px;font-size:14px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.92)}
+.wp .x-eyebrow::after{content:"";width:104px;height:1.5px;background:#5FD0F2}
+.wp .hero-x h1{font-family:"Fraunces",serif;font-weight:700;font-size:clamp(40px,6.2vw,76px);line-height:1.04;letter-spacing:-.02em;margin:18px 0 22px;text-shadow:0 2px 18px rgba(0,30,70,.25)}
+.wp .hero-x h1 em{font-family:"Dancing Script",cursive;font-style:normal;font-weight:600;font-size:1.22em;letter-spacing:0;color:#4FD3F5;line-height:.8}
+.wp .hero-x .lede{font-size:clamp(16px,1.6vw,20px);max-width:44ch;line-height:1.55;color:rgba(255,255,255,.95)}
+.wp .x-feats{display:flex;flex-wrap:wrap;gap:22px 30px;margin:34px 0 0;padding:0;list-style:none}
+.wp .x-feats li{width:115px;text-align:center;line-height:1.25}
+.wp .x-ic{width:84px;height:84px;margin:0 auto 12px;border-radius:50%;display:grid;place-items:center;background:rgba(14,90,165,.35);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+/* lighter overlay: keep white copy legible over the photo */
+.wp .hero-x h1{text-shadow:0 2px 6px rgba(4,36,80,.35),0 4px 24px rgba(4,36,80,.35)}
+.wp .hero-x .x-eyebrow,.wp .hero-x .lede,.wp .x-feats b,.wp .x-feats span,.wp .hero-x .price,.wp .hero-x .dur{text-shadow:0 1px 3px rgba(4,36,80,.55),0 2px 14px rgba(4,36,80,.35)}
+.wp .x-ic svg{width:38px;height:38px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-feats b{display:block;font-size:17px;font-weight:700}
+.wp .x-feats span{font-size:14.5px;color:rgba(255,255,255,.85)}
+.wp .hero-x .pricebar{margin-top:34px;gap:12px 34px;align-items:center}
+.wp .hero-x .price{font-size:clamp(44px,5vw,60px)}
+.wp .hero-x .price small{font-size:16px;font-weight:500;color:rgba(255,255,255,.92);margin-top:8px}
+.wp .hero-x .dur{font-size:19px;padding-left:34px;border-left-color:rgba(255,255,255,.4);line-height:1.5}
+.wp .hero-x .dur small{font-size:16px;margin-top:4px}
+
+.wp .lead.x-lead{--ink:#11233F;--muted:#5A6B7E;background:#fff;color:var(--ink);border-radius:20px;padding:34px 30px 26px;box-shadow:0 24px 60px rgba(4,28,60,.30)}
+.wp .x-kick{display:flex;align-items:center;gap:12px;font-size:12.5px;font-weight:700;letter-spacing:.2em;color:#5A6B7E;text-transform:uppercase}
+.wp .x-kick::after{content:"";width:48px;height:2px;background:#F07A22}
+.wp .lead.x-lead .wp-h2{font-size:clamp(26px,2.4vw,32px);font-weight:700;color:#0E2346;margin:10px 0 10px;letter-spacing:-.01em}
+.wp .lead.x-lead .sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15.5px;color:var(--muted);line-height:1.55;margin-bottom:20px}
+.wp .lead.x-lead .field{margin-bottom:16px}
+.wp .lead.x-lead .field label{font-size:14.5px;margin-bottom:7px;color:#11233F}
+.wp .x-in{position:relative}
+.wp .x-in > svg{position:absolute;left:15px;top:50%;width:19px;height:19px;transform:translateY(-50%);fill:none;stroke:#3E5166;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.wp .lead.x-lead .field input,.wp .lead.x-lead .field select{padding:13px 14px 13px 46px;background:#F1F5F9;border:1px solid #E1E8EF;border-radius:10px;color:#11233F;font-size:16px}
+.wp .lead.x-lead .field input::placeholder{color:#6B7B8C}
+.wp .lead.x-lead .field select{appearance:none;-webkit-appearance:none;cursor:pointer;
+  background:#F1F5F9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2311233F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center/18px}
+.wp .lead.x-lead .field input:focus,.wp .lead.x-lead .field select:focus{outline:none;border-color:#1BA6E4;box-shadow:0 0 0 3px rgba(27,166,228,.2);background-color:#fff}
+.wp .x-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin-top:22px;border:0;cursor:pointer;color:#fff;
+  padding:17px;border-radius:12px;font:700 17px/1 "Karla",sans-serif;
+  background:linear-gradient(90deg,#1BA6E4,#0B5C9E);box-shadow:0 10px 22px rgba(11,92,158,.32);transition:filter .15s,transform .15s}
+.wp .x-btn:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.wp .x-btn svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-safe{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;font-size:13px;color:#4B5B6C}
+.wp .x-safe svg{width:20px;height:20px;flex:none}
+.wp .lead.x-lead .thanks p:where(:not(.heading)){color:var(--muted)}
+@media (max-width:900px){
+  .wp .hero-x .shade{background:linear-gradient(180deg,rgba(9,64,128,.88) 0%,rgba(8,56,110,.92) 55%,rgba(8,56,110,.97) 100%)}
+  .wp .hero-x .swoosh{width:100%}
+  .wp .hero-x .hero-in{grid-template-columns:minmax(0,1fr);gap:34px;padding:44px 20px 56px}
+}
+@media (max-width:620px){
+  .wp .x-eyebrow{font-size:12px;letter-spacing:.24em}
+  .wp .x-eyebrow::after{width:56px}
+  .wp .x-feats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+  .wp .x-feats li{width:auto}
+  .wp .x-ic{width:56px;height:56px;margin-bottom:8px}
+  .wp .x-ic svg{width:26px;height:26px}
+  .wp .x-feats b{font-size:13.5px}
+  .wp .x-feats span{font-size:12px}
+  .wp .hero-x .dur{padding-left:20px;font-size:16px}
+  .wp .hero-x .dur small{font-size:14px}
+  .wp .lead.x-lead{padding:26px 20px 22px}
+}
+/* desktop: hero fills exactly one screen below the sticky header */
+@media (min-width:901px){
+  .wp .hero-x{--hdr:0px}
+  .wp .hero-x .hero-in{min-height:calc(100vh - var(--hdr));min-height:calc(100svh - var(--hdr));
+    padding-top:clamp(24px,4.5vh,64px);padding-bottom:clamp(36px,7vh,88px)}
+}
+/* shorter desktop screens (laptops): tighten vertical rhythm so all of it fits */
+@media (min-width:901px) and (max-height:900px){
+  .wp .hero-x h1{font-size:clamp(38px,min(5vw,8vh),66px);margin:12px 0 14px}
+  .wp .hero-x .lede{font-size:clamp(15px,2.2vh,18px)}
+  .wp .x-feats{margin-top:clamp(16px,3vh,28px);gap:16px 26px}
+  .wp .x-ic{width:clamp(56px,9vh,76px);height:clamp(56px,9vh,76px);margin-bottom:8px}
+  .wp .x-ic svg{width:clamp(26px,4.2vh,34px);height:clamp(26px,4.2vh,34px)}
+  .wp .x-feats b{font-size:16px}
+  .wp .x-feats span{font-size:13.5px}
+  .wp .hero-x .pricebar{margin-top:clamp(16px,3vh,28px)}
+  .wp .hero-x .price{font-size:clamp(38px,6.4vh,54px)}
+  .wp .lead.x-lead{padding:clamp(18px,3vh,28px) 28px clamp(14px,2.4vh,22px)}
+  .wp .lead.x-lead .wp-h2{font-size:clamp(24px,3.6vh,30px);margin:6px 0 6px}
+  .wp .lead.x-lead .sub{font-size:14.5px;margin-bottom:clamp(8px,1.8vh,16px)}
+  .wp .lead.x-lead .field{margin-bottom:clamp(6px,1.3vh,12px)}
+  .wp .lead.x-lead .field label{margin-bottom:4px}
+  .wp .lead.x-lead .field input,.wp .lead.x-lead .field select{padding-top:clamp(8px,1.4vh,12px);padding-bottom:clamp(8px,1.4vh,12px)}
+  .wp .x-btn{margin-top:clamp(10px,2vh,18px);padding:clamp(12px,2vh,16px)}
+  .wp .x-safe{margin-top:clamp(8px,1.6vh,14px)}
+}
+/* medium desktop widths: narrower form column so the left side never crowds */
+@media (min-width:901px) and (max-width:1280px){
+  .wp .hero-x .hero-in{grid-template-columns:minmax(0,1fr) 440px;gap:36px}
+  .wp .x-feats{gap:14px 18px}
+  .wp .x-feats li{width:100px}
+}
+/* small desktops / landscape tablets */
+@media (min-width:901px) and (max-width:1180px){
+  .wp .hero-x .hero-in{grid-template-columns:minmax(0,1fr) 390px;gap:28px;padding-left:32px;padding-right:32px}
+  .wp .hero-x h1{font-size:clamp(36px,4.3vw,48px)}
+  .wp .hero-x .lede{font-size:15.5px}
+  .wp .x-feats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:440px}
+  .wp .x-feats li{width:auto}
+  .wp .x-ic{width:58px;height:58px}
+  .wp .x-ic svg{width:26px;height:26px}
+  .wp .x-feats b{font-size:14px}
+  .wp .x-feats span{font-size:12.5px}
+  .wp .hero-x .price{font-size:42px}
+  .wp .hero-x .price small{font-size:14px}
+  .wp .hero-x .dur{font-size:16px;padding-left:22px}
+  .wp .hero-x .dur small{font-size:14px}
+  .wp .lead.x-lead{padding-left:22px;padding-right:22px}
+  .wp .lead.x-lead .wp-h2{font-size:26px}
+}
+.wp .hero-in{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:start;padding:52px 20px 56px;max-width:1120px;margin:0 auto}
+.wp .eyebrow{font-size:13px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.85)}
+.wp .hero h1{font-size:clamp(34px,5.6vw,56px);letter-spacing:-.015em;margin:10px 0 14px}
+.wp .hero .lede{font-size:17px;max-width:46ch;color:rgba(255,255,255,.92)}
+.wp .pricebar{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 22px;margin-top:26px}
+.wp .price{font-family:"Fraunces",serif;font-size:40px;font-weight:700;line-height:1}
+.wp .price small{font-family:"Karla",sans-serif;font-size:13px;font-weight:600;display:block;color:rgba(255,255,255,.8);margin-top:6px}
+.wp .dur{border-left:1px solid rgba(255,255,255,.35);padding-left:22px;font-size:15px;font-weight:600}
+.wp .dur small{display:block;font-weight:400;font-size:13px;color:rgba(255,255,255,.8)}
+/* ---------- form card ---------- */
+.wp .lead{background:var(--surface);color:var(--ink);border-radius:var(--radius);padding:22px;box-shadow:0 18px 40px rgba(10,20,28,.22)}
+.wp .lead .wp-h2{font-size:22px;margin-bottom:4px}
+.wp .lead .sub{font-size:13.5px;color:var(--muted);margin-bottom:16px}
+.wp .field{margin-bottom:11px}
+.wp .field label{display:block;font-size:12.5px;font-weight:700;margin-bottom:5px}
+.wp .field input,.wp .field select{
+  width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;
+  background:var(--paper);color:var(--ink);font:400 15px/1.3 "Karla",sans-serif;
+}
+.wp .thanks{display:none;text-align:center;padding:26px 6px}
+.wp .thanks .wp-h3{font-size:22px;margin-bottom:8px}
+.wp .thanks p:where(:not(.heading)){font-size:14px;color:var(--muted)}
+.wp .lead.done .form-body{display:none}
+.wp .lead.done .thanks{display:block}
+
+/* ---------- sections ---------- */
+.wp .sec{padding:52px 0;border-bottom:1px solid var(--line)}
+.wp .sec .wp-h2{font-size:clamp(24px,3.2vw,32px);margin-bottom:8px}
+.wp .sec .intro{color:var(--muted);max-width:62ch;margin-bottom:28px}
+/* rich route (pages with d.photo): island photo cards */
+.wp .sec-x{--sky:#1BA6E4;border-bottom:0;padding:64px 0 56px;
+  background:radial-gradient(1000px 360px at 80% 0%,color-mix(in oklab,var(--sky) 10%,transparent),transparent 70%),var(--paper)}
+.wp .x-rhead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:34px}
+.wp .x-sec-kick{display:flex;align-items:center;gap:14px;font-size:12.5px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.wp .x-sec-kick::after{content:"";width:56px;height:2px;background:var(--sky)}
+.wp .sec-x .wp-h2{font-size:clamp(30px,3.8vw,46px);font-weight:700;letter-spacing:-.015em;margin:12px 0 8px}
+.wp .sec-x .wp-h2 em{font-family:"Dancing Script",cursive;font-style:normal;font-weight:600;font-size:1.2em;color:var(--sky);letter-spacing:0}
+.wp .sec-x .intro{margin:0;font-size:16.5px}
+.wp .x-total{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;font-size:14.5px;font-weight:700;color:var(--accent);
+  background:color-mix(in oklab,var(--sky) 12%,transparent);border:1px solid color-mix(in oklab,var(--sky) 25%,transparent)}
+.wp .x-total svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.wp .x-cards{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:30px}
+.wp .x-cell{position:relative}
+.wp .x-card{position:relative;display:block;aspect-ratio:1/1;border-radius:22px;overflow:hidden;isolation:isolate;
+  box-shadow:0 18px 40px rgba(8,40,80,.18);background:#0B4F8F}
+.wp .x-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.wp .x-card:hover img{transform:scale(1.06)}
+.wp .x-card::after{content:"";position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg,rgba(4,24,50,.45) 0%,rgba(4,24,50,0) 26%,rgba(4,24,50,0) 42%,rgba(4,30,64,.88) 100%)}
+.wp .x-top{position:absolute;z-index:1;left:18px;right:18px;top:18px;display:flex;align-items:center;justify-content:space-between}
+.wp .x-daychip{padding:7px 13px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#fff;
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.wp .x-big{font:700 44px/1 "Fraunces",serif;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.85)}
+.wp .x-body{position:absolute;z-index:1;left:22px;right:22px;bottom:22px;color:#fff}
+.wp .x-nightpill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:#fff;color:var(--accent);font-size:13px;font-weight:800}
+.wp .x-nightpill svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-body .wp-h3{color:#fff;font-size:clamp(28px,2.6vw,36px);font-weight:700;margin:10px 0 12px;text-shadow:0 2px 14px rgba(0,0,0,.3)}
+.wp .x-chips{display:flex;flex-wrap:wrap;gap:7px;margin:0;padding:0;list-style:none}
+.wp .x-chips li{display:inline-flex;align-items:center;gap:5px;padding:5px 11px 5px 8px;border-radius:8px;font-size:13px;font-weight:600;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.wp .x-chips svg{width:14px;height:14px;flex:none;fill:none;stroke:#7FDBFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* ferry hop sits in the gap between two cards */
+.wp .x-hop{position:absolute;z-index:3;left:-15px;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
+.wp .x-hop span{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:#fff;
+  box-shadow:0 0 0 6px color-mix(in oklab,var(--sky) 18%,transparent),0 10px 22px rgba(8,40,80,.25)}
+.wp .x-hop svg{width:26px;height:26px;fill:none;stroke:var(--accent);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-hop small{padding:3px 9px;border-radius:999px;background:var(--accent);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.wp .x-credit{margin-top:18px;font-size:11.5px;color:var(--muted)}
+@media (max-width:1100px) and (min-width:901px){ .wp .x-card{aspect-ratio:5/6} .wp .x-body .wp-h3{font-size:26px} }
+@media (max-width:900px){
+  .wp .sec-x{padding:48px 0 44px}
+  .wp .x-cards{grid-template-columns:1fr;gap:34px}
+  .wp .x-card{aspect-ratio:16/10}
+  .wp .x-hop{left:50%;top:-17px;flex-direction:row}
+  .wp .x-hop span{width:46px;height:46px}
+  .wp .x-hop svg{width:22px;height:22px}
+}
+
+/* rich day-by-day (pages with d.photo): interactive day planner */
+.wp .sec-days{--sky:#1BA6E4;border-bottom:0;padding:64px 0 72px;
+  background:linear-gradient(180deg,var(--paper) 0%,color-mix(in oklab,var(--accent) 7%,var(--paper)) 100%)}
+.wp .x-dhead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:28px}
+.wp .sec-days .wp-h2{font-size:clamp(30px,3.8vw,46px);font-weight:700;letter-spacing:-.015em;margin:12px 0 8px}
+.wp .sec-days .wp-h2 em{font-family:"Dancing Script",cursive;font-style:normal;font-weight:600;font-size:1.2em;color:var(--sky);letter-spacing:0}
+.wp .sec-days .intro{margin:0;font-size:16.5px}
+.wp .x-tabs{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:10px;margin:0 0 18px;padding:0;list-style:none}
+.wp .x-tab{width:100%;cursor:pointer;text-align:left;border:1px solid color-mix(in oklab,var(--accent) 14%,transparent);background:var(--surface);
+  border-radius:14px;padding:12px 14px;font-family:"Karla",sans-serif;color:var(--ink);transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+.wp .x-tab:hover{transform:translateY(-2px);box-shadow:0 10px 22px color-mix(in oklab,var(--accent) 12%,transparent)}
+.wp .x-tab small{display:block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--sky)}
+.wp .x-tab b{display:block;font:700 22px/1.1 "Fraunces",serif;margin:2px 0}
+.wp .x-tab span{display:block;font-size:12.5px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wp .x-tab[aria-selected="true"]{background:linear-gradient(135deg,var(--sky),var(--accent));border-color:transparent;color:#fff;
+  box-shadow:0 12px 26px color-mix(in oklab,var(--accent) 30%,transparent)}
+.wp .x-tab[aria-selected="true"] small,.wp .x-tab[aria-selected="true"] span{color:rgba(255,255,255,.85)}
+.wp .x-prog{height:4px;border-radius:4px;background:color-mix(in oklab,var(--accent) 12%,transparent);margin-bottom:22px;overflow:hidden}
+.wp .x-prog i{display:block;height:100%;width:var(--p,0%);border-radius:4px;background:linear-gradient(90deg,var(--sky),var(--accent));transition:width .35s ease}
+.wp .x-panel{display:none;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);background:var(--surface);border-radius:24px;overflow:hidden;
+  border:1px solid color-mix(in oklab,var(--accent) 12%,transparent);box-shadow:0 20px 44px color-mix(in oklab,var(--accent) 14%,transparent)}
+.wp .x-panel.is-on{display:grid;animation:xfade .35s ease}
+@keyframes xfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.wp .x-pimg{position:relative;min-height:340px}
+.wp .x-pimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wp .x-pimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(4,30,64,.6))}
+.wp .x-pimg .x-where{position:absolute;z-index:1;left:20px;bottom:18px;display:inline-flex;align-items:center;gap:6px;color:#fff;font-weight:700;font-size:15px}
+.wp .x-pimg .x-where svg{width:17px;height:17px;fill:none;stroke:#7FDBFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-pbody{display:flex;flex-direction:column;padding:34px 38px 30px}
+.wp .x-pnum{font:700 15px/1 "Karla",sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--sky)}
+.wp .x-pnum b{font:700 54px/1 "Fraunces",serif;letter-spacing:0;color:var(--accent);margin-right:6px}
+.wp .x-pbody .x-dtags{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 12px}
+.wp .x-dtag{display:inline-flex;align-items:center;gap:5px;padding:5px 11px 5px 9px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--accent);
+  background:color-mix(in oklab,var(--sky) 12%,transparent)}
+.wp .x-dtag svg{width:14px;height:14px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-dtag-alt{background:color-mix(in oklab,var(--accent) 88%,#000);color:#fff}
+.wp .x-pbody .wp-h3{font-size:clamp(26px,2.6vw,34px);font-weight:700;margin-bottom:10px}
+.wp .x-pbody p:where(:not(.heading)){font-size:16.5px;color:var(--muted);line-height:1.65;max-width:52ch}
+.wp .x-pnav{display:flex;gap:10px;margin-top:auto;padding-top:26px}
+.wp .x-pnav button{display:inline-flex;align-items:center;gap:8px;cursor:pointer;border-radius:10px;padding:11px 16px;font:700 14px/1 "Karla",sans-serif;
+  border:1px solid color-mix(in oklab,var(--accent) 22%,transparent);background:transparent;color:var(--accent)}
+.wp .x-pnav button:last-child{background:linear-gradient(90deg,var(--sky),var(--accent));border-color:transparent;color:#fff}
+.wp .x-pnav button:disabled{opacity:.35;cursor:default}
+.wp .x-pnav svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-pnav .x-back svg{transform:scaleX(-1)}
+@media (max-width:900px){
+  .wp .sec-days{padding:48px 0 56px}
+  .wp .x-tabs{display:flex;overflow-x:auto;scrollbar-width:none;margin-left:-16px;margin-right:-16px;padding:2px 16px 8px;scroll-snap-type:x mandatory}
+  .wp .x-tabs::-webkit-scrollbar{display:none}
+  .wp .x-tabs li{flex:0 0 120px;scroll-snap-align:start}
+  .wp .x-panel{grid-template-columns:1fr}
+  .wp .x-pimg{min-height:210px}
+  .wp .x-pbody{padding:22px 20px 22px}
+  .wp .x-pnum b{font-size:42px}
+}
+/* rich price (pages with d.photo): package pricing card */
+.wp .sec-price{--sky:#1BA6E4;border-bottom:0;padding:72px 0 80px;background:var(--paper)}
+.wp .x-phead{text-align:center;max-width:640px;margin:0 auto 34px}
+.wp .x-phead .x-sec-kick{justify-content:center}
+.wp .x-phead .x-sec-kick::before{content:"";width:56px;height:2px;background:var(--sky)}
+.wp .sec-price .wp-h2{font-size:clamp(30px,3.8vw,46px);font-weight:700;letter-spacing:-.015em;margin:12px 0 0}
+.wp .sec-price .wp-h2 em{font-family:"Dancing Script",cursive;font-style:normal;font-weight:600;font-size:1.2em;color:var(--sky);letter-spacing:0}
+.wp .x-pk{max-width:960px;margin:0 auto;border-radius:28px;overflow:hidden;background:var(--surface);
+  border:1px solid color-mix(in oklab,var(--accent) 12%,transparent);box-shadow:0 26px 56px color-mix(in oklab,var(--accent) 16%,transparent)}
+.wp .x-pk-top{position:relative;overflow:hidden;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 30px;padding:30px 36px;color:#fff;
+  background:linear-gradient(110deg,#08386E 0%,#0B5C9E 60%,#1693D3 100%)}
+.wp .x-pk-top::before{content:"";position:absolute;right:-60px;top:-90px;width:260px;height:260px;border-radius:50%;border:40px solid rgba(255,255,255,.06)}
+.wp .x-pk-top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:24px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24'%3E%3Cpath d='M0 14 Q30 2 60 14 T120 14' fill='none' stroke='%23ffffff' stroke-opacity='.18' stroke-width='2'/%3E%3C/svg%3E") repeat-x bottom/120px 24px}
+.wp .x-pk-name{position:relative}
+.wp .x-pk-name small{display:block;font-size:11.5px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:#7FDBFF}
+.wp .x-pk-name .wp-h3{color:#fff;font-size:clamp(24px,2.6vw,30px);font-weight:700;margin:6px 0 10px}
+.wp .x-pk-name ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.wp .x-pk-name li{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:13px;font-weight:700;background:rgba(255,255,255,.12)}
+.wp .x-pk-name li svg{width:14px;height:14px;fill:none;stroke:#7FDBFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-pk-price{position:relative;text-align:right}
+.wp .x-pk-price b{display:block;font:700 clamp(42px,4.6vw,58px)/1 "Fraunces",serif}
+.wp .x-pk-price span{font-size:14px;color:rgba(255,255,255,.82)}
+.wp .x-pk-body{display:grid;grid-template-columns:1fr 1fr}
+.wp .x-pk-col{padding:30px 36px 32px}
+.wp .x-pk-col + .x-pk-col{border-left:1px solid var(--line);background:color-mix(in oklab,var(--ink) 2.5%,transparent)}
+.wp .x-pk-col .wp-h4{display:flex;align-items:center;gap:10px;font:800 12.5px/1 "Karla",sans-serif;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.wp .x-pk-col .wp-h4 i{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;font-style:normal;font-size:13px}
+.wp .x-pk-in .wp-h4{color:var(--accent)} .wp .x-pk-in .wp-h4 i{background:var(--accent);color:#fff}
+.wp .x-pk-out .wp-h4{color:var(--muted)} .wp .x-pk-out .wp-h4 i{background:color-mix(in oklab,var(--ink) 10%,transparent);color:var(--muted)}
+.wp .x-pk-col ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.wp .x-pk-col li{display:flex;gap:12px;font-size:15.5px;line-height:1.45}
+.wp .x-pk-col li svg{width:20px;height:20px;flex:none;margin-top:1px;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-pk-in li{font-weight:600} .wp .x-pk-in li svg{stroke:var(--sky)}
+.wp .x-pk-out li{color:var(--muted)} .wp .x-pk-out li svg{stroke:color-mix(in oklab,var(--muted) 70%,transparent)}
+.wp .x-pk-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;padding:20px 36px;border-top:1px solid var(--line)}
+.wp .x-pk-foot p:where(:not(.heading)){display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.wp .x-pk-foot p:where(:not(.heading)) svg{width:20px;height:20px;flex:none;fill:none;stroke:var(--sky);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-pk-btn{display:inline-flex;align-items:center;gap:10px;border:0;cursor:pointer;border-radius:12px;padding:14px 22px;color:#fff;
+  background:linear-gradient(90deg,var(--sky),var(--accent));font:700 15.5px/1 "Karla",sans-serif;box-shadow:0 10px 22px color-mix(in oklab,var(--accent) 28%,transparent);transition:transform .15s}
+.wp .x-pk-btn:hover{transform:translateY(-1px)}
+.wp .x-pk-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:760px){
+  .wp .sec-price{padding:52px 0 60px}
+  .wp .x-pk{border-radius:22px}
+  .wp .x-pk-top{padding:24px 20px 30px}
+  .wp .x-pk-price{text-align:left}
+  .wp .x-pk-body{grid-template-columns:1fr}
+  .wp .x-pk-col{padding:24px 20px}
+  .wp .x-pk-col + .x-pk-col{border-left:0;border-top:1px solid var(--line)}
+  .wp .x-pk-foot{padding:18px 20px}
+  .wp .x-pk-btn{width:100%;justify-content:center}
+}
+/* pricing card v2 (user mockup): tinted panels, icon rows, two buttons */
+.wp .x-pk-body{gap:0;padding:22px 22px 0;position:relative}
+.wp .x-pk-body::before{content:"";position:absolute;left:50%;top:40px;bottom:20px;border-left:1px solid var(--line)}
+.wp .x-pk-col{border-radius:20px;padding:20px 26px 14px!important}
+.wp .x-pk-col .wp-h4{margin-top:0!important}
+.wp .x-pk-in{background:#EEF6FC;margin-right:16px}
+.wp .x-pk-col + .x-pk-col{border-left:0!important;background:#FDF1F1!important;margin-left:16px}
+.wp .x-pk-col .wp-h4{gap:16px!important;font:700 22px/1.2 "Fraunces",serif!important;letter-spacing:0!important;text-transform:none!important;color:#0E2346!important;margin-bottom:12px!important}
+.wp .x-pk-col .wp-h4 i{width:46px!important;height:46px!important}
+.wp .x-pk-col .wp-h4 i svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-pk-in .wp-h4 i{background:linear-gradient(135deg,#1BA6E4,#0B5C9E)!important;box-shadow:0 8px 18px rgba(11,92,158,.3)}
+.wp .x-pk-out .wp-h4 i{background:#EF4444!important;box-shadow:0 8px 18px rgba(239,68,68,.3)}
+.wp .x-pk-col ul{gap:0!important}
+.wp .x-pk-col li{align-items:center;gap:18px!important;padding:9px 0;font-size:15.5px!important;font-weight:500!important;color:#1F3347!important}
+.wp .x-pk-col li + li{border-top:1px solid rgba(14,35,70,.08)}
+.wp .x-pk-col li > span{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;margin-left:6px}
+.wp .x-pk-col li > span svg{width:20px!important;height:20px!important;margin:0!important;fill:none;stroke-width:1.9!important;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-pk-in li > span{background:#DCEEFA}
+.wp .x-pk-in li > span svg{stroke:#0B6FB8!important}
+.wp .x-pk-out li > span{background:#FCE1E1}
+.wp .x-pk-out li > span svg{stroke:#E5484D!important}
+.wp .x-pk-foot{margin:18px 0 0;padding:16px 22px!important;background:#F2F8FD;border-top:0!important}
+.wp .x-pk-foot p:where(:not(.heading)){gap:18px!important;font-size:15px!important}
+.wp .x-pk-pl{display:grid;place-items:center;flex:none;width:54px;height:54px;border-radius:50%;background:#DCEEFA;margin-right:4px;position:relative}
+.wp .x-pk-pl::after{content:"";position:absolute;right:-12px;top:12px;bottom:12px;border-right:1px solid var(--line)}
+.wp .x-pk-pl svg{width:26px!important;height:26px!important;stroke:#1B8BD6!important}
+.wp .x-pk-acts{display:flex;flex-wrap:wrap;gap:14px}
+.wp .x-pk-btn{border-radius:999px!important;padding:16px 28px!important;font-size:16px!important}
+.wp .x-pk-wa{background:#22C55E!important;box-shadow:0 10px 22px rgba(34,197,94,.28)!important}
+@media (max-width:760px){
+  .wp .x-pk-body{padding:14px 14px 0}
+  .wp .x-pk-body::before{display:none}
+  .wp .x-pk-in{margin:0 0 14px}
+  .wp .x-pk-col + .x-pk-col{margin:0;border-top:0!important}
+  .wp .x-pk-col{padding:18px 16px 12px!important}
+  .wp .x-pk-col .wp-h4{font-size:19px!important}
+  .wp .x-pk-col .wp-h4 i{width:38px!important;height:38px!important}
+  .wp .x-pk-col li{font-size:14.5px!important;gap:12px!important}
+  .wp .x-pk-col li > span{width:38px;height:38px;margin-left:0}
+  .wp .x-pk-foot{margin-top:14px;padding:16px!important}
+  .wp .x-pk-pl{width:44px;height:44px}
+  .wp .x-pk-pl::after{display:none}
+  .wp .x-pk-acts{width:100%}
+  .wp .x-pk-acts .x-pk-btn{flex:1 1 160px;justify-content:center}
+}
+/* rich faq (pages with d.photo): simple accordion */
+.wp .sec-faq{--sky:#1BA6E4;border-bottom:0;padding:72px 0 80px;background:var(--paper)}
+.wp .x-fhead{text-align:center;max-width:620px;margin:0 auto 30px}
+.wp .sec-faq .wp-h2{font-size:clamp(28px,3.4vw,40px);font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+.wp .x-fhead p:where(:not(.heading)){color:var(--muted);font-size:16px}
+.wp .x-acc{max-width:780px;margin:0 auto;background:var(--surface);border-radius:20px;padding:6px 28px;
+  border:1px solid color-mix(in oklab,var(--accent) 10%,transparent);box-shadow:0 14px 34px color-mix(in oklab,var(--accent) 8%,transparent)}
+.wp .x-acc details{border-bottom:1px solid var(--line)}
+.wp .x-acc details:last-child{border-bottom:0}
+.wp .x-acc summary{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0;cursor:pointer;list-style:none;
+  font-size:17px;font-weight:700;color:var(--ink);transition:color .2s}
+.wp .x-acc summary::-webkit-details-marker{display:none}
+.wp .x-acc summary:hover,.wp .x-acc details[open] summary{color:var(--accent)}
+.wp .x-acc summary i{position:relative;flex:none;width:30px;height:30px;border-radius:50%;background:color-mix(in oklab,var(--sky) 12%,transparent);transition:background .2s}
+.wp .x-acc summary i::before,.wp .x-acc summary i::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;border-radius:2px;background:var(--accent);
+  transform:translate(-50%,-50%);transition:transform .25s}
+.wp .x-acc summary i::after{transform:translate(-50%,-50%) rotate(90deg)}
+.wp .x-acc details[open] summary i{background:var(--accent)}
+.wp .x-acc details[open] summary i::before,.wp .x-acc details[open] summary i::after{background:#fff}
+.wp .x-acc details[open] summary i::after{transform:translate(-50%,-50%) rotate(0)}
+.wp .x-acc details p:where(:not(.heading)){padding:0 48px 22px 0;margin-top:-6px;font-size:15.5px;line-height:1.7;color:var(--muted)}
+.wp .x-fmore{text-align:center;margin-top:24px;font-size:15px;color:var(--muted)}
+.wp .x-fmore button{border:0;background:none;cursor:pointer;padding:0 0 0 4px;font:700 15px/1 "Karla",sans-serif;color:var(--accent);
+  text-decoration:underline;text-underline-offset:4px;text-decoration-color:color-mix(in oklab,var(--accent) 35%,transparent)}
+.wp .x-fmore button:hover{text-decoration-color:var(--accent)}
+@media (max-width:620px){
+  .wp .sec-faq{padding:52px 0 60px}
+  .wp .x-acc{padding:2px 18px;border-radius:16px}
+  .wp .x-acc summary{font-size:15.5px;padding:18px 0}
+  .wp .x-acc details p:where(:not(.heading)){padding-right:0;font-size:14.5px}
+}
+/* rich closing cta (pages with d.photo): white card, photo right with wave edge (user mockup) */
+.wp .x-cta-sec{padding:24px 0 64px;background:var(--paper)}
+.wp .x-cta{position:relative;overflow:hidden;isolation:isolate;min-height:400px;display:flex;align-items:center;border-radius:28px;
+  background:linear-gradient(160deg,#F7FBFE 0%,#EAF5FC 100%);box-shadow:0 22px 48px rgba(11,60,110,.14)}
+.wp .x-cta-ph{position:absolute;z-index:-2;top:0;right:0;bottom:0;width:62%}
+.wp .x-cta-ph img{width:100%;height:100%;object-fit:cover;object-position:var(--cta-pos,center 60%)}
+.wp .x-cta-wave{position:absolute;z-index:-1;top:0;bottom:0;left:calc(38% - 220px);width:520px;height:100%;pointer-events:none}
+.wp .x-cta-blob{position:absolute;z-index:-1;left:-80px;bottom:-120px;width:340px;height:340px;border-radius:50%;background:rgba(27,166,228,.08)}
+.wp .x-cta-tx{max-width:560px;padding:52px 0 52px 64px}
+.wp .x-cta-tx .wp-h2{font-size:clamp(36px,4.4vw,62px);font-weight:700;line-height:1.02;letter-spacing:-.02em;color:#0E2346}
+.wp .x-cta-tx .wp-h2 em{font-family:"Dancing Script",cursive;font-style:normal;font-weight:600;font-size:1.15em;color:#1BA6E4}
+.wp .x-cta-tx p:where(:not(.heading)){margin-top:18px;font-size:17px;line-height:1.55;color:#4A6378;max-width:40ch}
+.wp .x-cta-acts{display:flex;flex-wrap:wrap;gap:16px;margin-top:30px}
+.wp .x-cta-acts button{display:inline-flex;align-items:center;gap:12px;border:0;cursor:pointer;border-radius:999px;padding:18px 32px;font:700 17px/1 "Karla",sans-serif;color:#fff;transition:transform .15s}
+.wp .x-cta-acts button:hover{transform:translateY(-2px)}
+.wp .x-cta-acts svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.wp .x-cta-main{background:linear-gradient(90deg,#1BA6E4,#0B5C9E);box-shadow:0 12px 26px rgba(11,92,158,.3)}
+.wp .x-cta-wa{background:#22C55E;box-shadow:0 12px 26px rgba(34,197,94,.3)}
+@media (max-width:900px){
+  .wp .x-cta{flex-direction:column;align-items:stretch;min-height:0}
+  .wp .x-cta-ph{position:relative;z-index:0;width:100%;height:220px;order:-1}
+  .wp .x-cta-wave{display:none}
+  .wp .x-cta-ph::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:60px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'%3E%3Cpath d='M0 30 C120 70 260 0 400 36 L400 60 L0 60 Z' fill='%23F3F9FD'/%3E%3C/svg%3E") no-repeat bottom/100% 100%}
+  .wp .x-cta-tx{padding:20px 22px 28px;max-width:none}
+  .wp .x-cta-acts button{flex:1 1 180px;justify-content:center;padding:16px 20px}
+}
+.wp .foot{padding:26px 0 40px;font-size:12.5px;color:var(--muted);text-align:center}
+@media (max-width:900px){
+  .wp .hero-in{grid-template-columns:1fr;padding:38px 20px 44px;gap:28px}
+}
+@media (max-width:620px){
+  .wp .wrap,.wp .hero-in{padding-left:16px;padding-right:16px}
+  .wp .price{font-size:33px}
+}
+/* even 30px vertical rhythm for the rich (photo) page sections */
+.wp .sec-x,.wp .sec-days,.wp .sec-price,.wp .sec-faq{padding-top:30px;padding-bottom:30px}
+.wp .x-cta-sec{padding-top:30px;padding-bottom:30px}
+.wp .sec-x .x-rhead,.wp .sec-days .x-dhead,.wp .sec-price .wp-h2,.wp .sec-faq .x-fhead{margin-bottom:24px}
+.wp .hero-x + .sec-x{padding-top:40px}
+/* match the hero width: content edges line up with the hero text and form */
+.wp .sec-x > .wrap,.wp .sec-days > .wrap,.wp .sec-price > .wrap,.wp .sec-faq > .wrap,.wp .x-cta-sec > .wrap{max-width:1760px;padding-left:clamp(24px,5vw,100px);padding-right:clamp(24px,5vw,100px)}
+.wp .sec-price .x-pk,.wp .sec-faq .x-acc{max-width:none}
+@media (max-width:900px){.wp .sec-x > .wrap,.wp .sec-days > .wrap,.wp .sec-price > .wrap,.wp .sec-faq > .wrap,.wp .x-cta-sec > .wrap{padding-left:20px;padding-right:20px}}
+/* left-align section headings to match the other sections */
+.wp .sec-price .x-phead,.wp .sec-faq .x-fhead{text-align:left;margin-left:0;margin-right:0;max-width:none}
+.wp .sec-price .x-phead .x-sec-kick{justify-content:flex-start}
+.wp .sec-price .x-phead .x-sec-kick::before{display:none}
+.wp .sec-faq .wp-h2{margin-top:12px}
+.wp .sec-faq .wp-h2 em{font-family:"Dancing Script",cursive;font-style:normal;font-weight:600;font-size:1.2em;color:#1BA6E4;letter-spacing:0}
+.wp .sec-faq .x-sec-kick{color:var(--accent)}
+.wp .sec-faq .x-sec-kick::after{background:#1BA6E4}
+/* mobile hero: 2-line heading, 3-line intro */
+@media (max-width:620px){
+  .wp .hero-x h1{font-size:clamp(26px,8.2vw,38px);line-height:1.12;margin:12px 0 14px}
+  .wp .hero-x h1 em{font-size:1.12em}
+  .wp .hero-x h1,.wp .hero-x h1 *{white-space:nowrap}
+  .wp .hero-x .lede{font-size:clamp(13.5px,3.75vw,16px);line-height:1.5;max-width:none}
+}
+/* mobile: form kicker on one line */
+@media (max-width:620px){
+  .wp .x-kick{font-size:11px;letter-spacing:.14em;white-space:nowrap;gap:10px}
+  .wp .x-kick::after{width:32px;flex:none}
+  .wp .lead.x-lead .sub{white-space:normal;overflow:visible;font-size:clamp(13px,3.6vw,15px)}
+  .wp .x-safe{white-space:nowrap;font-size:clamp(10.5px,3.1vw,13px);gap:6px}
+  .wp .x-safe svg{width:16px;height:16px}
+}
+/* mobile route cards: content flows below the top chips, never overlaps */
+@media (max-width:900px){
+  .wp .x-card{aspect-ratio:auto;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;padding:16px 18px 18px}
+  .wp .x-top{position:relative;left:auto;right:auto;top:auto}
+  .wp .x-body{position:relative;left:auto;right:auto;bottom:auto;margin-top:70px}
+  .wp .x-big{font-size:36px}
+  .wp .x-body .wp-h3{font-size:28px;margin:8px 0 10px}
+}
+/* mobile polish: section labels + price chips on one line */
+@media (max-width:620px){
+  .wp .x-sec-kick{font-size:11px!important;letter-spacing:.2em!important;white-space:nowrap;gap:10px}
+  .wp .x-sec-kick::after{width:36px!important;flex:none}
+  .wp .x-pk-name ul{flex-wrap:nowrap;gap:6px}
+  .wp .x-pk-name li{white-space:nowrap;font-size:11.5px;padding:5px 9px;gap:5px}
+  .wp .x-pk-name li svg{width:12px;height:12px}
+}
+/* mobile polish 2: consistent heading size, tab edge spacing */
+@media (max-width:620px){
+  .wp .sec-x .wp-h2,.wp .sec-days .wp-h2,.wp .sec-price .wp-h2,.wp .sec-faq .wp-h2{font-size:clamp(24px,7.2vw,30px)!important;line-height:1.15;margin:10px 0 8px!important}
+  .wp .sec-x .intro,.wp .sec-days .intro,.wp .x-fhead p:where(:not(.heading)){font-size:15px}
+  .wp .x-tabs{margin-left:-20px!important;margin-right:-20px!important;padding:2px 20px 8px!important;scroll-padding-left:20px}
+  .wp .x-tabs li{flex:0 0 112px}
+  .wp .x-cta-tx .wp-h2{font-size:clamp(28px,8vw,34px)}
+  .wp .x-cta-tx p:where(:not(.heading)){font-size:15px}
+}
+@media (min-width:761px){.wp .x-pk-foot{flex-wrap:nowrap}.wp .x-pk-foot p:where(:not(.heading)){min-width:0}.wp .x-pk-acts{flex:none;flex-wrap:nowrap}}
+
+/* mobile: price and duration side by side on one row */
+@media (max-width:620px){
+  .wp .hero-x .pricebar{flex-wrap:nowrap;align-items:center;gap:0 16px}
+  .wp .hero-x .price{font-size:clamp(28px,8.5vw,38px);white-space:nowrap}
+  .wp .hero-x .price small{font-size:clamp(11px,3.2vw,13px);white-space:nowrap}
+  .wp .hero-x .dur{font-size:clamp(13px,3.8vw,16px);padding-left:16px;white-space:nowrap}
+  .wp .hero-x .dur small{font-size:clamp(11px,3.2vw,13px)}
+}
+
+/* mobile: form title and description each on a single line */
+@media (max-width:620px){
+  .wp .lead.x-lead .wp-h2{font-size:clamp(17px,5.2vw,26px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .wp .lead.x-lead .sub{font-size:clamp(11px,3.1vw,15px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
+
+/* mobile: hide the decorative curve lines behind the hero text */
+@media (max-width:900px){
+  .wp .hero-x .swoosh{display:none}
+}

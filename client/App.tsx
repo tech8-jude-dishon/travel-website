@@ -3,10 +3,15 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
+import LeadPopup from './components/LeadPopup';
 import { AuthProvider } from './context/AuthContext';
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 import SubHome from './components/SubHome';
 import { getWhatsAppLink } from './utils/whatsapp';
+import { PhoneCall } from 'lucide-react';
+
+// Number dialled by the floating call button (same Dubai line as WhatsApp)
+const CALL_NUMBER = '+971589520398';
 import { slugify } from './utils/slugify';
 
 const DestinationsPage = React.lazy(() => import('./components/DestinationsPage'));
@@ -27,6 +32,7 @@ const BlogDetailPage = React.lazy(() => import('./components/BlogDetailPage'));
 const AdminDashboard = React.lazy(() => import('./components/AdminDashboard'));
 const TermsAndConditions = React.lazy(() => import('./components/TermsAndConditions'));
 const PrivacyPolicy = React.lazy(() => import('./components/PrivacyPolicy'));
+const WinterPackagePage = React.lazy(() => import('./components/WinterPackagePage'));
 
 
 function RouteSync() {
@@ -162,6 +168,16 @@ const App: React.FC = () => {
               />
 
               <Route
+                path="/services"
+                element={<Navigate to="/services/sikkim" replace />}
+              />
+
+              <Route
+                path="/services/:slug"
+                element={<WinterPackagePage />}
+              />
+
+              <Route
                 path="/packages"
                 element={<PackagesPage onBack={() => navigate("/")}
                   onExplore={handlePackageClick} onBookClick={toggleBooking} />}
@@ -234,15 +250,30 @@ const App: React.FC = () => {
           <Footer onContactClick={toggleBooking} onNavigate={navigateTo} />
         )}
         <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+        <LeadPopup />
 
 
+
+        {location.pathname !== '/admin' && (
+          <a
+            href={`tel:${CALL_NUMBER}`}
+            className="fixed bottom-[83px] right-1 w-14 h-14 rounded-full flex items-center justify-center z-50 transition-transform duration-300 hover:-translate-y-1"
+            aria-label="Call us"
+          >
+            {/* soft pulsing halo */}
+            <span className="absolute inset-0 rounded-full bg-[#022A61]/40 animate-ping [animation-duration:2s]" aria-hidden="true" />
+            <span className="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-[#0A3F86] to-[#022A61] ring-2 ring-white shadow-[0_10px_24px_rgba(2,42,97,0.45)]">
+              <PhoneCall className="w-6 h-6 text-white" strokeWidth={2} />
+            </span>
+          </a>
+        )}
 
         {location.pathname !== '/admin' && (
           <a
             href={getWhatsAppLink('Hi! I would like to enquire about your travel packages.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="fixed bottom-[60px] right-8 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 z-50 hover:-translate-y-2"
+            className="fixed bottom-[15px] right-1 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 z-50 hover:-translate-y-2"
             style={{ backgroundColor: '#25D366' }}
             aria-label="Chat on WhatsApp"
           >

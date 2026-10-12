@@ -8,13 +8,32 @@
     <meta name="description"
         content="Discover the best tours and holiday packages curated by premium travel experts. Experience seamless travel planning with personalized itineraries, exclusive offers, and unforgettable journeys..">
 
+    <!-- Keep preconnects to 4: fonts, images and the API (must match VITE_API_BASE's host) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com">
-    <!-- Speed up the first data fetch: open the connection to the API early -->
     <link rel="preconnect" href="https://api.globalconnectworldtravel.com" crossorigin>
-    <link rel="dns-prefetch" href="https://api.globalconnectworldtravel.com">
-    <link rel="preconnect" href="https://globalconnectworldtravel.com">
+    <!-- Home page LCP: start the hero banner download before the JS bundle runs.
+         Keep in sync with HERO_* in components/SubHome.tsx -->
+    <script>
+        if (location.pathname === '/') {
+            (function () {
+                var cld = 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_';
+                var heroes = [
+                    ['(max-width: 1023px)', '/v1774847994/backgrond_compressed_aupq3k.webp', [480, 828, 1200]],
+                    ['(min-width: 1024px)', '/v1774845947/homeBg_compressed_ecbphd.webp', [1280, 1600, 1920]]
+                ];
+                heroes.forEach(function (h) {
+                    var l = document.createElement('link');
+                    l.rel = 'preload'; l.as = 'image'; l.media = h[0];
+                    l.setAttribute('fetchpriority', 'high');
+                    l.setAttribute('imagesizes', '100vw');
+                    l.setAttribute('imagesrcset', h[2].map(function (w) { return cld + w + h[1] + ' ' + w + 'w'; }).join(', '));
+                    document.head.appendChild(l);
+                });
+            })();
+        }
+    </script>
     <link rel="icon" type="image/png" href="/images/Favicon.png">
     <!-- Google Tag Manager -->
     <script>
@@ -57,7 +76,7 @@
     <!-- Meta Pixel Code -->
 
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Fraunces:opsz,wght@9..144,400..900&family=Karla:wght@300..800&display=swap"
         media="print" onload="this.media='all'">
     <link rel="stylesheet" href="/index.css">
 </head>

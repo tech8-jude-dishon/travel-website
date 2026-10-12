@@ -22,14 +22,14 @@ const PrivacyPolicy: React.FC = () => {
                 <p className="text-slate-500 text-sm">Last updated: March 2026</p>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">1. Introduction</h2>
+                    <p className="heading text-xl font-black text-slate-900">1. Introduction</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         Global Connect World Travel ("GCWT", "we", "us", or "our") is committed to protecting your personal information. This Privacy Policy explains what data we collect, how we use it, and your rights regarding that data when you use our website or services.
                     </p>
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">2. Information We Collect</h2>
+                    <p className="heading text-xl font-black text-slate-900">2. Information We Collect</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         We may collect the following types of personal information:
                     </p>
@@ -43,7 +43,7 @@ const PrivacyPolicy: React.FC = () => {
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">3. How We Use Your Information</h2>
+                    <p className="heading text-xl font-black text-slate-900">3. How We Use Your Information</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         We use your personal information for the following purposes:
                     </p>
@@ -58,7 +58,7 @@ const PrivacyPolicy: React.FC = () => {
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">4. Sharing Your Information</h2>
+                    <p className="heading text-xl font-black text-slate-900">4. Sharing Your Information</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         We do not sell your personal data. We may share it with trusted third parties only as necessary to fulfil your booking, including:
                     </p>
@@ -74,28 +74,28 @@ const PrivacyPolicy: React.FC = () => {
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">5. Cookies</h2>
+                    <p className="heading text-xl font-black text-slate-900">5. Cookies</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         Our website uses cookies to improve your browsing experience and analyse site traffic. Cookies are small text files stored on your device. You can control cookie settings through your browser preferences. Disabling cookies may affect certain features of our website.
                     </p>
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">6. Data Retention</h2>
+                    <p className="heading text-xl font-black text-slate-900">6. Data Retention</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         We retain your personal data for as long as necessary to provide our services and comply with legal obligations. Booking records are typically retained for 7 years in accordance with financial regulations. You may request deletion of your data at any time, subject to legal retention requirements.
                     </p>
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">7. Data Security</h2>
+                    <p className="heading text-xl font-black text-slate-900">7. Data Security</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         We implement appropriate technical and organisational measures to protect your personal data against unauthorised access, alteration, disclosure, or destruction. Payment information is processed through secure, encrypted channels and is never stored on our servers.
                     </p>
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">8. Your Rights</h2>
+                    <p className="heading text-xl font-black text-slate-900">8. Your Rights</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         Depending on your location, you may have the following rights regarding your personal data:
                     </p>
@@ -112,28 +112,28 @@ const PrivacyPolicy: React.FC = () => {
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">9. Third-Party Links</h2>
+                    <p className="heading text-xl font-black text-slate-900">9. Third-Party Links</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of those sites. We encourage you to review their privacy policies before providing any personal information.
                     </p>
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">10. Children's Privacy</h2>
+                    <p className="heading text-xl font-black text-slate-900">10. Children's Privacy</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         Our services are not directed to children under 18. We do not knowingly collect personal data from minors. If you believe we have inadvertently collected such data, please contact us immediately for deletion.
                     </p>
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">11. Changes to This Policy</h2>
+                    <p className="heading text-xl font-black text-slate-900">11. Changes to This Policy</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date. Continued use of our services after changes are posted constitutes your acceptance of the revised policy.
                     </p>
                 </section>
 
                 <section className="space-y-3">
-                    <h2 className="text-xl font-black text-slate-900">12. Contact Us</h2>
+                    <p className="heading text-xl font-black text-slate-900">12. Contact Us</p>
                     <p className="text-slate-600 text-sm leading-relaxed">
                         For any questions or concerns about this Privacy Policy, or to exercise your data rights, please contact us:
                     </p>

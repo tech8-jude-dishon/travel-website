@@ -144,3 +144,17 @@ CREATE TABLE IF NOT EXISTS dream_destinations (
 -- ALTER TABLE travel_details ADD COLUMN travel_origin VARCHAR(255) AFTER phone;
 -- ALTER TABLE travel_details ADD COLUMN tentative_budget VARCHAR(100) AFTER children;
 -- ALTER TABLE travel_details ADD COLUMN specific_requirements TEXT AFTER tentative_budget;
+
+-- ============================================================
+-- Table: popup_leads  (name / phone / email from the website popup)
+-- ============================================================
+CREATE TABLE IF NOT EXISTS popup_leads (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  phone VARCHAR(50) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  source_page VARCHAR(255),
+  client_token VARCHAR(64),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_popup_leads_token (client_token)
+);

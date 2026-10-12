@@ -114,10 +114,9 @@ const IndiaLocalToursPage: React.FC<IndiaLocalToursPageProps> = ({ onExplore, on
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="lg:text-white text-black lg:text-[38px] text-2xl font-bold  lg:mb-12 mb-4">
+        <h1 className="lg:text-white text-black lg:text-[38px] text-2xl font-bold  lg:mb-12 mb-4">
           North India Tours
-
-        </div>
+        </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative w-full px-6 md:px-14">
           {northTours.length === 0 ? (

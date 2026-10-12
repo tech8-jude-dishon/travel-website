@@ -1,16 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --font-family-sans: 'Poppins', sans-serif;
-  --font-family-serif: 'Poppins', sans-serif;
-  --font-family-cursive: 'Dancing Script', cursive;
+  --font-sans: 'Karla', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-cursive: 'Dancing Script', cursive;
   --color-brand-gold: #0fb7fb;
   --color-brand-dark: #02285b;
   --color-brand-bg: #ffff;
 }
 
-* {
-    font-family: 'Poppins', sans-serif !important;
+/* Site-wide fonts: Karla for text, Fraunces for titles, Dancing Script for script accents */
+body {
+    font-family: var(--font-sans);
+}
+
+/* Only the page's hero title is an h1; other titles are <p class="heading"> with the same look */
+h1, h2, h3, h4, h5, h6, .heading {
+    font-family: var(--font-serif) !important;
 }
 
 html {

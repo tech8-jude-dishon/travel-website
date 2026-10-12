@@ -4,11 +4,14 @@ require('dotenv').config();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM        = process.env.EMAIL_FROM;
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+// Comma-separated lists in .env, e.g. ADMIN_EMAIL=a@x.com,b@x.com and ADMIN_CC=c@y.com,d@y.com
+const parseList = (v) => (v || '').split(',').map(e => e.trim()).filter(Boolean);
+const ADMIN_EMAIL = parseList(process.env.ADMIN_EMAIL);
+const ADMIN_CC    = parseList(process.env.ADMIN_CC);
 
 // Startup check — print to server console so you can verify env is loaded
 console.log('[mailer] FROM:', FROM);
-console.log('[mailer] ADMIN_EMAIL:', ADMIN_EMAIL);
+console.log('[mailer] ADMIN_EMAIL:', ADMIN_EMAIL.join(', '), '| CC:', ADMIN_CC.join(', ') || '-');
 
 // ── Shared HTML wrapper ──────────────────────────────────────────
 const wrapHtml = (body) => `
@@ -58,6 +61,9 @@ const wrapHtml = (body) => `
 </html>`;
 
 // ── Detail row helper ────────────────────────────────────────────
+const escapeHtml = (v) =>
+  v == null ? v : String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
 const row = (label, value) =>
   value
     ? `<tr>
@@ -111,7 +117,15 @@ const sendUserEnquiryConfirmation = async ({ full_name, email, phone, destinatio
 // ════════════════════════════════════════════════════════════════
 // 2. General Enquiry — notification to ADMIN
 // ════════════════════════════════════════════════════════════════
-const sendAdminEnquiryNotification = async ({ full_name, email, phone, destination, travel_date, adults, children, message }) => {
+const sendAdminEnquiryNotification = async (data) => {
+  // Escape visitor input before it goes into the HTML email.
+  const { full_name, email, phone, destination, travel_date, adults, children, message } =
+    Object.fromEntries(Object.entries(data).map(([k, v]) => [k, escapeHtml(v)]));
+  // Winter package forms collect a WhatsApp number but no email: reply on WhatsApp instead.
+  const waDigits = String(data.phone || '').replace(/\D/g, '');
+  const replyHref = data.email ? `mailto:${email}` : waDigits ? `https://wa.me/${waDigits}` : '';
+  const replyLabel = data.email ? `Reply to ${full_name || 'Customer'}` : `WhatsApp ${full_name || 'Customer'}`;
+
   const html = wrapHtml(`
     <h2 style="margin:0 0 8px;color:#1B2534;font-size:20px;">🔔 New Travel Enquiry Received</h2>
     <p style="margin:0 0 24px;color:#64748b;font-size:15px;">A new booking enquiry has been submitted on the website.</p>
@@ -120,8 +134,8 @@ const sendAdminEnquiryNotification = async ({ full_name, email, phone, destinati
       <p style="margin:0 0 16px;font-size:13px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:1px;">Lead Details</p>
       <table cellpadding="0" cellspacing="0" width="100%">
         ${row('Name', full_name)}
-        ${row('Email', `<a href="mailto:${email}" style="color:#C9A84C;">${email}</a>`)}
-        ${row('Phone', phone)}
+        ${email ? row('Email', `<a href="mailto:${email}" style="color:#C9A84C;">${email}</a>`) : ''}
+        ${row(data.email ? 'Phone' : 'WhatsApp', phone)}
         ${row('Destination', destination || 'General Enquiry')}
         ${row('Travel Date', travel_date)}
         ${row('Adults', adults)}
@@ -130,15 +144,16 @@ const sendAdminEnquiryNotification = async ({ full_name, email, phone, destinati
       </table>
     </div>
 
-    <a href="mailto:${email}" style="display:inline-block;background:#1B2534;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.5px;">
-      Reply to ${full_name || 'Customer'}
-    </a>
+    ${replyHref ? `<a href="${replyHref}" style="display:inline-block;background:#1B2534;color:#ffffff;text-decoration:none;padding:12px 28px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:0.5px;">
+      ${replyLabel}
+    </a>` : ''}
   `);
 
   return resend.emails.send({
     from: FROM,
-    to: [ADMIN_EMAIL],
-    subject: `🧳 New Enquiry: ${full_name || 'Unknown'} → ${destination || 'General'}`,
+    to: ADMIN_EMAIL,
+    ...(ADMIN_CC.length ? { cc: ADMIN_CC } : {}),
+    subject: `🧳 New Enquiry: ${data.full_name || 'Unknown'} → ${data.destination || 'General'}`,
     html,
   });
 };
@@ -207,7 +222,8 @@ const sendAdminPackageEnquiryNotification = async ({ name, email, phone, package
 
   return resend.emails.send({
     from: FROM,
-    to: [ADMIN_EMAIL],
+    to: ADMIN_EMAIL,
+    ...(ADMIN_CC.length ? { cc: ADMIN_CC } : {}),
     subject: `🎯 Package Enquiry: ${name || 'Unknown'} → ${package_title || 'Package'}`,
     html,
   });

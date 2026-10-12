@@ -101,9 +101,9 @@ const DubaiToursPage: React.FC<DubaiToursPageProps> = ({ onBack, onExplore, onBo
       <section className="relative overflow-hidden py-4 bg-white">
         <div className="max-w-[1440px] mx-auto relative z-10 px-6 md:px-14">
           <div className="text-left mb-4">
-            <h2 className="text-3xl l text-center lg:text-left md:text-[38px] font-sans font-black text-slate-900 leading-tight">
+            <p className="heading text-3xl l text-center lg:text-left md:text-[38px] font-sans font-black text-slate-900 leading-tight">
               Choose Your <br /> <span className="text-[#00A9D7]">Dream Destination</span>
-            </h2>
+            </p>
           </div>
 
           <div className="flex  flex-col lg:flex-row  lg:gap-12 gap-4 relative">
@@ -317,9 +317,9 @@ const DubaiToursPage: React.FC<DubaiToursPageProps> = ({ onBack, onExplore, onBo
 
         {/* Dubai Local Tour Section */}
         <div className="max-w-[1440px] mx-auto pb-12 px-6 md:px-14">
-          <h2 className="text-2xl md:text-[38px] text-center lg:text-left font-sans font-black text-slate-900 leading-tight mb-6">
+          <p className="heading text-2xl md:text-[38px] text-center lg:text-left font-sans font-black text-slate-900 leading-tight mb-6">
             Dubai <span className="text-[#00A9D7]">Local Tour</span>
-          </h2>
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {localTours.map((tour) => (
               <div

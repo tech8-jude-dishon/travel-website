@@ -16,6 +16,12 @@ const TABS = [
     { id: 'visa', label: 'Visa', icon: FileText },
 ];
 
+const HERO_MOBILE = (w: number) => `https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_${w}/v1774847994/backgrond_compressed_aupq3k.webp`;
+const HERO_DESKTOP = (w: number) => `https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_${w}/v1774845947/homeBg_compressed_ecbphd.webp`;
+const HERO_MOBILE_SRC = HERO_MOBILE(828);
+const HERO_MOBILE_SRCSET = [480, 828, 1200].map(w => `${HERO_MOBILE(w)} ${w}w`).join(', ');
+const HERO_DESKTOP_SRCSET = [1280, 1600, 1920].map(w => `${HERO_DESKTOP(w)} ${w}w`).join(', ');
+
 const OFFERS = [
     { id: 1, title: 'INDIA TOURS', image: '/images/indiaFrom.png', },
     { id: 2, title: 'DUBAI TOURS', image: '/images/dubaii.png', },
@@ -499,9 +505,12 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
             <section
                 className="relative w-full lg:h-[760px] h-auto z-0 mt-[-9%] lg:bg-white overflow-hidden flex items-center justify-center"
             >
-                {/* LCP images as <img loading="lazy"> with fetchpriority="high" for fast loading */}
-                <img src="https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774847994/backgrond_compressed_aupq3k.webp" fetchPriority="high" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover object-center lg:hidden" />
-                <img src="https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774845947/homeBg_compressed_ecbphd.webp" fetchPriority="high" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-contain object-center hidden lg:block" />
+                {/* LCP image: <picture> so only the mobile or the desktop banner is downloaded,
+                    at a width that fits the screen. Keep in sync with the preload in index.html. */}
+                <picture>
+                    <source media="(min-width: 1024px)" srcSet={HERO_DESKTOP_SRCSET} sizes="100vw" />
+                    <img src={HERO_MOBILE_SRC} srcSet={HERO_MOBILE_SRCSET} sizes="100vw" fetchPriority="high" decoding="async" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover object-center lg:object-contain" />
+                </picture>
 
                 {/* Mobile hero layout */}
                 <div className="relative z-10 w-full px-6 pt-[63px] pb-[40px] flex flex-col items-center lg:hidden">
@@ -582,9 +591,10 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
                 {/* Desktop hero layout */}
                 <div className="relative z-10 lg:left-[60px] max-w-[1440px] mx-auto w-full px-6 grid-cols-1 lg:grid-cols-2 gap-10 items-center hidden lg:grid">
                     <div className="lg:mt-[-90px]">
-                        <h1 className="text-[60px] font-sans font-bold text-left text-white drop-shadow-2xl leading-tight animate-fade-in-up">
+                        {/* Same title as the mobile h1 above; kept as <p> so the page has a single h1 */}
+                        <p className="heading text-[60px] font-sans font-bold text-left text-white drop-shadow-2xl leading-tight animate-fade-in-up">
                             Book Your Next <br /> Adventure Today
-                        </h1>
+                        </p>
 
                         <div className="flex flex-column gap-4 animate-fade-in-up delay-200 justify-start pt-[20px]">
                             <button
@@ -640,11 +650,11 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
 
                 <div className="max-w-7xl mx-auto lg:px-[20px] relative z-10">
                     {/* <p className="md:hidden text-[#00A9D7] text-xs font-bold tracking-[0.2em] uppercase text-center mb-2 animate-fade-in-up">What We Offer</p> */}
-                    <h2
-                        className="text-2xl md:text-[42px] font-black text-brand-dark mb-3 lg:text-left text-center animate-fade-in-up"
+                    <p
+                        className="heading text-2xl md:text-[42px] font-black text-brand-dark mb-3 lg:text-left text-center animate-fade-in-up"
                     >
                         Our <span className="text-[#00A9D7] ">Services</span>
-                    </h2>
+                    </p>
                     <p className="md:hidden text-gray-500 text-[13px] text-center mb-8 animate-fade-in-up">Everything you need for a perfect trip, all in one place</p>
 
                     {/* Services list */}
@@ -654,67 +664,67 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
                                 label: 'Flight Booking',
                                 desc: 'Domestic & international flights at best prices',
                                 detail: 'Compare 500+ airlines, get instant confirmations, and enjoy exclusive deals on business & economy class.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774701649/flightbookingcloud_lnvyup.jpg'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1774701649/flightbookingcloud_lnvyup.jpg'
                             },
                             {
                                 label: 'Hotel Booking',
                                 desc: 'Luxury to budget stays worldwide',
                                 detail: 'Access 1M+ properties worldwide with free cancellation, best price guarantee, and loyalty rewards.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774702257/hotelbookingCloud_ezqgsc.jpg'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1774702257/hotelbookingCloud_ezqgsc.jpg'
                             },
                             {
                                 label: 'Global Transport',
                                 desc: 'Worldwide transport & transfer services',
                                 detail: 'Airport transfers, intercity rides, and chauffeur services across major destinations worldwide.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774855842/worldwide_compressed_vlcev5.webp'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1774855842/worldwide_compressed_vlcev5.webp'
                             },
                             {
                                 label: 'Visa Assistance',
                                 desc: 'UAE & global visa processing support',
                                 detail: 'Smooth visa support for 50+ countries with step-by-step document help and faster processing.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774855942/passport_compressed_sjuard.webp'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1774855942/passport_compressed_sjuard.webp'
                             },
                             {
                                 label: 'Holiday Packages',
                                 desc: 'Curated worldwide holiday experiences',
                                 detail: 'All-inclusive packages with flights, hotels, transfers, and guided tours at unbeatable prices.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774855999/hpack_compressed_f00jgm.webp'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1774855999/hpack_compressed_f00jgm.webp'
                             },
                             {
                                 label: 'Car Rentals',
                                 desc: 'Self-drive & chauffeur car rentals',
                                 detail: 'Wide range of vehicles from economy to luxury with flexible pickup and drop-off locations.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774856692/carrentals_compressed_uj2g5p.webp'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1774856692/carrentals_compressed_uj2g5p.webp'
                             },
                             {
                                 label: '24/7 Support',
                                 desc: 'Round the clock customer assistance',
                                 detail: 'Dedicated travel experts available anytime via call, chat, or email for all your travel needs.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774856755/24into7_compressed_ni6guy.webp'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1774856755/24into7_compressed_ni6guy.webp'
                             },
                             {
                                 label: 'Luxury Staycation',
                                 desc: 'Premium staycation deals & getaways',
                                 detail: 'Exclusive staycation offers at top-rated resorts and hotels with spa, dining, and activity packages.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774856893/Luxury_Staycation_compressed_jup8ws.webp'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1774856893/Luxury_Staycation_compressed_jup8ws.webp'
                             },
                             {
                                 label: 'Luxury Yachts',
                                 desc: 'Private yacht cruises & charters',
                                 detail: 'Experience the ultimate luxury on the water with private yacht charters for special occasions and leisure cruises.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1775303887/yatch_aku4yu.webp'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1775303887/yatch_aku4yu.webp'
                             },
                             {
                                 label: 'Limousines',
                                 desc: 'Premium limousine hire services',
                                 detail: 'Travel in style with our chauffeur-driven limousine services for airport transfers, events, and city tours.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1775303886/Lumoise_d9qg5f.webp'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1775303886/Lumoise_d9qg5f.webp'
                             },
                             {
                                 label: 'Charter Flight',
                                 desc: 'Private & group charter flights',
                                 detail: 'Book private charter flights for business or leisure with flexible schedules and personalized in-flight services.',
-                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1775303886/Charter_Flight_adz8tp.webp'
+                                img: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_240/v1775303886/Charter_Flight_adz8tp.webp'
                             },
                         ];
                         return (
@@ -818,9 +828,9 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
             <section className="global-page-container lg:mt-[] relative overflow-hidden">
                 <div className="max-w-7xl mx-auto z-10">
                     <div className="flex flex-col md:flex-row items-center justify-between lg:mb-10 mb-4 px-[20px] animate-fade-in-up gap-6">
-                        <h2 className="text-2xl text-center lg:text-left md:text-[45px] font-sans font-black text-slate-900 leading-tight">
+                        <p className="heading text-2xl text-center lg:text-left md:text-[45px] font-sans font-black text-slate-900 leading-tight">
                             Choose Your <br /> <span className="text-[#00A9D7]">Dream Destination</span>
-                        </h2>
+                        </p>
 
                         <div className="flex items-center gap-4 ">
                             <button
@@ -852,7 +862,7 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
                                 <div
                                     key={`${offer.id}-${idx}`}
                                     className="dream-card relative rounded-3xl overflow-hidden px-[10px] py-[10px] h-[180px] lg:w-[calc((100%-96px)/4)] md:w-[calc((100%-32px)/2)] w-full shrink-0 cursor-pointer bg-no-repeat bg-right-bottom bg-cover"
-                                    style={{ backgroundImage: `url(${resolveImageUrl(offer.image)})` }}
+                                    style={{ backgroundImage: `url(${resolveImageUrl(offer.image, 800)})` }}
                                     onClick={() => {
                                         if (offer.link) {
                                             navigate(offer.link);
@@ -888,9 +898,9 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
             <section className="bg-white">
                 {/* Mobile: vertical card list */}
                 <div className="md:hidden px-4 py-8">
-                    <h2 className="text-2xl font-bold text-black text-center mb-6">
+                    <p className="heading text-2xl font-bold text-black text-center mb-6">
                         Amazing Trendings Desinations
-                    </h2>
+                    </p>
                     <div className="flex flex-col gap-5">
                         {filteredTours.map((tour: any, idx: number) => (
                             <div
@@ -900,7 +910,7 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
                                 style={{ boxShadow: "rgb(149 157 165 / 10%) 0px 8px 24px" }}
                             >
                                 <div className="relative h-[185px]">
-                                    <img loading="lazy" src={resolveImageUrl(tour.image_url) || tour.image} alt={tour.title} className="w-full h-full object-cover" />
+                                    <img loading="lazy" src={resolveImageUrl(tour.image_url || tour.image, 800)} alt={tour.title} className="w-full h-full object-cover" />
                                     <div className="absolute top-3 right-3 bg-white rounded-full px-2.5 py-1 flex items-center gap-1 shadow-lg">
                                         <svg className="w-3.5 h-3.5 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                                         <span className="text-xs font-bold text-slate-700">{tour.rating}</span>
@@ -1000,7 +1010,7 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
                                         style={{ boxShadow: "rgb(149 157 165 / 10%) 0px 8px 24px" }}
                                     >
                                         <div className="relative h-[185px]">
-                                            <img loading="lazy" src={resolveImageUrl(tour.image_url) || tour.image} alt={tour.title} className="w-full h-full object-cover" />
+                                            <img loading="lazy" src={resolveImageUrl(tour.image_url || tour.image, 800)} alt={tour.title} className="w-full h-full object-cover" />
                                             <div className="absolute top-3 right-3 bg-white rounded-full px-2.5 py-1 flex items-center gap-1 shadow-lg">
                                                 <svg className="w-3.5 h-3.5 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                                                 <span className="text-xs font-bold text-slate-700">{tour.rating}</span>
@@ -1048,9 +1058,9 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
                 <div className="max-w-7xl mx-auto mx-6 relative z-10 global-page-container ">
                     <div className="flex items-end justify-center">
                         <div>
-                            <h2 className="text-4xl md:text-[38px] font-sans font-black text-slate-900 mb-4 mx-6">
+                            <p className="heading text-4xl md:text-[38px] font-sans font-black text-slate-900 mb-4 mx-6">
                                 Recommend packages
-                            </h2>
+                            </p>
                             <p className="text-slate-400 font-medium mx-6">Specially curated travel experiences for you</p>
                         </div>
                     </div>
@@ -1091,7 +1101,7 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
                                     >
                                         <div className="relative p-3 h-[200px]">
                                             <div className="w-full h-full rounded-[24px] overflow-hidden relative">
-                                                <img loading="lazy" src={resolveImageUrl(pkg.image_url) || pkg.image} alt={pkg.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                                <img loading="lazy" src={resolveImageUrl(pkg.image_url || pkg.image, 800)} alt={pkg.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
 
                                             </div>
                                         </div>
@@ -1286,9 +1296,9 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
                 {/* Mobile: Bento grid layout */}
                 <div className="md:hidden px-4">
                     <div className="bg-[#00A9D7] rounded-[20px] px-5 py-4 mb-5">
-                        <h2 className="text-2xl font-black text-white text-center leading-tight">
+                        <p className="heading text-2xl font-black text-white text-center leading-tight">
                             Trending India And Around Destinations
-                        </h2>
+                        </p>
                     </div>
 
                     {trendingImages.length >= 5 && (
@@ -1296,16 +1306,16 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
                             {/* Row 1: tall left + two stacked right */}
                             <div className="flex gap-3 h-[280px]">
                                 <div className="relative w-[48%] h-full rounded-2xl overflow-hidden">
-                                    <img loading="lazy" src={resolveImageUrl(trendingImages[0].image_url)} alt={trendingImages[0].name || 'Destination'} className="w-full h-full object-cover" />
+                                    <img loading="lazy" src={resolveImageUrl(trendingImages[0].image_url, 800)} alt={trendingImages[0].name || 'Destination'} className="w-full h-full object-cover" />
                                     {trendingImages[0].name && <p className="absolute bottom-2 left-3 text-white text-sm font-bold drop-shadow-lg">{trendingImages[0].name}</p>}
                                 </div>
                                 <div className="w-[52%] flex flex-col gap-3">
                                     <div className="relative flex-1 rounded-2xl overflow-hidden">
-                                        <img loading="lazy" src={resolveImageUrl(trendingImages[1].image_url)} alt={trendingImages[1].name || 'Destination'} className="w-full h-full object-cover" />
+                                        <img loading="lazy" src={resolveImageUrl(trendingImages[1].image_url, 800)} alt={trendingImages[1].name || 'Destination'} className="w-full h-full object-cover" />
                                         {trendingImages[1].name && <p className="absolute bottom-2 left-3 text-white text-sm font-bold drop-shadow-lg">{trendingImages[1].name}</p>}
                                     </div>
                                     <div className="relative flex-1 rounded-2xl overflow-hidden">
-                                        <img loading="lazy" src={resolveImageUrl(trendingImages[2].image_url)} alt={trendingImages[2].name || 'Destination'} className="w-full h-full object-cover" />
+                                        <img loading="lazy" src={resolveImageUrl(trendingImages[2].image_url, 800)} alt={trendingImages[2].name || 'Destination'} className="w-full h-full object-cover" />
                                         {trendingImages[2].name && <p className="absolute bottom-2 left-3 text-white text-sm font-bold drop-shadow-lg">{trendingImages[2].name}</p>}
                                     </div>
                                 </div>
@@ -1314,17 +1324,17 @@ const SubHome: React.FC<SubHomeProps> = ({ onExplore, onBookClick }) => {
                             <div className="flex gap-3 h-[280px]">
                                 <div className="w-[52%] flex flex-col gap-3">
                                     <div className="relative flex-1 rounded-2xl overflow-hidden">
-                                        <img loading="lazy" src={resolveImageUrl(trendingImages[3].image_url)} alt={trendingImages[3].name || 'Destination'} className="w-full h-full object-cover" />
+                                        <img loading="lazy" src={resolveImageUrl(trendingImages[3].image_url, 800)} alt={trendingImages[3].name || 'Destination'} className="w-full h-full object-cover" />
                                         {trendingImages[3].name && <p className="absolute bottom-2 left-3 text-white text-sm font-bold drop-shadow-lg">{trendingImages[3].name}</p>}
                                     </div>
                                     <div className="relative flex-1 rounded-2xl overflow-hidden">
-                                        <img loading="lazy" src={resolveImageUrl(trendingImages[4].image_url)} alt={trendingImages[4].name || 'Destination'} className="w-full h-full object-cover" />
+                                        <img loading="lazy" src={resolveImageUrl(trendingImages[4].image_url, 800)} alt={trendingImages[4].name || 'Destination'} className="w-full h-full object-cover" />
                                         {trendingImages[4].name && <p className="absolute bottom-2 left-3 text-white text-sm font-bold drop-shadow-lg">{trendingImages[4].name}</p>}
                                     </div>
                                 </div>
                                 {trendingImages[5] && (
                                     <div className="relative w-[48%] h-full rounded-2xl overflow-hidden">
-                                        <img loading="lazy" src={resolveImageUrl(trendingImages[5].image_url)} alt={trendingImages[5].name || 'Destination'} className="w-full h-full object-cover" />
+                                        <img loading="lazy" src={resolveImageUrl(trendingImages[5].image_url, 800)} alt={trendingImages[5].name || 'Destination'} className="w-full h-full object-cover" />
                                         {trendingImages[5].name && <p className="absolute bottom-2 left-3 text-white text-sm font-bold drop-shadow-lg">{trendingImages[5].name}</p>}
                                     </div>
                                 )}

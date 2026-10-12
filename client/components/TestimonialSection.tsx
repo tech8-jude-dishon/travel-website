@@ -61,7 +61,7 @@ const TestimonialCard: React.FC<{ testimonial: typeof testimonials[0], className
         <div className="w-full h-px bg-gray-100"></div>
         <div className="flex items-center justify-between">
           <div>
-            <h4 className="text-[#0F2454] font-bold text-lg leading-tight">{testimonial.name}</h4>
+            <p className="heading text-[#0F2454] font-bold text-lg leading-tight">{testimonial.name}</p>
             <p className="text-[#8E95A5] text-[9px] font-bold uppercase tracking-[0.2em] mt-1">{testimonial.role}</p>
           </div>
           
@@ -127,9 +127,9 @@ const TestimonialSection: React.FC = () => {
             <p className="font-cursive text-brand-gold text-3xl md:text-[30px] mb-6">
               client’s testimonial
             </p>
-            <h2 className="text-white text-5xl md:text-7xl lg:text-[84px] font-serif font-bold mb-8 leading-[1.1] tracking-tight">
+            <p className="heading text-white text-5xl md:text-7xl lg:text-[84px] font-serif font-bold mb-8 leading-[1.1] tracking-tight">
               Client’s <br className="hidden lg:block"/> testimonial
-            </h2>
+            </p>
             <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-md font-medium">
               communication and utilizes cutting edge logistic planning to get your shipment completed on time. itself founded of backgrounds, which simply.
             </p>

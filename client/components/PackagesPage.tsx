@@ -372,9 +372,9 @@ const PackagesPage: React.FC<PackagesPageProps> = ({ onBack, onExplore, onBookCl
           <section className="relative overflow-hidden py-4 bg-white">
             <div className="max-w-[1440px] mx-auto relative z-10 px-6 md:px-14">
               <div className="text-left lg:mb-12 mb-4">
-                <h2 className="text-3xl md:text-[38px] font-sans font-black text-slate-900 leading-tight text-center lg:text-left">
+                <p className="heading text-3xl md:text-[38px] font-sans font-black text-slate-900 leading-tight text-center lg:text-left">
                   Choose Your <br /> <span className="text-[#00A9D7]">Dream Destination</span>
-                </h2>
+                </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">

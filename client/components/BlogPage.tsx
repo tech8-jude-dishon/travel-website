@@ -72,9 +72,9 @@ const BlogCard: React.FC<{ blog: BlogItem; onClick?: (blog: any) => void }> = ({
       </div>
 
       {/* Title - Bold sans-serif as seen in reference */}
-      <h3 className="text-2xl md:text-3xl font-bold text-brand-dark mb-8 leading-tight px-2 group-hover:text-brand-gold transition-colors duration-300">
+      <p className="heading text-2xl md:text-3xl font-bold text-brand-dark mb-8 leading-tight px-2 group-hover:text-brand-gold transition-colors duration-300">
         {blog.title}
-      </h3>
+      </p>
 
       {/* Button - Navy blue rounded pill from reference */}
       <div className="px-2">

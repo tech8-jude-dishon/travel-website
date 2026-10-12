@@ -23,9 +23,9 @@ const GalleryItem: React.FC<{
     />
     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-500"></div>
     <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6">
-      <h3 className="text-white text-lg md:text-xl font-bold tracking-tight mb-0.5 uppercase">
+      <p className="heading text-white text-lg md:text-xl font-bold tracking-tight mb-0.5 uppercase">
         {title}
-      </h3>
+      </p>
       <p className="text-white/80 text-[9px] md:text-[10px] font-bold uppercase tracking-widest">
         {duration}
       </p>
@@ -38,9 +38,9 @@ const GallerySection: React.FC = () => {
     <section className="global-page-container bg-brand-bg overflow-hidden py-24">
       <div className="max-w-screen-xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-brand-dark">
+          <p className="heading text-4xl md:text-5xl font-serif font-bold text-brand-dark">
             Inspiring Travel Stories
-          </h2>
+          </p>
           <p className="mt-4 text-brand-dark/60 max-w-xl mx-auto font-medium">
             See the world through experiences that define adventure and elegance.
           </p>

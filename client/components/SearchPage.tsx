@@ -70,7 +70,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ query, onBack }) => {
         <div className="max-w-screen-2xl mx-auto px-6 md:px-12 lg:px-24 py-20 text-center">
           <div className="bg-white rounded-[3rem] p-16 shadow-sm border border-brand-dark/5">
             <div className="text-6xl mb-6">🔍</div>
-            <h2 className="text-3xl font-serif font-bold text-brand-dark mb-4">No results found</h2>
+            <p className="heading text-3xl font-serif font-bold text-brand-dark mb-4">No results found</p>
             <p className="text-[#64718C] max-w-md mx-auto mb-10">
               We couldn't find any destinations or packages matching "{query}". Try different keywords or browse our popular categories.
             </p>
@@ -88,7 +88,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ query, onBack }) => {
           {filteredDestinations.length > 0 && (
             <div>
               <div className="flex items-center gap-4 mb-10">
-                <h2 className="text-3xl font-serif font-bold text-brand-dark">Matching Destinations</h2>
+                <p className="heading text-3xl font-serif font-bold text-brand-dark">Matching Destinations</p>
                 <div className="flex-1 h-px bg-brand-dark/10"></div>
                 <span className="text-[10px] font-bold text-brand-gold uppercase tracking-widest">{filteredDestinations.length} found</span>
               </div>
@@ -104,7 +104,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ query, onBack }) => {
           {filteredTours.length > 0 && (
             <div>
               <div className="flex items-center gap-4 mb-10">
-                <h2 className="text-3xl font-serif font-bold text-brand-dark">Available Packages</h2>
+                <p className="heading text-3xl font-serif font-bold text-brand-dark">Available Packages</p>
                 <div className="flex-1 h-px bg-brand-dark/10"></div>
                 <span className="text-[10px] font-bold text-brand-gold uppercase tracking-widest">{filteredTours.length} found</span>
               </div>

@@ -32,10 +32,10 @@ const CaptureBeautySection: React.FC<CaptureBeautySectionProps> = ({ onBookingCl
     </div>
 
     {/* Main Heading */}
-    <h1 className="text-white font-serif font-bold text-5xl md:text-7xl lg:text-[80px] leading-tight tracking-tight max-w-4xl">
+    <p className="heading text-white font-serif font-bold text-5xl md:text-7xl lg:text-[80px] leading-tight tracking-tight max-w-4xl">
       Discover the World <br />
       <span className="text-brand-gold">Beyond Limits</span>
-    </h1>
+    </p>
 
     {/* Sub Text */}
     <p className="mt-6 text-white/80 text-base md:text-lg max-w-2xl leading-relaxed font-medium">

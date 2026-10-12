@@ -61,9 +61,9 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ onBack, onBookClick
       <div className="max-w-screen-2xl mx-auto px-6 global-page-container">
         {/* Intro Text Block */}
         <div className="max-w-3xl mb-16">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark mb-6">
+          <p className="heading text-3xl md:text-4xl font-serif font-bold text-brand-dark mb-6">
             Explore Curated Landscapes
-          </h2>
+          </p>
           <p className="text-[#64718C] text-lg font-medium leading-relaxed">
             From the futuristic skyline of Dubai to the serene blue waters of the Maldives, we've hand-picked the world's most iconic locations to ensure your travel experience is nothing short of legendary.
           </p>
@@ -90,9 +90,9 @@ const DestinationsPage: React.FC<DestinationsPageProps> = ({ onBack, onBookClick
             <p className="font-cursive text-brand-gold text-4xl mb-4 animate-fade-in-down">
               Escape the Ordinary
             </p>
-            <h2 className="text-white text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-8 leading-tight">
+            <p className="heading text-white text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-8 leading-tight">
               Journey Beyond <br /> <span className="brush-highlight inline-block">Expectations</span>
-            </h2>
+            </p>
             <button
               onClick={onBookClick}
               className="bg-brand-gold text-brand-dark px-10 py-4 rounded-full font-bold text-xs uppercase tracking-widest shadow-xl hover:bg-white transition-all"

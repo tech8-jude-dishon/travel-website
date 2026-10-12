@@ -72,9 +72,9 @@ const FaqSection: React.FC = () => {
            <p className="font-cursive text-brand-gold text-3xl md:text-4xl mb-4">
             Common Inquiries
           </p>
-          <h2 className="text-4xl md:text-[30px] font-serif font-bold text-brand-dark mb-6 leading-tight">
+          <p className="heading text-4xl md:text-[30px] font-serif font-bold text-brand-dark mb-6 leading-tight">
             Frequently Asked Questions
-          </h2>
+          </p>
           <p className="text-brand-dark/60 text-sm md:text-base leading-relaxed font-medium">
             Everything you need to know about planning your next great adventure with our team of global travel experts.
           </p>

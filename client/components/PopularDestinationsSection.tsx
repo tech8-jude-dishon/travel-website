@@ -96,9 +96,9 @@ export const DestinationCard: React.FC<DestinationCardProps> = ({ destination, o
             </div>
         </div>
         <div className="px-5 pb-5 pt-1 flex flex-col flex-grow">
-            <h3 className="text-[16px] font-bold text-slate-900 leading-snug mb-3">
+            <p className="heading text-[16px] font-bold text-slate-900 leading-snug mb-3">
                 {destination.title}
-            </h3>
+            </p>
             <div className="flex items-center gap-4 text-[12px] text-slate-400 mb-4">
                 <div className="flex items-center gap-1.5">
                     <svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>
@@ -136,9 +136,9 @@ const PopularDestinationsSection: React.FC<{ onExplore?: (dest: any) => void; on
             <p className="font-cursive text-brand-gold text-3xl md:text-4xl mb-4">
               Explore More
             </p>
-            <h2 className="text-4xl md:text-6xl font-serif font-bold text-brand-dark mb-8 leading-tight">
+            <p className="heading text-4xl md:text-6xl font-serif font-bold text-brand-dark mb-8 leading-tight">
               Popular Packages
-            </h2>
+            </p>
             <p className="text-brand-dark/60 text-base md:text-lg leading-relaxed max-w-xl font-medium">
               Discover the most sought-after locations around the globe. From historical cities to tropical paradises, find your next dream destination.
             </p>
