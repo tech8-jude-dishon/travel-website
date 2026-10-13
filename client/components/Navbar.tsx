@@ -4,7 +4,7 @@ import {
 } from './Icons';
 import {
   Home, Umbrella, Plane, Luggage, ShoppingBag,
-  MessageSquare, Send, Briefcase, ChevronDown
+  MessageSquare, Send, ChevronDown
 } from 'lucide-react';
 import { Link, useLocation } from "react-router-dom";
 import { WINTER_PACKAGES, servicePath } from '../data/winterPackages';
@@ -35,15 +35,22 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick, onNavigate }) => {
     setIsMenuOpen(false);
   };
 
+  // India's dropdown: the India Tours page first, then the winter package pages
+  const indiaMenu = [
+    { label: 'India Tours', path: '/india-tours' },
+    ...WINTER_PACKAGES.map((p) => ({ label: p.tab, path: servicePath(p.id) })),
+  ];
+
   const isItemActive = (path: string) =>
-    path === '/services' ? location.pathname.startsWith('/services') : location.pathname === path;
+    path === '/india-tours'
+      ? location.pathname.startsWith('/india-tours') || location.pathname.startsWith('/services')
+      : location.pathname === path;
 
   const menuItems: { label: string; path: string; icon: React.ElementType; hasPackages?: boolean }[] = [
     { label: 'Home', path: '/', icon: Home },
     // { label: 'Holidays', path: '/holidays', icon: Umbrella },
     { label: 'Dubai', path: '/dubai-tours', icon: Plane },
-    { label: 'India', path: '/india-tours', icon: Luggage },
-    { label: 'Services', path: '/services', icon: Briefcase, hasPackages: true },
+    { label: 'India', path: '/india-tours', icon: Luggage, hasPackages: true },
     // { label: 'Packages', path: '/packages', icon: ShoppingBag },
     { label: 'Contact', path: '/contact', icon: MessageSquare },
   ];
@@ -163,7 +170,7 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick, onNavigate }) => {
                 return (
                   <div key={item.path} className="relative group" onMouseLeave={() => setDropdownClosed(false)}>
                     <Link
-                      to={servicePath(WINTER_PACKAGES[0].id)}
+                      to={item.path}
                       onClick={closeDropdown}
                       className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 border-2
                         ${isActive
@@ -176,15 +183,15 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick, onNavigate }) => {
                       <ChevronDown className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:rotate-180" />
                     </Link>
 
-                    {/* Hover dropdown: winter package pills */}
+                    {/* Hover dropdown: India Tours + winter packages */}
                     <div className={`absolute left-1/2 top-full -translate-x-1/2 pt-3 z-[1200] opacity-0 invisible translate-y-1 transition-all duration-200 ${dropdownClosed ? '' : 'group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0'}`}>
                       <div className="flex flex-col min-w-[220px] whitespace-nowrap bg-white rounded-2xl py-2 shadow-xl border border-slate-100">
-                        {WINTER_PACKAGES.map((p) => {
-                          const isCurrent = location.pathname === servicePath(p.id);
+                        {indiaMenu.map((m) => {
+                          const isCurrent = location.pathname === m.path;
                           return (
                             <Link
-                              key={p.id}
-                              to={servicePath(p.id)}
+                              key={m.path}
+                              to={m.path}
                               onClick={closeDropdown}
                               className={`px-5 py-2.5 text-[15px] font-semibold transition-colors duration-200
                                 ${isCurrent
@@ -192,7 +199,7 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick, onNavigate }) => {
                                   : 'text-slate-600 hover:text-[#00A9D7] hover:bg-[#00A9D7]/5'
                                 }`}
                             >
-                              {p.tab}
+                              {m.label}
                             </Link>
                           );
                         })}
@@ -271,17 +278,17 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick, onNavigate }) => {
                     {item.label}
                   </div>
                   <div className="flex flex-col gap-1 px-3 pb-3">
-                    {WINTER_PACKAGES.map((p) => {
-                      const isCurrent = location.pathname === servicePath(p.id);
+                    {indiaMenu.map((m) => {
+                      const isCurrent = location.pathname === m.path;
                       return (
                         <Link
-                          key={p.id}
-                          to={servicePath(p.id)}
+                          key={m.path}
+                          to={m.path}
                           onClick={() => setIsMenuOpen(false)}
                           className={`px-4 py-2.5 rounded-full text-sm font-semibold
                             ${isCurrent ? 'bg-[#0B5C9E] text-white' : 'text-slate-600 hover:bg-slate-100'}`}
                         >
-                          {p.tab}
+                          {m.label}
                         </Link>
                       );
                     })}
