@@ -35,9 +35,10 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick, onNavigate }) => {
     setIsMenuOpen(false);
   };
 
-  // India's dropdown: the India Tours page first, then the winter package pages
+  // India's dropdown: India Tours, the services overview, then the winter package pages
   const indiaMenu = [
     { label: 'India Tours', path: '/india-tours' },
+    { label: 'All Destinations', path: '/services' },
     ...WINTER_PACKAGES.map((p) => ({ label: p.tab, path: servicePath(p.id) })),
   ];
 

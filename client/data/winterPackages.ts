@@ -40,6 +40,11 @@ export interface WinterPackage {
   stops: WinterStop[];
   days_list: { t: string; d: string }[];
   faq: { q: string; a: string }[];
+  /** Package-specific terms; packages without them use the shared lists below. */
+  inclusions?: string[];
+  exclusions?: string[];
+  hotels?: { place: string; hotel: string; nights: number; meal: string }[];
+  notes?: string[];
 }
 
 const IMG = '/images/winter/';
@@ -80,27 +85,60 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     eyebrow: 'Andaman Islands',
     ctaPhoto: IMG + 'cta-andaman.webp', ctaPos: 'right center',
     formTitle: 'Plan Your Andaman Trip',
-    routeHead: 'Three islands, <em>one</em> easy route',
-    feats: [{ i: 'palm', t: '3 Islands', s: 'In One Trip' }, { i: 'cloche', t: 'Breakfast', s: 'Daily' }, { i: 'plane', t: 'Airport', s: 'Transfers' }, { i: 'shield', t: 'No Hidden', s: 'Cost' }],
-    name: 'Andaman Islands', nights: 5, days: 6, price: '22,300', ex: 'Port Blair',
+    routeHead: 'Two islands, <em>one</em> easy route',
+    feats: [{ i: 'palm', t: '2 Islands', s: 'Port Blair + Havelock' }, { i: 'cloche', t: 'Breakfast', s: 'Daily' }, { i: 'plane', t: 'Airport', s: 'Transfers' }, { i: 'shield', t: 'Ferry', s: 'Tickets Included' }],
+    name: 'Port Blair & Havelock', nights: 4, days: 5, price: '22,300', ex: 'Port Blair',
     headPre: 'Discover ', headEm: 'Andaman', headLine2: 'Like Never Before',
-    lede: 'Pristine beaches, crystal clear waters, breathtaking islands and unforgettable experiences — all in one perfect trip.',
+    lede: 'Port Blair 2 nights and Havelock 2 nights: Radhanagar and Elephant Beach, Cellular Jail and Chidiya Tapu sunsets, with ferries and transfers handled.',
+    // In travel order: Port Blair → Havelock → back to Port Blair
     stops: [
-      { p: 'Port Blair', n: '2 nights', note: 'Cellular Jail, Ross Island', img: IMG + 'route-port-blair.webp', alt: 'Cellular Jail, Port Blair', credit: 'Jomesh, CC BY 3.0' },
-      { p: 'Havelock', n: '2 nights', note: 'Radhanagar, Elephant Beach', img: IMG + 'route-havelock.webp', alt: 'Radhanagar Beach, Havelock', credit: 'Vyacheslav Argenberg, CC BY 4.0' },
-      { p: 'Neil', n: '1 night', note: 'Natural bridge, Bharatpur', img: IMG + 'route-neil.webp', alt: 'Natural rock bridge, Neil Island', credit: 'SameerMarathe25, CC BY-SA 4.0' }],
+      { p: 'Port Blair', n: '1 night', note: "Corbyn's Cove, Cellular Jail", img: IMG + 'route-port-blair.webp', alt: 'Cellular Jail, Port Blair', credit: 'Jomesh, CC BY 3.0' },
+      { p: 'Havelock', n: '2 nights', note: 'Radhanagar, Elephant Beach, Kalapathar', img: IMG + 'route-havelock.webp', alt: 'Radhanagar Beach, Havelock', credit: 'Vyacheslav Argenberg, CC BY 4.0' },
+      { p: 'Port Blair', n: '1 night', note: 'Chidiya Tapu sunset', img: '/images/services/andaman-port-blair.webp', alt: 'Port Blair harbour seen from South Point', credit: 'Prateek4 at English Wikivoyage, Public domain' }],
     days_list: [
-      { t: 'Arrive Port Blair', d: "Airport pickup and check in. Corbyn's Cove in the afternoon, then the light and sound show at Cellular Jail." },
-      { t: 'Ross Island and North Bay', d: 'Ferry across to the old colonial ruins at Ross Island and the coral beds at North Bay. Water sports available at your own cost.' },
-      { t: 'Ferry to Havelock', d: 'Cruise to Swaraj Dweep and head straight for Radhanagar Beach in time for sunset.' },
-      { t: 'Elephant Beach', d: 'Boat ride to Elephant Beach for snorkelling and shallow reef time. Rest of the day free.' },
-      { t: 'Ferry to Neil Island', d: 'Short crossing to Shaheed Dweep. Bharatpur Beach, Laxmanpur sunset point and the natural rock bridge.' },
-      { t: 'Back to Port Blair and departure', d: 'Morning ferry back and transfer to the airport.' },
+      { t: 'Arrive Port Blair', d: "Our representative meets you at the airport and transfers you to the hotel to rest. In the afternoon visit Corbyn's Cove, a coconut-fringed beach about 8 km from the city. In the evening watch the Light and Sound Show at Cellular Jail, which brings the story of India's freedom struggle to life." },
+      { t: 'Ferry to Havelock and Radhanagar Beach', d: "After breakfast, take the ferry to Havelock (Swaraj Dweep), one of the largest and most beautiful islands of Ritchie's Archipelago, 57 km north-east of South Andaman. Check in, then spend the afternoon at Radhanagar Beach (Beach No. 7), rated among the best beaches in Asia. On an early ferry, ask the hotel for a packed breakfast, and report at the terminal 1 hour before departure with photo ID." },
+      { t: 'Elephant Beach and Kalapathar Beach', d: 'After breakfast, a half-day trip to Elephant Beach by shared boat. In the afternoon, visit Kalapathar Beach. Carry your own water bottle, snacks and a change of clothes.' },
+      { t: 'Ferry back to Port Blair and Chidiya Tapu', d: 'After breakfast, check out and take the ferry back to Port Blair. Check in, then head to Chidiya Tapu in the afternoon to watch the sunset.' },
+      { t: 'Departure', d: 'After breakfast, check out and transfer to Port Blair airport for your flight home.' },
     ],
     faq: [
-      { q: 'Are the ferry tickets included?', a: 'Inter island ferry transfers as per this itinerary are arranged by us. Share your flight timings so we can book the right slots.' },
-      { q: 'Is scuba diving part of the package?', a: 'No. Diving, sea walks and jet ski are optional activities paid directly at the beach. We will tell you the current rates before you go.' },
-      { q: 'What is the best month to travel?', a: 'October to April has the calmest sea and the clearest water, which is why winter dates sell out early.' },
+      { q: 'Are the ferry tickets included?', a: 'Yes. Port Blair to Havelock and back is included by Makruzz, Green Ocean, Nautika, ITT Majestic or similar, or by government ferry if private ferries are not running. Tickets are issued once we receive your advance payment.' },
+      { q: 'Is scuba diving part of the package?', a: 'No. Snorkelling, scuba, glass-bottom boat rides and other water activities are optional and paid directly. We will tell you the current rates before you go.' },
+      { q: 'Which dates does this package cover?', a: 'Travel between 1 October 2026 and 31 March 2027. These rates do not apply in peak season, 15 December 2026 to 15 January 2027. Ask us for peak-season prices.' },
+    ],
+    hotels: [
+      { place: 'Port Blair', hotel: 'North Reef (Contemporary room) or similar', nights: 2, meal: 'Breakfast' },
+      { place: 'Havelock', hotel: 'Havelock Gateways (Deluxe room) or similar', nights: 2, meal: 'Breakfast' },
+    ],
+    inclusions: [
+      'Accommodation on double sharing basis in AC rooms (deluxe hotels)',
+      'Daily breakfast (CP meal plan)',
+      'Exclusive AC vehicle for all transfers and sightseeing at Port Blair and Havelock, point to point as per the itinerary',
+      'Ferry tickets Port Blair – Havelock – Port Blair',
+      'Entry tickets for Port Blair sightseeing',
+    ],
+    exclusions: [
+      'Airfare, train or helicopter fares',
+      '5% GST, charged extra',
+      'Guide, snorkelling, glass-bottom boat rides, camera fees, optional tours and room upgrades',
+      'Entry fees at places other than Port Blair sightseeing',
+      'Personal expenses such as laundry, phone calls, tips, mineral water and drinks',
+      'Extra sightseeing or vehicle use beyond the itinerary',
+      'Costs from natural calamities, road blocks or political disturbances, paid directly on the spot',
+      'Any increase in taxes or fuel prices before departure',
+      'Travel insurance',
+      'Anything not listed under inclusions',
+    ],
+    notes: [
+      'Valid for travel from 1 October 2026 to 31 March 2027. Not valid in peak season, 15 December 2026 to 15 January 2027.',
+      'Prices are for base category rooms. Higher room categories cost extra and are quoted at booking.',
+      'Ferry tickets are issued after the advance payment. Private ferry seats depend on availability at the time of issue.',
+      'Rooms are subject to availability at confirmation. If the listed hotels are full, we provide equivalent hotels.',
+      'Ferry and entry charges are at current rates. Any increase is payable by the guest.',
+      'Sightseeing depends on the weather and permits. Ferries run subject to weather and government clearance.',
+      'Andaman is a restricted area, so every traveller must carry a valid government photo ID.',
+      'Check-out at most hotels in Port Blair and Havelock is 8:00 am. Late check-out depends on availability.',
     ],
   },
   {

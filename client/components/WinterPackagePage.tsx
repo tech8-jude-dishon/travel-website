@@ -175,7 +175,7 @@ const Route: React.FC<{ d: WinterPackage }> = ({ d }) => {
           const nights = parseInt(s.n, 10) || 1, from = day, to = day + nights - 1;
           day += nights;
           return (
-            <div className="x-cell" key={s.p}>
+            <div className="x-cell" key={`${s.p}-${i}`}>
               <article className="x-card">
                 <img src={s.img} alt={s.alt} loading="lazy" title={s.credit ? `Photo: ${s.credit} (Wikimedia Commons)` : undefined} />
                 <div className="x-top"><span className="x-daychip">Day {from}{to > from ? `–${to}` : ''}</span><span className="x-big">{pad2(i + 1)}</span></div>
@@ -269,7 +269,7 @@ const Price: React.FC<{ d: WinterPackage }> = ({ d }) => (
           <p className="heading wp-h3">{d.name}</p>
           <ul>
             <li><Icon k="moon" />{d.nights}N / {d.days}D</li>
-            <li><Icon k="palm" />{d.stops.map(s => s.p).join(' · ')}</li>
+            <li><Icon k="palm" />{[...new Set(d.stops.map(s => s.p))].join(' · ')}</li>
           </ul>
         </div>
         <div className="x-pk-price"><b>₹{d.price}</b><span>per person · 4 persons sharing</span></div>
@@ -277,13 +277,34 @@ const Price: React.FC<{ d: WinterPackage }> = ({ d }) => (
       <div className="x-pk-body">
         <div className="x-pk-col x-pk-in">
           <p className="heading wp-h4"><i><Icon k="tick" /></i>What's Included</p>
-          <ul>{inclusionsFor(d).map(t => <li key={t}><span><Svg d={pick(INC_IC, t)} /></span>{t}</li>)}</ul>
+          <ul>{(d.inclusions || inclusionsFor(d)).map(t => <li key={t}><span><Svg d={pick(INC_IC, t)} /></span>{t}</li>)}</ul>
         </div>
         <div className="x-pk-col x-pk-out">
           <p className="heading wp-h4"><i><Icon k="cross" /></i>Not Included</p>
-          <ul>{EXCLUSIONS.map(t => <li key={t}><span><Svg d={pick(EXCL_IC, t)} /></span>{t}</li>)}</ul>
+          <ul>{(d.exclusions || EXCLUSIONS).map(t => <li key={t}><span><Svg d={pick(EXCL_IC, t)} /></span>{t}</li>)}</ul>
         </div>
       </div>
+      {d.hotels && (
+        <div className="x-pk-extra">
+          <p className="heading wp-h4">Hotels envisaged</p>
+          <div className="x-pk-table">
+            <table>
+              <thead><tr><th>Destination</th><th>Deluxe hotel</th><th>Nights</th><th>Meals</th></tr></thead>
+              <tbody>
+                {d.hotels.map(h => (
+                  <tr key={h.place}><td>{h.place}</td><td>{h.hotel}</td><td>{h.nights}</td><td>{h.meal}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+      {d.notes && (
+        <div className="x-pk-extra">
+          <p className="heading wp-h4">Important notes</p>
+          <ul className="x-pk-notes">{d.notes.map(n => <li key={n}>{n}</li>)}</ul>
+        </div>
+      )}
       <div className="x-pk-foot">
         <p><span className="x-pk-pl"><Icon k="plane" /></span>Starts and ends at {d.exShort || d.ex}. We match transfers to your flights.</p>
         <div className="x-pk-acts">

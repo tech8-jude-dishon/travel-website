@@ -33,6 +33,7 @@ const AdminDashboard = React.lazy(() => import('./components/AdminDashboard'));
 const TermsAndConditions = React.lazy(() => import('./components/TermsAndConditions'));
 const PrivacyPolicy = React.lazy(() => import('./components/PrivacyPolicy'));
 const WinterPackagePage = React.lazy(() => import('./components/WinterPackagePage'));
+const ServicesPage = React.lazy(() => import('./components/ServicesPage'));
 
 
 function RouteSync() {
@@ -169,7 +170,7 @@ const App: React.FC = () => {
 
               <Route
                 path="/services"
-                element={<Navigate to="/services/sikkim" replace />}
+                element={<ServicesPage onBookClick={toggleBooking} />}
               />
 
               <Route
