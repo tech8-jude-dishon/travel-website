@@ -38,13 +38,15 @@ export interface WinterPackage {
   headLine2: string;
   lede: string;
   stops: WinterStop[];
-  days_list: { t: string; d: string }[];
+  /** `tab` overrides the place shown on that day's tab. */
+  days_list: { t: string; d: string; notes?: string[]; tab?: string }[];
   faq: { q: string; a: string }[];
   /** Package-specific terms; packages without them use the shared lists below. */
   inclusions?: string[];
   exclusions?: string[];
   hotels?: { place: string; hotel: string; nights: number; meal: string }[];
   notes?: string[];
+  specialNotes?: string[];
 }
 
 const IMG = '/images/winter/';
@@ -66,11 +68,26 @@ export const WINTER_PACKAGES: WinterPackage[] = [
       { p: 'Gangtok', n: '2 nights', note: 'Tsomgo Lake, MG Marg', img: IMG + 'skm-gangtok.webp', alt: 'Turquoise Tsomgo Lake among snowy slopes, East Sikkim', credit: 'Indrajit Das, CC BY 3.0' },
       { p: 'Darjeeling', n: '2 nights', note: 'Tiger Hill, tea gardens', img: IMG + 'skm-darjeeling.webp', alt: 'Darjeeling Himalayan Railway toy train steaming through the hills', credit: 'Public domain' }],
     days_list: [
-      { t: 'Arrive and drive to Gangtok', d: 'Pick up from Bagdogra or NJP and drive up to Gangtok, roughly 4 to 5 hours. Evening free on MG Marg.' },
-      { t: 'Tsomgo Lake and Baba Mandir', d: 'Full day to the frozen lake at 12,400 ft and Baba Harbhajan Singh temple. Permit charges are part of your package.' },
-      { t: 'Gangtok to Darjeeling', d: 'Drive along the Teesta valley to Darjeeling, about 4 hours. Evening at Chowrasta and Mall Road.' },
-      { t: 'Tiger Hill sunrise and town tour', d: 'Early start for the Kanchenjunga sunrise, then Batasia Loop, Ghoom Monastery, HMI and a working tea garden.' },
-      { t: 'Departure', d: 'Transfer back to NJP or Bagdogra for your onward journey.' },
+      {
+        t: 'NJP Railway Station / Bagdogra (IXB) Airport to Gangtok',
+        d: 'About 125 km / 4 hrs drive. On arrival at NJP Railway Station or Bagdogra (IXB) Airport, our representative welcomes you and transfers you to Gangtok. Check in to your hotel; the rest of the day is free at leisure. Night halt at Gangtok.',
+      },
+      {
+        t: 'Gangtok: Tsomgo Lake + Baba Mandir (New)',
+        d: 'This morning, start on a half-day trip to Tsomgo Lake (12,400 ft), only 32 km from Gangtok city. The lake is almost 1 km long and 15 m deep, and is considered sacred by the local people. A further 12 km on, visit the Baba Harbhajan Singh Mandir (New). Back to the hotel in the afternoon. Night halt at Gangtok.',
+      },
+      {
+        t: 'Gangtok Sightseeing and Gangtok to Darjeeling',
+        d: 'About 120 km / 4 hrs drive. After breakfast, check out and start a half-day Gangtok city tour covering Banjhakri Waterfalls, the Flower Show, the Handicraft Centre, Do Drul Chorten and the Institute of Tibetology (closed on Sundays). In the afternoon, transfer to Darjeeling and check in to your hotel. Night halt at Darjeeling.',
+      },
+      {
+        t: 'Darjeeling Local City Tour',
+        d: 'This morning, a Darjeeling city tour covering Tiger Hill, Ghoom Monastery, the Himalayan Mountaineering Institute, P.N. Zoological Park (closed on Thursdays), Tenzing Rock, a tea garden (outer view), the Peace Pagoda, the Japanese Temple and the Ropeway (ticket at guest’s own cost). Back to the hotel in the afternoon, then enjoy shopping on the famous Mall Road on foot. Night halt at Darjeeling.',
+      },
+      {
+        t: 'Darjeeling to NJP Railway Station / Bagdogra (IXB) Airport',
+        d: 'About 90 km / 3 hrs drive. After breakfast, check out of the hotel and transfer to NJP Railway Station or Bagdogra (IXB) Airport for your onward journey. Happy journey!',
+      },
     ],
     faq: [
       { q: 'Are the Tsomgo Lake permits arranged for us?', a: 'Yes. Permit charges for Tsomgo Lake and Baba Mandir are included in the package cost. Carry original photo ID and passport size photos.' },
@@ -96,11 +113,33 @@ export const WINTER_PACKAGES: WinterPackage[] = [
       { p: 'Havelock', n: '2 nights', note: 'Radhanagar, Elephant Beach, Kalapathar', img: IMG + 'route-havelock.webp', alt: 'Radhanagar Beach, Havelock', credit: 'Vyacheslav Argenberg, CC BY 4.0' },
       { p: 'Port Blair', n: '1 night', note: 'Chidiya Tapu sunset', img: '/images/services/andaman-port-blair.webp', alt: 'Port Blair harbour seen from South Point', credit: 'Prateek4 at English Wikivoyage, Public domain' }],
     days_list: [
-      { t: 'Arrive Port Blair', d: "Our representative meets you at the airport and transfers you to the hotel to rest. In the afternoon visit Corbyn's Cove, a coconut-fringed beach about 8 km from the city. In the evening watch the Light and Sound Show at Cellular Jail, which brings the story of India's freedom struggle to life." },
-      { t: 'Ferry to Havelock and Radhanagar Beach', d: "After breakfast, take the ferry to Havelock (Swaraj Dweep), one of the largest and most beautiful islands of Ritchie's Archipelago, 57 km north-east of South Andaman. Check in, then spend the afternoon at Radhanagar Beach (Beach No. 7), rated among the best beaches in Asia. On an early ferry, ask the hotel for a packed breakfast, and report at the terminal 1 hour before departure with photo ID." },
-      { t: 'Elephant Beach and Kalapathar Beach', d: 'After breakfast, a half-day trip to Elephant Beach by shared boat. In the afternoon, visit Kalapathar Beach. Carry your own water bottle, snacks and a change of clothes.' },
-      { t: 'Ferry back to Port Blair and Chidiya Tapu', d: 'After breakfast, check out and take the ferry back to Port Blair. Check in, then head to Chidiya Tapu in the afternoon to watch the sunset.' },
-      { t: 'Departure', d: 'After breakfast, check out and transfer to Port Blair airport for your flight home.' },
+      {
+        t: "Arrival at Port Blair + Cellular Jail Light & Sound Show + Corbyn's Cove Beach",
+        d: "Arrival at Port Blair, where our representative meets and assists you at the airport and transfers you to your hotel to rest till the afternoon. In the afternoon, visit Corbyn's Cove Beach, a coconut-fringed beach about 8 km from Port Blair city. Late in the evening, witness the enthralling Sound and Light Show at Cellular Jail, where the heroic saga of the Indian freedom struggle is brought alive. Overnight stay at Port Blair.",
+      },
+      {
+        t: 'Port Blair to Havelock + Radhanagar Beach',
+        d: "After breakfast, check out from the hotel to catch a ferry to Havelock. The island (often just called Havelock) is one of the most beautiful and largest islands of Ritchie's Archipelago, a placid heaven like no other. Situated 57 km north-east of South Andaman with an area of 92 sq km, it offers a breathtaking trail of nature expeditions. On arrival, proceed to your hotel. In the afternoon, visit Beach No. 7, Radhanagar Beach (swimming beach), rated the best beach in Asia, and spend the day relaxing there. Stay overnight amongst sandy beaches and lush green forest in a comfortable beach resort. Overnight stay at Havelock Island.",
+        notes: [
+          'Do not forget to carry your own water bottle, snacks and a change of clothes.',
+          'Breakfast this day is at Port Blair. If you are travelling by an early morning ferry, ask the hotel for a packed breakfast.',
+          'Ferry timings are mentioned on the tickets provided to you. Please report at the ferry terminal 1 hour before departure with a valid photo ID card.',
+          'Ferry operation is purely subject to weather conditions and government clearance.',
+        ],
+      },
+      {
+        t: 'Elephant Beach + Kalapathar Beach',
+        d: 'After breakfast, proceed on a half-day trip to Elephant Beach by shared boat. In the afternoon, visit Kalapathar Beach. Overnight stay at Havelock Island.',
+        notes: ['Do not forget to carry your own water bottle, snacks and a change of clothes.'],
+      },
+      {
+        t: 'Havelock to Port Blair + Chidiya Tapu Beach',
+        d: 'Breakfast at the hotel in the morning. Check out and transfer to the Havelock ferry terminal for the ferry back to Port Blair, then transfer to your hotel in Port Blair. In the afternoon, visit Chidiya Tapu Beach to enjoy the sunset. Overnight stay at Port Blair.',
+      },
+      {
+        t: 'Departure',
+        d: 'After breakfast this morning, pack your bags, check out of the hotel and go to the airport. Board your flight on time and depart with sweet memories.',
+      },
     ],
     faq: [
       { q: 'Are the ferry tickets included?', a: 'Yes. Port Blair to Havelock and back is included by Makruzz, Green Ocean, Nautika, ITT Majestic or similar, or by government ferry if private ferries are not running. Tickets are issued once we receive your advance payment.' },
@@ -112,33 +151,41 @@ export const WINTER_PACKAGES: WinterPackage[] = [
       { place: 'Havelock', hotel: 'Havelock Gateways (Deluxe room) or similar', nights: 2, meal: 'Breakfast' },
     ],
     inclusions: [
-      'Accommodation on double sharing basis in AC rooms (deluxe hotels)',
-      'Daily breakfast (CP meal plan)',
-      'Exclusive AC vehicle for all transfers and sightseeing at Port Blair and Havelock, point to point as per the itinerary',
-      'Ferry tickets Port Blair – Havelock – Port Blair',
-      'Entry tickets for Port Blair sightseeing',
+      'Accommodation on double sharing basis in an AC room',
+      'Meal plan CPAI (bed and breakfast only)',
+      'Exclusive AC vehicle for all transfers and sightseeing at Port Blair and Havelock. The vehicle is not at your disposal; it is available as per the itinerary only (point to point basis)',
+      'All ferry charges Port Blair – Havelock – Port Blair by Makruzz / Green Ocean / Nautika / ITT Majestic or similar. If private ferries do not operate, transfer by government ferry as per availability',
+      'All entry tickets for Port Blair sightseeing only',
     ],
     exclusions: [
-      'Airfare, train or helicopter fares',
-      '5% GST, charged extra',
-      'Guide, snorkelling, glass-bottom boat rides, camera fees, optional tours and room upgrades',
-      'Entry fees at places other than Port Blair sightseeing',
-      'Personal expenses such as laundry, phone calls, tips, mineral water and drinks',
-      'Extra sightseeing or vehicle use beyond the itinerary',
-      'Costs from natural calamities, road blocks or political disturbances, paid directly on the spot',
-      'Any increase in taxes or fuel prices before departure',
+      'Cost of supplementary services, optional tours, upgrade charges, guide, snorkelling, glass-bottom boat ride, camera fees and entry fees to monuments and places',
+      'Any airfare, train fare or helicopter fare',
+      'Personal expenses (laundry, telephone, tips, mineral water, soft and hard drinks)',
+      'Additional sightseeing or extra use of the vehicle other than mentioned in the itinerary',
+      'Any cost arising from natural calamities like landslides, road blockages or political disturbances, to be borne by the client and paid directly on the spot',
+      'Any increase in taxes or fuel prices leading to higher surface transport and land costs, which may come into effect before departure',
       'Travel insurance',
-      'Anything not listed under inclusions',
+      'Anything which is not included in the package inclusions',
+      '5% GST extra (not included in the package cost)',
+    ],
+    specialNotes: [
+      'Travel dates: 1 October 2026 to 31 March 2027. Rates are not valid during peak season, 15 December 2026 to 15 January 2027.',
+      'All rates are net and non-commissionable.',
+      'All rooms are base category, unless the room category is mentioned.',
+      'Rates will vary with an increase or decrease in the total number of passengers.',
+      'The quote is valid for 3 days from the date it is sent. Rates are subject to room availability at the time of booking.',
     ],
     notes: [
-      'Valid for travel from 1 October 2026 to 31 March 2027. Not valid in peak season, 15 December 2026 to 15 January 2027.',
-      'Prices are for base category rooms. Higher room categories cost extra and are quoted at booking.',
-      'Ferry tickets are issued after the advance payment. Private ferry seats depend on availability at the time of issue.',
-      'Rooms are subject to availability at confirmation. If the listed hotels are full, we provide equivalent hotels.',
-      'Ferry and entry charges are at current rates. Any increase is payable by the guest.',
-      'Sightseeing depends on the weather and permits. Ferries run subject to weather and government clearance.',
-      'Andaman is a restricted area, so every traveller must carry a valid government photo ID.',
-      'Check-out at most hotels in Port Blair and Havelock is 8:00 am. Late check-out depends on availability.',
+      'Quotation is based on base category rooms at all places. Higher room categories cost extra, which we will inform you of at the time of booking.',
+      'We issue ferry tickets after receiving the advance payment. Private ferry tickets are subject to availability at the time of issuance.',
+      'All rates are net and non-commissionable to agents.',
+      'Rooms are subject to availability at the time of confirmation.',
+      'The above rates are valid for the given dates only.',
+      'This is only an offer and not a confirmation of your booking. We proceed with your booking once we receive your payment. If we cannot get the original hotels, we will provide equivalent or alternative hotels.',
+      'Ferry and entry charges are calculated at present rates. If ticket rates increase, the extra cost is to be paid by the guest.',
+      'All sightseeing is subject to weather conditions and the issuance of permits.',
+      'The Union Territory of Andaman and Nicobar Islands is a restricted area, so please carry a valid photo identity proof issued by the competent authorities for all travellers.',
+      'Check-out time at most hotels in Port Blair, Havelock and Neil is 08:00 hrs. Late check-out is subject to availability only.',
     ],
   },
   {
@@ -150,25 +197,25 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     formTitle: 'Plan Your Rajasthan Trip',
     routeHead: 'Three royal cities, <em>one</em> easy route',
     feats: [{ i: 'palm', t: '3 Cities', s: 'In One Trip' }, { i: 'cloche', t: 'Breakfast', s: 'Daily' }, { i: 'plane', t: 'All Road', s: 'Transfers' }, { i: 'shield', t: 'No Hidden', s: 'Cost' }],
-    name: 'Rajasthan', nights: 5, days: 6, price: '24,700', ex: 'Udaipur, Jaisalmer or Jodhpur airport or railway station', exShort: 'Udaipur, Jodhpur or Jaisalmer',
+    name: 'Rajasthan', nights: 5, days: 6, price: '24,700', ex: 'Jaipur, ends in Udaipur', exShort: 'Jaipur and ends in Udaipur',
     headPre: 'Discover ', headEm: 'Rajasthan', headLine2: 'Like Royalty',
-    lede: 'Lake palaces, mighty forts, the blue city and a night by the golden dunes — three royal cities in one perfect trip.',
+    lede: 'The Pink City, holy Pushkar, the blue city of Jodhpur, Ranakpur’s marble temple and Udaipur’s lakes — three royal cities in one perfect trip.',
     stops: [
-      { p: 'Udaipur', n: '2 nights', note: 'City Palace, Pichola', img: IMG + 'raj-udaipur.webp', alt: 'City Palace on Lake Pichola, Udaipur', credit: 'Jakub Hałun, CC BY-SA 4.0' },
-      { p: 'Jodhpur', n: '1 night', note: 'Mehrangarh Fort, Blue city', img: IMG + 'raj-jodhpur.webp', alt: 'Mehrangarh Fort ramparts over the blue city, Jodhpur', credit: 'Vyacheslav Argenberg, CC BY 4.0' },
-      { p: 'Jaisalmer', n: '2 nights', note: 'Sam dunes, Golden fort', img: IMG + 'raj-jaisalmer.webp', alt: 'Camel on the Sam sand dunes at sunset, Jaisalmer', credit: 'Vijay.dhankahr28, CC BY-SA 4.0' }],
+      { p: 'Jaipur', n: '2 nights', note: 'Hawa Mahal, Amber Fort', img: '/images/services/rajasthan-jaipur.webp', alt: 'Hawa Mahal facade, Jaipur', credit: 'Chainwit., CC BY-SA 4.0' },
+      { p: 'Jodhpur', n: '1 night', note: 'Pushkar, Mehrangarh Fort', img: IMG + 'raj-jodhpur.webp', alt: 'Mehrangarh Fort ramparts over the blue city, Jodhpur', credit: 'Vyacheslav Argenberg, CC BY 4.0' },
+      { p: 'Udaipur', n: '2 nights', note: 'Ranakpur, City Palace, Pichola', img: IMG + 'raj-udaipur.webp', alt: 'City Palace on Lake Pichola, Udaipur', credit: 'Jakub Hałun, CC BY-SA 4.0' }],
     days_list: [
-      { t: 'Arrive Udaipur', d: 'Transfer to hotel and head to the City Palace complex. Boat ride on Lake Pichola is optional at your own cost.' },
-      { t: 'Udaipur sightseeing', d: 'Saheliyon ki Bari, Jagdish Temple, Fateh Sagar and the Sajjangarh viewpoint for sunset over the lakes.' },
-      { t: 'Drive to Jodhpur', d: 'About 5 hours by road. Afternoon at Mehrangarh Fort and Jaswant Thada, evening in the clock tower bazaar.' },
-      { t: 'Jodhpur to Jaisalmer', d: 'Drive across the Thar to the golden city. Evening at Sam sand dunes with a camel ride and folk performance.' },
-      { t: 'Jaisalmer sightseeing', d: 'The living fort, Patwon ki Haveli, Gadisar Lake and the old merchant quarter.' },
-      { t: 'Departure', d: 'Transfer to Jaisalmer or Jodhpur airport or railway station.' },
+      { t: 'Arrival Jaipur', d: 'On arrival in Jaipur, transfer to your hotel and check in. Rest of the day at leisure. Night stay at Jaipur.' },
+      { t: 'Jaipur Sightseeing', d: 'A full day of Jaipur sightseeing in the Pink City. Night stay at Jaipur.' },
+      { t: 'Jaipur – Pushkar – Jodhpur', tab: 'Jaipur to Jodhpur', d: 'About 380 km / 7 hrs drive. Check out and drive to Jodhpur via the holy town of Pushkar. Check in to your hotel. Night stay at Jodhpur.' },
+      { t: 'Jodhpur – Ranakpur – Udaipur', tab: 'Jodhpur to Udaipur', d: 'About 260 km / 5 hrs drive. Check out and drive to Udaipur via Ranakpur. Check in to your hotel. Night stay at Udaipur.' },
+      { t: 'Udaipur Sightseeing', d: 'A full day of Udaipur sightseeing in the City of Lakes. Night stay at Udaipur.' },
+      { t: 'Udaipur Drop', d: 'After breakfast, check out and transfer to Udaipur airport or railway station for your onward journey.' },
     ],
     faq: [
-      { q: 'Can we start from Jaipur instead?', a: 'Yes. The route can be rebuilt around Jaipur or the Golden Triangle. Send your dates and we will requote.' },
-      { q: 'Is the desert camp night included?', a: 'This version uses hotels in Jaisalmer with a dunes excursion. A Swiss tent camp night can be added on request.' },
-      { q: 'How long are the drives?', a: 'Udaipur to Jodhpur is about 5 hours and Jodhpur to Jaisalmer about 5 and a half. All drives are in a private vehicle with breaks.' },
+      { q: 'Where does the trip start and end?', a: 'It starts in Jaipur and ends in Udaipur, so book your arrival into Jaipur and your departure from Udaipur. We match the transfers to your flight or train timings.' },
+      { q: 'Can we add Jaisalmer or a desert camp night?', a: 'Yes. Jaisalmer and a Swiss tent camp night near the Sam dunes can be added on request. Send your dates and we will requote.' },
+      { q: 'How long are the drives?', a: 'Jaipur to Jodhpur via Pushkar is about 380 km / 7 hours and Jodhpur to Udaipur via Ranakpur about 260 km / 5 hours. All drives are in a private vehicle with breaks.' },
     ],
   },
   {
@@ -184,15 +231,19 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     headPre: 'Discover ', headEm: 'Uttarakhand', headLine2: 'Lakes & Jungle',
     lede: 'Three nights by the lakes and two inside Corbett country, picked up and dropped back in Delhi.',
     stops: [
-      { p: 'Nainital', n: '3 nights', note: 'Naini Lake, Tiffin Top', img: IMG + 'utk-nainital.webp', alt: 'Rowing boats on Naini Lake below the Nainital hills', credit: 'Praveen Singh Bisht, CC BY 2.0' },
-      { p: 'Jim Corbett', n: '2 nights', note: 'Safari country', img: IMG + 'utk-corbett.webp', alt: 'Bengal tiger in the grassland of Jim Corbett National Park', credit: 'Soumyajit Nandy, CC BY-SA 4.0' }],
+      { p: 'Nainital', n: '3 nights', note: 'Naini Lake, Kainchi Dham', img: IMG + 'utk-nainital.webp', alt: 'Rowing boats on Naini Lake below the Nainital hills', credit: 'Praveen Singh Bisht, CC BY 2.0' },
+      { p: 'Jim Corbett', n: '2 nights', note: 'Jungle safari', img: IMG + 'utk-corbett.webp', alt: 'Bengal tiger in the grassland of Jim Corbett National Park', credit: 'Soumyajit Nandy, CC BY-SA 4.0' }],
     days_list: [
-      { t: 'Delhi to Nainital', d: 'Early departure for the 7 to 8 hour drive. Evening walk on Mall Road beside Naini Lake.' },
-      { t: 'Nainital local', d: 'Naina Devi temple, Snow View point by ropeway, Tiffin Top and the Eco Cave Gardens.' },
-      { t: 'Lake district tour', d: 'Bhimtal, Sattal and Naukuchiatal, the quiet lakes most visitors miss.' },
-      { t: 'Drive to Jim Corbett', d: 'Transfer to your resort near the park, about 2 and a half hours. Evening free by the river.' },
-      { t: 'Corbett day', d: 'Jungle safari at your own cost, plus Corbett Falls and Garjia Temple.' },
-      { t: 'Back to Delhi', d: 'Drive back to Delhi airport or railway station.' },
+      { t: 'Arrive Delhi to Nainital', tab: 'Delhi to Nainital', d: 'About 310 km / 6–7 hrs drive. On arrival in Delhi, drive up to Nainital and check in to your hotel. Night stay at Nainital.' },
+      {
+        t: 'Nainital Local Sightseeing',
+        d: 'A day of Nainital local sightseeing around Naini Lake and the town. Night stay at Nainital.',
+        notes: ['Vehicles are not allowed on Mall Road, so this stretch is explored on foot.'],
+      },
+      { t: 'Nainital: Shree Kainchi Dham', d: 'Visit Shree Kainchi Dham, the ashram of Param Pujya Baba Shri Neeb Karori Maharaj. Night stay at Nainital.' },
+      { t: 'Nainital to Corbett', tab: 'Nainital to Corbett', d: 'About 120 km / 4 hrs drive. Check out and drive to Corbett, then check in to your resort near the park. Night stay at Corbett.' },
+      { t: 'Corbett Jungle Safari', d: 'A jungle safari in Jim Corbett National Park, home of the Bengal tiger. Night stay at Corbett.' },
+      { t: 'Corbett to Delhi, Airport Drop', d: 'About 250 km / 5 hrs drive. Check out and drive back to Delhi for your airport drop.' },
     ],
     faq: [
       { q: 'Is the jungle safari included?', a: 'No. Safari permits and jeep charges are paid separately and depend on the zone. We will help you book in advance since winter slots fill fast.' },
@@ -216,11 +267,11 @@ export const WINTER_PACKAGES: WinterPackage[] = [
       { p: 'Srinagar', n: '3 nights', note: 'Gardens, Gulmarg, Pahalgam', img: IMG + 'ksh-srinagar.webp', alt: 'Snow-covered cottage among pines in Gulmarg', credit: 'Zahoor Bhat, CC BY-SA 4.0' },
       { p: 'Houseboat', n: '1 night', note: 'Dal Lake', img: IMG + 'ksh-houseboat.webp', alt: 'Carved wooden houseboat on Dal Lake, Srinagar', credit: 'Slyronit, CC BY-SA 4.0' }],
     days_list: [
-      { t: 'Arrive Srinagar', d: 'Airport pickup, then Nishat and Shalimar gardens and the Shankaracharya temple viewpoint.' },
-      { t: 'Gulmarg day trip', d: 'Drive up to the meadow and the snow line. Gondola tickets and sledge rides are at your own cost.' },
-      { t: 'Pahalgam day trip', d: 'Through saffron fields and apple orchards to Betaab Valley and the Lidder river.' },
-      { t: 'Shikara to the houseboat', d: 'Shift to a Dal Lake houseboat, see the floating vegetable market and the old city crafts quarter.' },
-      { t: 'Departure', d: 'Transfer to Srinagar airport.' },
+      { t: 'Arrival in Srinagar', d: 'On arrival at Srinagar airport, our representative meets you and transfers you to your hotel. Rest of the day at leisure. Night stay at Srinagar.' },
+      { t: 'Local Sightseeing in Srinagar', d: 'A day of Srinagar local sightseeing: the Mughal gardens of Nishat and Shalimar, the Shankaracharya temple viewpoint and Dal Lake. Night stay at Srinagar.' },
+      { t: 'Pahalgam Day Trip', tab: 'Pahalgam', d: 'A full-day trip to Pahalgam through saffron fields and apple orchards, to Betaab Valley and the Lidder river. Return to Srinagar in the evening.' },
+      { t: 'Gulmarg Day Trip', tab: 'Gulmarg', d: 'A full-day trip to the snowy meadows of Gulmarg. Gondola tickets and sledge rides are at your own cost. Return to Srinagar in the evening.' },
+      { t: 'Srinagar Airport Drop', tab: 'Srinagar', d: 'After breakfast, check out and transfer to Srinagar airport for your onward journey.' },
     ],
     faq: [
       { q: 'Is the Gulmarg gondola included?', a: 'No. Gondola phase 1 and 2 tickets, pony rides and sledges are paid locally. Everything else on those days is covered.' },
@@ -239,20 +290,25 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     feats: [{ i: 'palm', t: 'Snow Point', s: 'Day' }, { i: 'cloche', t: 'Breakfast', s: 'Daily' }, { i: 'plane', t: 'Private', s: 'Vehicle' }, { i: 'shield', t: 'No Hidden', s: 'Cost' }],
     name: 'Splendid Himachal', nights: 5, days: 6, price: '15,600', ex: 'Chandigarh', exShort: 'Chandigarh airport or railway station',
     headPre: 'Discover ', headEm: 'Himachal', headLine2: 'Snow & Hills',
-    lede: "Solang snow, the Atal Tunnel run and Shimla's ridge, with a private vehicle through the whole loop from Chandigarh.",
+    lede: "Shimla's ridge, the Kullu valley drive, Manali sightseeing and a Rohtang Pass day, with a private vehicle through the whole loop from Chandigarh.",
     stops: [
-      { p: 'Manali', n: '3 nights', note: 'Solang, Atal Tunnel', img: IMG + 'him-manali.webp', alt: 'Solang Valley under snow near Manali', credit: 'Bleezebub, CC BY-SA 4.0' },
-      { p: 'Shimla', n: '2 nights', note: 'Ridge, Kufri', img: IMG + 'him-shimla.webp', alt: 'Christ Church on the Ridge, Shimla', credit: 'Slyronit, CC BY-SA 4.0' }],
+      { p: 'Shimla', n: '2 nights', note: 'Ridge, Mall Road', img: IMG + 'him-shimla.webp', alt: 'Christ Church on the Ridge, Shimla', credit: 'Slyronit, CC BY-SA 4.0' },
+      { p: 'Manali', n: '3 nights', note: 'Kullu, Manali, Rohtang Pass', img: IMG + 'him-manali.webp', alt: 'Solang Valley under snow near Manali', credit: 'Bleezebub, CC BY-SA 4.0' }],
     days_list: [
-      { t: 'Chandigarh to Manali', d: 'Scenic drive along the Beas, about 8 hours with breaks. Evening on Mall Road.' },
-      { t: 'Solang Valley and Atal Tunnel', d: 'Snow point day and a run through the Atal Tunnel towards Sissu, subject to weather and road conditions.' },
-      { t: 'Manali local', d: 'Hadimba Temple, Vashisht hot springs, Manu Temple, Van Vihar and Old Manali.' },
-      { t: 'Manali to Shimla', d: 'Drive down via Kullu and Mandi, about 7 hours. Evening on the Ridge.' },
-      { t: 'Kufri and Shimla', d: 'Half day at Kufri, then Christ Church, Jakhu Temple and the Lakkar Bazaar.' },
-      { t: 'Departure', d: 'Transfer back to Chandigarh airport or railway station.' },
+      { t: 'Arrive Chandigarh – Shimla', tab: 'Chandigarh to Shimla', d: 'About 110 km / 4 hrs drive. On arrival in Chandigarh, drive up to Shimla and check in to your hotel. Night stay at Shimla.' },
+      { t: 'Shimla Sightseeing', d: 'A day of Shimla sightseeing around the Ridge, Christ Church and Mall Road. Night stay at Shimla.' },
+      { t: 'Shimla – Kullu – Manali', tab: 'Shimla to Manali', d: 'About 285 km / 7 hrs drive. Check out and drive to Manali through the Kullu valley. Check in to your hotel. Night stay at Manali.' },
+      { t: 'Manali Local Sightseeing', d: 'A day of Manali local sightseeing. Night stay at Manali.' },
+      {
+        t: 'Manali – Rohtang Pass',
+        tab: 'Rohtang Pass',
+        d: 'A day trip from Manali to Rohtang Pass. Return to Manali in the evening. Night stay at Manali.',
+        notes: ['The Rohtang Pass trip is at your own cost.'],
+      },
+      { t: 'Manali – Chandigarh Drop', tab: 'Manali to Chandigarh', d: 'About 290 km / 7 hrs drive. After breakfast, check out and drive back to Chandigarh for your drop.' },
     ],
     faq: [
-      { q: 'Will we reach Rohtang Pass?', a: 'Rohtang stays closed in winter. The Atal Tunnel to Sissu is the alternative and gives you the same snow, weather permitting.' },
+      { q: 'Is the Rohtang Pass trip included?', a: 'No. The Rohtang Pass trip is at your own cost. Rohtang usually closes in deep winter; when it is shut, the Atal Tunnel to Sissu or Solang Valley is the snow alternative, weather permitting.' },
       { q: 'Are snow clothes and boots included?', a: 'No. They are rented at Solang for a few hundred rupees and your driver will take you to a trusted stall.' },
       { q: 'Can we fly into Delhi instead?', a: 'Yes. Delhi pickup can be added for an extra charge, or you can take the Volvo to Chandigarh and start there.' },
     ],
