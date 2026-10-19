@@ -19,6 +19,7 @@ const DubaiToursPage = React.lazy(() => import('./components/DubaiToursPage'));
 const DubaiInternationalToursPage = React.lazy(() => import('./components/DubaiInternationalToursPage'));
 const DubaiLocalToursPage = React.lazy(() => import('./components/DubaiLocalToursPage'));
 const IndiaToursPage = React.lazy(() => import('./components/IndiaToursPage'));
+const IndiaToursPackagePage = React.lazy(() => import('./components/IndiaToursPackagePage'));
 const IndiaInternationalToursPage = React.lazy(() => import('./components/IndiaInternationalToursPage'));
 const IndiaLocalToursPage = React.lazy(() => import('./components/IndiaLocalToursPage'));
 const PackagesPage = React.lazy(() => import('./components/PackagesPage'));
@@ -55,6 +56,8 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  // The ads landing page has its own sticky mobile bar (call / WhatsApp / enquire)
+  const hideFloatingOnMobile = location.pathname === '/india-tours-package';
   const [currentView, setCurrentView] = useState<'home' | 'destinations' | 'packages' | 'about' | 'search' | 'blog' | 'contact' | 'package-detail' | 'blog-detail' | 'admin'>('home');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPackage, setSelectedPackage] = useState<any>(null);
@@ -160,6 +163,11 @@ const App: React.FC = () => {
               />
 
               <Route
+                path="/india-tours-package"
+                element={<IndiaToursPackagePage />}
+              />
+
+              <Route
                 path="/india-tours/international"
                 element={<IndiaInternationalToursPage onExplore={handlePackageClick} onBookClick={toggleBooking} />}
               />
@@ -259,7 +267,7 @@ const App: React.FC = () => {
         {location.pathname !== '/admin' && (
           <a
             href={`tel:${CALL_NUMBER}`}
-            className="fixed bottom-[83px] right-1 w-14 h-14 rounded-full flex items-center justify-center z-50 transition-transform duration-300 hover:-translate-y-1"
+            className={`fixed bottom-[83px] right-1 w-14 h-14 rounded-full ${hideFloatingOnMobile ? 'hidden lg:flex' : 'flex'} items-center justify-center z-50 transition-transform duration-300 hover:-translate-y-1`}
             aria-label="Call us"
           >
             {/* soft pulsing halo */}
@@ -275,7 +283,7 @@ const App: React.FC = () => {
             href={getWhatsAppLink('Hi! I would like to enquire about your travel packages.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="fixed bottom-[15px] right-1 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 z-50 hover:-translate-y-2"
+            className={`fixed bottom-[15px] right-1 w-14 h-14 rounded-full ${hideFloatingOnMobile ? 'hidden lg:flex' : 'flex'} items-center justify-center shadow-2xl transition-all duration-300 z-50 hover:-translate-y-2`}
             style={{ backgroundColor: '#25D366' }}
             aria-label="Chat on WhatsApp"
           >

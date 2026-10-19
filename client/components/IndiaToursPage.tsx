@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { packages, resolveImageUrl } from '../lib/apiClient';
 import { LocationIcon } from './Icons';
-import { Users } from 'lucide-react';
+import { Users, ArrowUpRight } from 'lucide-react';
+import { WINTER_PACKAGES, servicePath } from '../data/winterPackages';
+import { WINTER_CARD_IMG } from '../data/winterCardImages';
 
 const OFFERS = [
   { id: 1, title: 'INTERNATIONAL TOURS ', image: 'https://res.cloudinary.com/dn29cn21x/image/upload/f_auto,q_auto,c_limit,w_1600/v1774849144/indiaFrom_compressed_gwvhxb.webp', },
@@ -162,6 +164,48 @@ const IndiaToursPage: React.FC<IndiaToursPageProps> = ({ onBack, onExplore, onBo
                   Book Now
                 </button>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Winter Package Destinations: 6 famous places, each opens its package page */}
+      <section className="bg-white lg:pt-12 pt-8 lg:pb-4 pb-2">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-14">
+          <div className="mb-6 lg:mb-8">
+            <p className="heading text-3xl text-center lg:text-left md:text-[38px] font-sans font-black text-slate-900 leading-tight">
+              Famous Places <br /> <span className="text-[#00A9D7]">to Explore in India</span>
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 lg:gap-6">
+            {WINTER_PACKAGES.map((p) => (
+              <Link
+                key={p.id}
+                to={servicePath(p.id)}
+                className="group relative block h-[150px] md:h-[190px] lg:h-[240px] rounded-[20px] lg:rounded-[24px] overflow-hidden shadow-md"
+              >
+                <img
+                  loading="lazy"
+                  src={WINTER_CARD_IMG[p.id] || p.photo}
+                  alt={p.photoAlt}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+
+                <span className="absolute top-2.5 right-2.5 lg:top-4 lg:right-4 w-7 h-7 lg:w-9 lg:h-9 rounded-full bg-white/90 text-[#00A9D7] flex items-center justify-center shadow-md transition-transform duration-300 group-hover:rotate-45">
+                  <ArrowUpRight className="w-4 h-4" />
+                </span>
+
+                <div className="absolute left-3 right-3 bottom-3 lg:left-6 lg:right-6 lg:bottom-5 text-white">
+                  <p className="text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.16em] text-white/80">
+                    {p.nights}N / {p.days}D
+                  </p>
+                  <p className="heading text-base md:text-xl lg:text-[26px] font-bold leading-tight mt-0.5">
+                    {p.tab}
+                  </p>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
