@@ -1,0 +1,4 @@
+/* Slow zoom on the active gallery photo (gives the hero a gentle "moving" feel) */
+@keyframes itp-kenburns { from { transform: scale(1); } to { transform: scale(1.12) translate(-1.5%, -1%); } }
+.itp-kenburns { animation: itp-kenburns 6s ease-out forwards; }
+@media (prefers-reduced-motion: reduce) { .itp-kenburns { animation: none; } }
