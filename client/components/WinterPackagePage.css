@@ -533,3 +533,8 @@
 @media (max-width:700px){
   .wp .x-pk-extra{padding:22px 20px}
 }
+
+/* per-day notes in the day-by-day planner */
+.wp .x-pbody .x-dnotes{list-style:none;margin:16px 0 0;padding:14px 16px;display:grid;gap:8px;border-radius:14px;background:color-mix(in oklab,var(--sky) 8%,transparent);font-size:14.5px;line-height:1.5;color:var(--ink);max-width:60ch}
+.wp .x-pbody .x-dnotes li{display:flex;gap:10px;align-items:baseline}
+.wp .x-pbody .x-dnotes b{flex:none;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}

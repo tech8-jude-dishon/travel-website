@@ -219,10 +219,10 @@ const Days: React.FC<{ d: WinterPackage }> = ({ d }) => {
         </div>
       </div>
       <ul className="x-tabs" role="tablist" style={{ '--n': N } as React.CSSProperties}>
-        {d.days_list.map((_, i) => (
+        {d.days_list.map((x, i) => (
           <li key={i}>
             <button className="x-tab" role="tab" id={`dt-${d.id}-${i}`} aria-controls={`dp-${d.id}-${i}`} aria-selected={i === active} onClick={() => go(i)}>
-              <small>Day</small><b>{pad2(i + 1)}</b><span>{stopFor(i).p}</span>
+              <small>Day</small><b>{pad2(i + 1)}</b><span>{x.tab || stopFor(i).p}</span>
             </button>
           </li>
         ))}
@@ -233,7 +233,7 @@ const Days: React.FC<{ d: WinterPackage }> = ({ d }) => {
         const tags: React.ReactNode[] = [];
         if (i === 0) tags.push(<span key="a" className="x-dtag x-dtag-alt"><Icon k="plane" />Arrival</span>);
         else if (i === last) tags.push(<span key="d" className="x-dtag x-dtag-alt"><Icon k="plane" />Departure</span>);
-        else if (/ferry/i.test(x.t)) tags.push(<span key="f" className="x-dtag x-dtag-alt"><Icon k="ferry" />Ferry day</span>);
+        else if (/ferry/i.test(x.t + ' ' + x.d)) tags.push(<span key="f" className="x-dtag x-dtag-alt"><Icon k="ferry" />Ferry day</span>);
         if (i !== last) tags.push(<span key="n" className="x-dtag"><Icon k="moon" />Night in {s.p}</span>);
         return (
           <div key={i} className={`x-panel${i === active ? ' is-on' : ''}`} role="tabpanel" id={`dp-${d.id}-${i}`} aria-labelledby={`dt-${d.id}-${i}`}>
@@ -243,6 +243,7 @@ const Days: React.FC<{ d: WinterPackage }> = ({ d }) => {
               <div className="x-dtags">{tags}</div>
               <p className="heading wp-h3">{x.t}</p>
               <p>{x.d}</p>
+              {x.notes && <ul className="x-dnotes">{x.notes.map(n => <li key={n}><b>Note</b>{n}</li>)}</ul>}
               <div className="x-pnav">
                 <button type="button" className="x-back" onClick={() => go(i - 1)} disabled={i === 0}><Icon k="arrow" />Previous</button>
                 <button type="button" onClick={() => go(i + 1)} disabled={i === last}>Next day <Icon k="arrow" /></button>
@@ -297,6 +298,12 @@ const Price: React.FC<{ d: WinterPackage }> = ({ d }) => (
               </tbody>
             </table>
           </div>
+        </div>
+      )}
+      {d.specialNotes && (
+        <div className="x-pk-extra">
+          <p className="heading wp-h4">Special note</p>
+          <ul className="x-pk-notes">{d.specialNotes.map(n => <li key={n}>{n}</li>)}</ul>
         </div>
       )}
       {d.notes && (

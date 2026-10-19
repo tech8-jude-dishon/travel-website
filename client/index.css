@@ -130,3 +130,8 @@ html {
         height: 100% !important;
     }
 }
+
+/* Heavy, tight display face for the services page headlines (beats the global serif rule on h1/h2) */
+.font-display {
+    font-family: 'Inter Tight', var(--font-sans) !important;
+}
