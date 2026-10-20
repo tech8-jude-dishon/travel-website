@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  ArrowRight, Bookmark, Facebook, Instagram, Linkedin, MapPin, Menu, Minus, Play, Plus, Search, X, Youtube,
+  ArrowRight, Bookmark, Facebook, Instagram, Linkedin, MapPin, Menu, MessageCircle, Minus, Play, Plus, Search, X,
+  Youtube,
 } from 'lucide-react';
 import { servicePath } from '../data/winterPackages';
 import { getWhatsAppLink } from '../utils/whatsapp';
@@ -45,14 +46,14 @@ const SOCIALS = [
 ];
 
 const Brand: React.FC<{ light?: boolean }> = ({ light }) => (
-  <Link to="/" className="flex items-center gap-2.5 shrink-0" aria-label="Global Connect World Travel home">
-    <svg viewBox="0 0 64 36" className="w-12 h-7" aria-hidden="true">
+  <Link to="/" className="svc-brand flex items-center gap-2.5 shrink-0" aria-label="Global Connect World Travel home">
+    <svg viewBox="0 0 64 36" className="svc-brand-mark w-12 h-7" aria-hidden="true">
       <path d="M2 34 22 6l10 13 8-9 22 24h-9L40 20l-8 9L22 15 11 34z" fill={light ? '#14c8f5' : '#0b1630'} />
       <path d="M22 6 32 19l-4 5-6-9z" fill="#14c8f5" />
     </svg>
     <span className="leading-none">
-      <span className={`font-display block text-[19px] font-extrabold tracking-[-0.01em] ${light ? 'text-white' : 'text-[#0b1630]'}`}>WORLD TRAVEL</span>
-      <span className={`block mt-1 text-[8.5px] font-semibold tracking-[0.52em] ${light ? 'text-[#14c8f5]' : 'text-brand-dark/60'}`}>GLOBAL CONNECT</span>
+      <span className={`svc-brand-name font-display block text-[19px] font-extrabold tracking-[-0.01em] ${light ? 'text-white' : 'text-[#0b1630]'}`}>WORLD TRAVEL</span>
+      <span className={`svc-brand-tag block mt-1 text-[8.5px] font-semibold tracking-[0.52em] ${light ? 'text-[#14c8f5]' : 'text-brand-dark/60'}`}>GLOBAL CONNECT</span>
     </span>
   </Link>
 );
@@ -61,22 +62,22 @@ const Header: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   return (
-    <header className="absolute z-30 top-3 lg:top-5 inset-x-3 lg:inset-x-[8.8vw]">
-      <div className="flex items-center gap-4 bg-white/95 backdrop-blur rounded-2xl lg:rounded-[22px] shadow-[0_10px_30px_rgba(2,40,91,0.10)] pl-5 pr-3 lg:pl-8 lg:pr-3 py-2.5">
+    <header className="svc-head absolute z-30 top-3 lg:top-5 inset-x-3 lg:inset-x-[4vw] xl:inset-x-[8.8vw]">
+      <div className="svc-head-bar flex items-center gap-4 bg-white/95 backdrop-blur rounded-2xl lg:rounded-[22px] shadow-[0_10px_30px_rgba(2,40,91,0.10)] pl-5 pr-3 lg:pl-8 lg:pr-3 py-2.5">
         <Brand />
-        <nav className="hidden lg:flex flex-1 justify-center gap-[2.6vw]">
+        <nav className="svc-nav hidden lg:flex flex-1 justify-center gap-[1.6vw]">
           {NAV.map(n => (
-            <Link key={n.to} to={n.to} className="text-[15px] font-medium text-[#0b1630] hover:text-[#0b8fd8] transition-colors">{n.label}</Link>
+            <Link key={n.to} to={n.to} className="whitespace-nowrap text-[14px] xl:text-[15px] font-medium text-[#0b1630] hover:text-[#0b8fd8] transition-colors">{n.label}</Link>
           ))}
         </nav>
-        <div className="ml-auto lg:ml-0 flex items-center gap-3">
-          <span className="hidden lg:block w-px h-8 bg-brand-dark/15" />
+        <div className="svc-head-right ml-auto lg:ml-0 flex items-center gap-3">
+          <span className="svc-div hidden xl:block w-px h-8 bg-brand-dark/15" />
           <button onClick={() => navigate('/search')} aria-label="Search tours"
-            className="hidden sm:flex w-11 h-11 rounded-full bg-slate-100 items-center justify-center hover:bg-slate-200 transition-colors">
+            className="svc-search hidden sm:flex lg:hidden xl:flex w-11 h-11 rounded-full bg-slate-100 items-center justify-center hover:bg-slate-200 transition-colors">
             <Search className="w-[18px] h-[18px] text-[#0b1630]" />
           </button>
-          <span className="hidden lg:block w-px h-8 bg-brand-dark/15" />
-          <button onClick={onBookClick} className={`${btnCyan} px-5 lg:px-6 py-2.5 lg:py-3 text-[15px]`}>
+          <span className="svc-div hidden xl:block w-px h-8 bg-brand-dark/15" />
+          <button onClick={onBookClick} className={`svc-plan ${btnCyan} max-sm:!hidden whitespace-nowrap shrink-0 px-5 lg:px-6 py-2.5 lg:py-3 text-[15px]`}>
             Plan My Trip <ArrowRight className="w-4 h-4" />
           </button>
           <button onClick={() => setOpen(v => !v)} aria-expanded={open} aria-label="Menu"
@@ -90,6 +91,9 @@ const Header: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => {
           {NAV.map(n => (
             <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="px-4 py-3 rounded-xl font-medium text-[#0b1630] hover:bg-slate-50">{n.label}</Link>
           ))}
+          <button onClick={() => { setOpen(false); onBookClick(); }} className={`sm:hidden ${btnCyan} justify-center m-2 px-5 py-3`}>
+            Plan My Trip <ArrowRight className="w-4 h-4" />
+          </button>
         </nav>
       )}
     </header>
@@ -152,32 +156,32 @@ const PageFooter: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => (
 const Hero: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => {
   const [saved, setSaved] = useState(false);
   return (
-    <section className="relative overflow-hidden w-full flex flex-col lg:min-h-[calc(44.4vw+400px)] bg-[#eaf2f9]">
+    <section className="svc-hero relative overflow-hidden w-full flex flex-col lg:min-h-[calc(44.4vw+400px)] bg-[#eaf2f9]">
       <Header onBookClick={onBookClick} />
       {/* Full-width snowy scene behind everything, with a light wash so the headline reads */}
       <div className="absolute inset-0 bg-[url('/images/services/hero-scene.webp')] bg-cover bg-no-repeat bg-[position:center_35%]" />
       <div className="absolute inset-0 bg-white/60 lg:bg-transparent lg:bg-gradient-to-r lg:from-white/55 lg:via-white/15 lg:to-transparent" />
 
-      {/* Original banner photo from the design. Phones: full width above the text, cropped above
-          the card printed into the photo. Desktop: on the right, standing on the destination strip,
-          with the live trip card sitting exactly over the printed one. */}
-      <div className="relative z-[1] order-first w-full aspect-[912/400] max-lg:mt-[76px] min-h-0 overflow-hidden lg:order-none lg:absolute lg:bottom-[330px] lg:right-0 lg:w-[64vw] lg:aspect-[912/632] lg:[--woman-shift:8%_0]">
-        <img src={S + 'hero-woman-wide.webp'} alt="Traveller in a white beanie and ski goggles in the snowy Himalayas" fetchPriority="high" style={{ translate: 'var(--woman-shift, 0)' }}
-          className="w-full h-full object-cover object-top [mask-image:linear-gradient(to_bottom,#000_80%,transparent)] lg:[mask-image:linear-gradient(to_bottom,transparent,#000_8%,#000_68%,rgba(0,0,0,0.55)_84%,transparent_97%)]" />
+      {/* Original banner photo from the design. Phones: full width above the text, cropped above the
+          printed card. Desktop: on the right with the live trip card over the printed one; at 1280px+
+          everything in this hero is placed at the design file's exact positions (index.css, .svc-*). */}
+      <div className="svc-woman max-lg:hidden relative z-[1] order-first w-full aspect-[1032/400] max-sm:aspect-[1.6] max-lg:mt-[76px] min-h-0 overflow-hidden lg:order-none lg:absolute lg:bottom-[330px] lg:right-0 lg:w-[64vw] lg:aspect-[1032/632]">
+        <img src={S + 'hero-woman-wide.webp'} alt="Traveller in a white beanie and ski goggles in the snowy Himalayas" fetchPriority="high"
+          className="svc-woman-img w-full h-full object-cover object-top max-sm:w-[165%] max-sm:max-w-none max-sm:h-auto max-sm:-ml-[24%] [mask-image:linear-gradient(to_bottom,#000_80%,transparent)] lg:[mask-image:linear-gradient(to_bottom,transparent,#000_8%,#000_90%,transparent)]" />
 
-        {/* featured trip card */}
-        <div className="hidden lg:flex absolute left-[36.5%] top-[65.2%] w-[60.4%] h-[32.2%] gap-4 bg-white rounded-2xl p-3.5 shadow-[0_20px_50px_rgba(2,40,91,0.18)]">
+        {/* featured trip card, laid over the one printed in the photo */}
+        <div className="svc-card hidden lg:flex absolute left-[39.73%] top-[65.2%] w-[53.39%] h-[32.2%] gap-4 bg-white rounded-2xl p-3.5 shadow-[0_20px_50px_rgba(2,40,91,0.18)]">
           <img src={S + 'card-gulmarg.webp'} alt="Gondola over snowy peaks and pine trees in Gulmarg" className="h-full aspect-square rounded-xl object-cover" />
           <div className="flex-1 min-w-0 flex flex-col justify-center">
-            <p className="flex items-center gap-1.5 text-xs text-brand-dark/70"><MapPin className="w-3.5 h-3.5 text-red-500 fill-red-500/20" /> Gulmarg, Kashmir</p>
-            <p className="font-display mt-1 text-xl font-bold tracking-[-0.02em] text-[#0b1630]">Your Himalayan Escape</p>
-            <p className="text-xs text-brand-dark/55">Snow trails • Scenic stays • Mountain adventures</p>
-            <div className="mt-3 flex items-center justify-between">
-              <Link to={servicePath('kashmir')} className="inline-flex items-center gap-2 bg-[#0b1630] text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-brand-dark transition-colors">
+            <p className="svc-card-loc flex items-center gap-1.5 text-[11px] xl:text-xs text-brand-dark/70"><MapPin className="w-3.5 h-3.5 text-red-500 fill-red-500/20" /> Gulmarg, Kashmir</p>
+            <p className="svc-card-title font-display mt-0.5 xl:mt-1 text-[17px] xl:text-xl leading-tight font-bold tracking-[-0.02em] text-[#0b1630]">Your Himalayan Escape</p>
+            <p className="svc-card-sub hidden xl:block text-xs text-brand-dark/55">Snow trails • Scenic stays • Mountain adventures</p>
+            <div className="svc-card-row mt-2 xl:mt-3 flex items-center justify-between">
+              <Link to={servicePath('kashmir')} className="svc-card-btn inline-flex items-center gap-2 bg-[#0b1630] text-white text-xs xl:text-sm font-semibold px-4 xl:px-5 py-2 xl:py-2.5 rounded-full hover:bg-brand-dark transition-colors">
                 Explore Trip <ArrowRight className="w-4 h-4" />
               </Link>
               <button onClick={() => setSaved(v => !v)} aria-pressed={saved} aria-label={saved ? 'Remove from saved trips' : 'Save this trip'}
-                className="w-10 h-10 rounded-full border border-brand-dark/15 flex items-center justify-center hover:bg-slate-50">
+                className="svc-card-save w-8 h-8 xl:w-10 xl:h-10 rounded-full border border-brand-dark/15 flex items-center justify-center hover:bg-slate-50">
                 <Bookmark className={`w-4 h-4 text-brand-dark ${saved ? 'fill-brand-dark' : ''}`} />
               </button>
             </div>
@@ -185,22 +189,22 @@ const Hero: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => {
         </div>
       </div>
 
-      <div className="relative z-10 lg:flex-1 w-full mx-auto px-5 md:px-10 lg:px-[7vw] pt-8 lg:pt-[150px] pb-10 pointer-events-none [&_a]:pointer-events-auto">
-        <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand-dark/70 uppercase">
+      <div className="svc-copy relative z-10 lg:flex-1 w-full mx-auto px-5 md:px-10 lg:px-[7vw] pt-[112px] lg:pt-[150px] pb-10 pointer-events-none [&_a]:pointer-events-auto">
+        <p className="svc-eyebrow flex items-center gap-3 text-xs font-semibold tracking-[0.18em] text-brand-dark/70 uppercase">
           <span className="w-10 h-px bg-brand-dark/50" /> Explore Incredible India
         </p>
-        <h1 className="font-display mt-4 text-[44px] sm:text-6xl lg:text-[clamp(60px,5.5vw,112px)] font-extrabold leading-[0.95] tracking-[-0.045em] text-[#0b1630] whitespace-nowrap">
+        <h1 className="svc-h1 font-display mt-4 text-[clamp(32px,10.4vw,44px)] sm:text-6xl lg:text-[clamp(60px,5.5vw,112px)] font-extrabold leading-[0.95] tracking-[-0.045em] text-[#0b1630] whitespace-nowrap">
           Chase Mountains.<br />Make Memories.
         </h1>
-        <p className="mt-5 text-lg md:text-xl lg:text-[clamp(20px,1.4vw,28px)] text-brand-dark/75 max-w-[34vw] max-lg:max-w-lg">
+        <p className="svc-sub mt-5 text-lg md:text-xl lg:text-[clamp(20px,1.4vw,28px)] text-brand-dark/75 max-w-[34vw] max-lg:max-w-lg">
           Discover breathtaking escapes, handpicked stays and unforgettable journeys across India.
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center gap-6">
-          <Link to="/india-tours" className={`${btnCyan} px-8 py-4 text-lg`}>
+        <div className="svc-ctas mt-8 flex flex-wrap items-center gap-6">
+          <Link to="/india-tours" className={`svc-cta-main ${btnCyan} px-8 py-4 text-lg`}>
             Explore Tours <ArrowRight className="w-5 h-5" />
           </Link>
-          <Link to="/about" className="group flex items-center gap-4">
+          <Link to="/about" className="svc-watch group flex items-center gap-4">
             <span className="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center group-hover:scale-105 transition-transform">
               <Play className="w-5 h-5 text-brand-dark fill-brand-dark ml-0.5" />
             </span>
@@ -211,15 +215,15 @@ const Hero: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => {
           </Link>
         </div>
 
-        <ul className="mt-10 flex flex-wrap items-center text-white text-base font-semibold"
+        <ul className="svc-hl mt-10 flex flex-wrap items-center text-white text-base font-semibold"
           style={{ textShadow: '0 1px 2px rgba(2,22,48,0.95), 0 2px 12px rgba(2,22,48,0.8)' }}>
           {HIGHLIGHTS.map((h, i) => (
-            <li key={h} className={`py-1 pr-6 ${i ? 'pl-6 border-l border-white/80' : ''}`}>{h}</li>
+            <li key={h} className={`py-1 pr-4 sm:pr-6 ${i ? 'sm:pl-6 sm:border-l border-white/80' : ''}`}>{h}</li>
           ))}
         </ul>
       </div>
 
-      <div className="relative z-20 w-full mx-auto px-5 md:px-10 lg:px-[3.7vw] pb-10">
+      <div className="svc-strip-wrap relative z-20 w-full mx-auto px-5 md:px-10 lg:px-[3.7vw] pb-10">
         <Escapes onBookClick={onBookClick} />
       </div>
     </section>
@@ -228,8 +232,8 @@ const Hero: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => {
 
 // ---------- destination strip ----------
 const Escapes: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => (
-  <div className="bg-white rounded-3xl shadow-[0_24px_60px_rgba(2,40,91,0.14)] p-4 md:p-5 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1fr_1.6fr]">
-    <div className="flex flex-col justify-center px-3 py-3 sm:col-span-2 lg:col-span-1">
+  <div className="svc-strip bg-white rounded-3xl shadow-[0_24px_60px_rgba(2,40,91,0.14)] p-4 md:p-5 grid gap-4 grid-cols-1 sm:grid-cols-3 lg:grid-cols-[1.35fr_1fr_1fr_1fr_1.6fr]">
+    <div className="svc-strip-intro flex flex-col justify-center px-3 py-3 sm:col-span-3 lg:col-span-1">
       <p className="flex items-center gap-3 text-[11px] font-semibold tracking-[0.15em] text-brand-dark/60 uppercase">
         <span className="w-7 h-px bg-brand-dark/40" /> Explore India
       </p>
@@ -242,16 +246,16 @@ const Escapes: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => (
     </div>
 
     {ESCAPES.map(e => (
-      <Link key={e.id} to={servicePath(e.id)} className="group relative h-[170px] lg:h-[210px] rounded-2xl overflow-hidden">
+      <Link key={e.id} to={servicePath(e.id)} className="svc-tile group relative h-[170px] lg:h-[210px] rounded-2xl overflow-hidden">
         <img src={e.img} alt={e.alt} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-        <span className="absolute left-4 bottom-3.5 flex items-center gap-2 text-white text-lg font-semibold">
+        <span className="svc-tile-label absolute left-4 bottom-3.5 flex items-center gap-2 text-white text-lg font-semibold">
           <MapPin className="w-5 h-5 fill-white text-white [&>circle]:fill-black/40" /> {e.name}
         </span>
       </Link>
     ))}
 
-    <div className="relative h-[170px] lg:h-[210px] rounded-2xl overflow-hidden sm:col-span-2 lg:col-span-1 bg-[#0b1630] bg-[url('/images/services/journey-card.webp')] bg-cover bg-[position:right_center]">
+    <div className="svc-journey relative h-[170px] lg:h-[210px] rounded-2xl overflow-hidden sm:col-span-3 lg:col-span-1 bg-[#0b1630] bg-[url('/images/services/journey-card.webp')] bg-cover bg-[position:right_center]">
       <div className="absolute inset-0 bg-gradient-to-r from-[#0b1630] via-[#0b1630]/75 to-transparent" />
       <div className="relative h-full flex flex-col justify-center px-6 text-white">
         <p className="font-display text-[28px] font-bold leading-[1.05] tracking-[-0.03em]">A journey<br />made for you.</p>
@@ -309,10 +313,40 @@ const Faq: React.FC = () => {
   );
 };
 
+// ---------- call to action ----------
+const CallToAction: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => (
+  <section className="px-5 md:px-10 lg:px-[3.7vw] pb-14 md:pb-20">
+    <div className="relative overflow-hidden rounded-3xl lg:rounded-[28px] bg-[#0b1630] bg-[url('/images/services/cta-woman.webp')] bg-cover bg-[position:center_35%] max-lg:bg-[position:40%_35%] shadow-[0_24px_60px_rgba(2,40,91,0.18)]">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0b1630] from-5% via-[#0b1630]/75 via-40% to-transparent to-68% max-md:to-[#0b1630]/55 max-md:to-100%" />
+      <div className="relative px-6 py-12 md:px-14 md:py-16 lg:px-[5vw] lg:py-[4.5vw] max-w-3xl text-white">
+        <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.15em] text-[#14c8f5] uppercase">
+          <span className="w-10 h-0.5 bg-[#14c8f5]" /> Plan with an expert
+        </p>
+        <h2 className="font-display mt-4 text-[36px] md:text-[52px] lg:text-[clamp(48px,3.6vw,68px)] font-extrabold leading-[1] tracking-[-0.045em]">
+          Ready for your<br />next escape?
+        </h2>
+        <p className="mt-5 text-base md:text-lg text-white/85 max-w-xl">
+          Tell us your dates, group size and budget. Our travel experts will send you a tailored itinerary and quote, usually within a day.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          <button onClick={onBookClick} className={`${btnCyan} px-8 py-4 text-lg`}>
+            Plan My Trip <ArrowRight className="w-5 h-5" />
+          </button>
+          <a href={getWhatsAppLink('Hi! I would like to plan a trip in India.')} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 border border-white/70 text-white font-semibold rounded-full px-7 py-4 text-lg hover:bg-white hover:text-[#0b1630] transition-colors">
+            <MessageCircle className="w-5 h-5" /> WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 const ServicesPage: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => (
   <div className="bg-white">
     <Hero onBookClick={onBookClick} />
     <Faq />
+    <CallToAction onBookClick={onBookClick} />
     <PageFooter onBookClick={onBookClick} />
   </div>
 );

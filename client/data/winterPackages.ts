@@ -70,23 +70,23 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     days_list: [
       {
         t: 'NJP Railway Station / Bagdogra (IXB) Airport to Gangtok',
-        d: 'About 125 km / 4 hrs drive. On arrival at NJP Railway Station or Bagdogra (IXB) Airport, our representative welcomes you and transfers you to Gangtok. Check in to your hotel; the rest of the day is free at leisure. Night halt at Gangtok.',
+        d: "About 125 km / 4 hrs. Our representative meets you at NJP or Bagdogra and transfers you to your Gangtok hotel.",
       },
       {
         t: 'Gangtok: Tsomgo Lake + Baba Mandir (New)',
-        d: 'This morning, start on a half-day trip to Tsomgo Lake (12,400 ft), only 32 km from Gangtok city. The lake is almost 1 km long and 15 m deep, and is considered sacred by the local people. A further 12 km on, visit the Baba Harbhajan Singh Mandir (New). Back to the hotel in the afternoon. Night halt at Gangtok.',
+        d: "Half-day trip to sacred Tsomgo Lake (12,400 ft), 32 km from Gangtok, and the new Baba Harbhajan Singh Mandir.",
       },
       {
         t: 'Gangtok Sightseeing and Gangtok to Darjeeling',
-        d: 'About 120 km / 4 hrs drive. After breakfast, check out and start a half-day Gangtok city tour covering Banjhakri Waterfalls, the Flower Show, the Handicraft Centre, Do Drul Chorten and the Institute of Tibetology (closed on Sundays). In the afternoon, transfer to Darjeeling and check in to your hotel. Night halt at Darjeeling.',
+        d: "Gangtok city tour (Banjhakri Falls, Do Drul Chorten, Tibetology), then a 120 km / 4 hrs drive to Darjeeling.", notes: ["The Institute of Tibetology is closed on Sundays."],
       },
       {
         t: 'Darjeeling Local City Tour',
-        d: 'This morning, a Darjeeling city tour covering Tiger Hill, Ghoom Monastery, the Himalayan Mountaineering Institute, P.N. Zoological Park (closed on Thursdays), Tenzing Rock, a tea garden (outer view), the Peace Pagoda, the Japanese Temple and the Ropeway (ticket at guest’s own cost). Back to the hotel in the afternoon, then enjoy shopping on the famous Mall Road on foot. Night halt at Darjeeling.',
+        d: "Tiger Hill, Ghoom Monastery, HMI, the zoo, Peace Pagoda and a tea garden, then shopping on Mall Road.", notes: ["P.N. Zoological Park is closed on Thursdays.","Ropeway ticket is at your own cost."],
       },
       {
         t: 'Darjeeling to NJP Railway Station / Bagdogra (IXB) Airport',
-        d: 'About 90 km / 3 hrs drive. After breakfast, check out of the hotel and transfer to NJP Railway Station or Bagdogra (IXB) Airport for your onward journey. Happy journey!',
+        d: "About 90 km / 3 hrs. After breakfast, transfer to NJP Railway Station or Bagdogra Airport. Happy journey!",
       },
     ],
     faq: [
@@ -115,30 +115,23 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     days_list: [
       {
         t: "Arrival at Port Blair + Cellular Jail Light & Sound Show + Corbyn's Cove Beach",
-        d: "Arrival at Port Blair, where our representative meets and assists you at the airport and transfers you to your hotel to rest till the afternoon. In the afternoon, visit Corbyn's Cove Beach, a coconut-fringed beach about 8 km from Port Blair city. Late in the evening, witness the enthralling Sound and Light Show at Cellular Jail, where the heroic saga of the Indian freedom struggle is brought alive. Overnight stay at Port Blair.",
+        d: "Airport pickup and hotel check-in. Afternoon at Corbyn's Cove Beach, evening Light & Sound Show at Cellular Jail.",
       },
       {
         t: 'Port Blair to Havelock + Radhanagar Beach',
-        d: "After breakfast, check out from the hotel to catch a ferry to Havelock. The island (often just called Havelock) is one of the most beautiful and largest islands of Ritchie's Archipelago, a placid heaven like no other. Situated 57 km north-east of South Andaman with an area of 92 sq km, it offers a breathtaking trail of nature expeditions. On arrival, proceed to your hotel. In the afternoon, visit Beach No. 7, Radhanagar Beach (swimming beach), rated the best beach in Asia, and spend the day relaxing there. Stay overnight amongst sandy beaches and lush green forest in a comfortable beach resort. Overnight stay at Havelock Island.",
-        notes: [
-          'Do not forget to carry your own water bottle, snacks and a change of clothes.',
-          'Breakfast this day is at Port Blair. If you are travelling by an early morning ferry, ask the hotel for a packed breakfast.',
-          'Ferry timings are mentioned on the tickets provided to you. Please report at the ferry terminal 1 hour before departure with a valid photo ID card.',
-          'Ferry operation is purely subject to weather conditions and government clearance.',
-        ],
+        d: "Morning ferry to Havelock, one of the Andamans' most beautiful islands. Afternoon at Radhanagar Beach, rated Asia's best.",
       },
       {
         t: 'Elephant Beach + Kalapathar Beach',
-        d: 'After breakfast, proceed on a half-day trip to Elephant Beach by shared boat. In the afternoon, visit Kalapathar Beach. Overnight stay at Havelock Island.',
-        notes: ['Do not forget to carry your own water bottle, snacks and a change of clothes.'],
+        d: "Half-day shared boat trip to Elephant Beach, then Kalapathar Beach in the afternoon. Overnight at Havelock.",
       },
       {
         t: 'Havelock to Port Blair + Chidiya Tapu Beach',
-        d: 'Breakfast at the hotel in the morning. Check out and transfer to the Havelock ferry terminal for the ferry back to Port Blair, then transfer to your hotel in Port Blair. In the afternoon, visit Chidiya Tapu Beach to enjoy the sunset. Overnight stay at Port Blair.',
+        d: "Ferry back to Port Blair and hotel check-in. Afternoon at Chidiya Tapu Beach to watch the sunset.",
       },
       {
         t: 'Departure',
-        d: 'After breakfast this morning, pack your bags, check out of the hotel and go to the airport. Board your flight on time and depart with sweet memories.',
+        d: "After breakfast, check out and transfer to Port Blair airport. Depart with sweet memories.",
       },
     ],
     faq: [
@@ -207,7 +200,7 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     days_list: [
       { t: 'Arrival Jaipur', d: 'On arrival in Jaipur, transfer to your hotel and check in. Rest of the day at leisure. Night stay at Jaipur.' },
       { t: 'Jaipur Sightseeing', d: 'A full day of Jaipur sightseeing in the Pink City. Night stay at Jaipur.' },
-      { t: 'Jaipur – Pushkar – Jodhpur', tab: 'Jaipur to Jodhpur', d: 'About 380 km / 7 hrs drive. Check out and drive to Jodhpur via the holy town of Pushkar. Check in to your hotel. Night stay at Jodhpur.' },
+      { t: 'Jaipur – Pushkar – Jodhpur', tab: 'Jaipur to Jodhpur', d: "About 380 km / 7 hrs. Drive to Jodhpur via the holy town of Pushkar and check in. Night stay at Jodhpur." },
       { t: 'Jodhpur – Ranakpur – Udaipur', tab: 'Jodhpur to Udaipur', d: 'About 260 km / 5 hrs drive. Check out and drive to Udaipur via Ranakpur. Check in to your hotel. Night stay at Udaipur.' },
       { t: 'Udaipur Sightseeing', d: 'A full day of Udaipur sightseeing in the City of Lakes. Night stay at Udaipur.' },
       { t: 'Udaipur Drop', d: 'After breakfast, check out and transfer to Udaipur airport or railway station for your onward journey.' },
@@ -241,7 +234,7 @@ export const WINTER_PACKAGES: WinterPackage[] = [
         notes: ['Vehicles are not allowed on Mall Road, so this stretch is explored on foot.'],
       },
       { t: 'Nainital: Shree Kainchi Dham', d: 'Visit Shree Kainchi Dham, the ashram of Param Pujya Baba Shri Neeb Karori Maharaj. Night stay at Nainital.' },
-      { t: 'Nainital to Corbett', tab: 'Nainital to Corbett', d: 'About 120 km / 4 hrs drive. Check out and drive to Corbett, then check in to your resort near the park. Night stay at Corbett.' },
+      { t: 'Nainital to Corbett', tab: 'Nainital to Corbett', d: "About 120 km / 4 hrs. Drive from Nainital to your resort near Corbett and check in. Night stay at Corbett." },
       { t: 'Corbett Jungle Safari', d: 'A jungle safari in Jim Corbett National Park, home of the Bengal tiger. Night stay at Corbett.' },
       { t: 'Corbett to Delhi, Airport Drop', d: 'About 250 km / 5 hrs drive. Check out and drive back to Delhi for your airport drop.' },
     ],
@@ -267,10 +260,10 @@ export const WINTER_PACKAGES: WinterPackage[] = [
       { p: 'Srinagar', n: '3 nights', note: 'Gardens, Gulmarg, Pahalgam', img: IMG + 'ksh-srinagar.webp', alt: 'Snow-covered cottage among pines in Gulmarg', credit: 'Zahoor Bhat, CC BY-SA 4.0' },
       { p: 'Houseboat', n: '1 night', note: 'Dal Lake', img: IMG + 'ksh-houseboat.webp', alt: 'Carved wooden houseboat on Dal Lake, Srinagar', credit: 'Slyronit, CC BY-SA 4.0' }],
     days_list: [
-      { t: 'Arrival in Srinagar', d: 'On arrival at Srinagar airport, our representative meets you and transfers you to your hotel. Rest of the day at leisure. Night stay at Srinagar.' },
-      { t: 'Local Sightseeing in Srinagar', d: 'A day of Srinagar local sightseeing: the Mughal gardens of Nishat and Shalimar, the Shankaracharya temple viewpoint and Dal Lake. Night stay at Srinagar.' },
-      { t: 'Pahalgam Day Trip', tab: 'Pahalgam', d: 'A full-day trip to Pahalgam through saffron fields and apple orchards, to Betaab Valley and the Lidder river. Return to Srinagar in the evening.' },
-      { t: 'Gulmarg Day Trip', tab: 'Gulmarg', d: 'A full-day trip to the snowy meadows of Gulmarg. Gondola tickets and sledge rides are at your own cost. Return to Srinagar in the evening.' },
+      { t: 'Arrival in Srinagar', d: "Our representative meets you at Srinagar airport and transfers you to your hotel. Rest of the day at leisure." },
+      { t: 'Local Sightseeing in Srinagar', d: "The Mughal gardens of Nishat and Shalimar, the Shankaracharya temple viewpoint and Dal Lake." },
+      { t: 'Pahalgam Day Trip', tab: 'Pahalgam', d: "Full-day trip through saffron fields and apple orchards to Betaab Valley and the Lidder river." },
+      { t: 'Gulmarg Day Trip', tab: 'Gulmarg', d: "Full-day trip to the snowy meadows of Gulmarg, back to Srinagar in the evening.", notes: ["Gondola tickets and sledge rides are at your own cost."] },
       { t: 'Srinagar Airport Drop', tab: 'Srinagar', d: 'After breakfast, check out and transfer to Srinagar airport for your onward journey.' },
     ],
     faq: [
@@ -297,7 +290,7 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     days_list: [
       { t: 'Arrive Chandigarh – Shimla', tab: 'Chandigarh to Shimla', d: 'About 110 km / 4 hrs drive. On arrival in Chandigarh, drive up to Shimla and check in to your hotel. Night stay at Shimla.' },
       { t: 'Shimla Sightseeing', d: 'A day of Shimla sightseeing around the Ridge, Christ Church and Mall Road. Night stay at Shimla.' },
-      { t: 'Shimla – Kullu – Manali', tab: 'Shimla to Manali', d: 'About 285 km / 7 hrs drive. Check out and drive to Manali through the Kullu valley. Check in to your hotel. Night stay at Manali.' },
+      { t: 'Shimla – Kullu – Manali', tab: 'Shimla to Manali', d: "About 285 km / 7 hrs. Drive to Manali through the Kullu valley and check in. Night stay at Manali." },
       { t: 'Manali Local Sightseeing', d: 'A day of Manali local sightseeing. Night stay at Manali.' },
       {
         t: 'Manali – Rohtang Pass',

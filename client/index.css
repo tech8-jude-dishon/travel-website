@@ -135,3 +135,78 @@ html {
 .font-display {
     font-family: 'Inter Tight', var(--font-sans) !important;
 }
+
+/* /services highlights: dark text below 1024px, where light snow sits behind them */
+@media (max-width: 1023px) {
+    .svc-hl { color: #0b1630; text-shadow: none !important; }
+    .svc-hl li { border-color: rgba(11, 22, 48, 0.25); }
+}
+
+/* ---------- /services hero: exact design layout on screens 1280px and wider ----------
+   Every number below is a pixel position measured on the 1672x941 design file
+   ("Kashmir Escape" mockup); --u is one design pixel at the current banner width. */
+@media (min-width: 1280px) {
+    .svc-hero { container-type: inline-size; display: block; aspect-ratio: 1672 / 941; min-height: 0; --u: calc(100cqw / 1672); }
+
+    .svc-head { top: calc(30 * var(--u)); left: calc(118 * var(--u)); right: calc(117 * var(--u)); }
+    .svc-head-bar { height: calc(76 * var(--u)); padding: 0 calc(18 * var(--u)) 0 calc(40 * var(--u)); border-radius: calc(26 * var(--u)); gap: 0; }
+    .svc-head .svc-brand { gap: calc(13 * var(--u)); }
+    .svc-head .svc-brand-mark { width: calc(77 * var(--u)); height: calc(36 * var(--u)); }
+    .svc-head .svc-brand-name { font-size: calc(27 * var(--u)); }
+    .svc-head .svc-brand-tag { font-size: calc(10 * var(--u)); margin-top: calc(5 * var(--u)); letter-spacing: 0.58em; }
+    .svc-nav { flex: none; justify-content: flex-start; margin-left: calc(106 * var(--u)); gap: calc(41 * var(--u)); }
+    .svc-nav a { font-size: calc(17 * var(--u)); }
+    .svc-head-right { margin-left: auto; gap: calc(20 * var(--u)); }
+    .svc-div { height: calc(36 * var(--u)); }
+    .svc-search { width: calc(50 * var(--u)); height: calc(50 * var(--u)); }
+    .svc-search svg { width: calc(20 * var(--u)); height: calc(20 * var(--u)); }
+    .svc-plan { height: calc(54 * var(--u)); padding: 0 calc(24 * var(--u)) 0 calc(32 * var(--u)); font-size: calc(18 * var(--u)); gap: calc(12 * var(--u)); }
+    .svc-plan svg { width: calc(20 * var(--u)); height: calc(20 * var(--u)); }
+
+    .svc-woman { position: absolute; left: calc(640 * var(--u)); top: calc(18 * var(--u)); right: auto; bottom: auto; width: calc(1032 * var(--u)); height: calc(632 * var(--u)); aspect-ratio: auto; margin: 0; }
+    .svc-woman-img { mask-image: linear-gradient(to bottom, transparent, #000 8%); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%); }
+    .svc-card { left: 40.7%; top: 66.6%; width: 51.8%; height: 30.3%; padding: calc(19 * var(--u)); gap: calc(18 * var(--u)); border-radius: calc(22 * var(--u)); }
+    .svc-card > img { border-radius: calc(14 * var(--u)); }
+    .svc-card-loc { font-size: calc(14.5 * var(--u)); gap: calc(7 * var(--u)); }
+    .svc-card-loc svg { width: calc(17 * var(--u)); height: calc(17 * var(--u)); }
+    .svc-card-title { font-size: calc(26 * var(--u)); margin-top: calc(6 * var(--u)); }
+    .svc-card-sub { font-size: calc(14.5 * var(--u)); margin-top: calc(4 * var(--u)); }
+    .svc-card-row { margin-top: calc(18 * var(--u)); }
+    .svc-card-btn { height: calc(48 * var(--u)); padding: 0 calc(24 * var(--u)) 0 calc(32 * var(--u)); font-size: calc(17 * var(--u)); gap: calc(14 * var(--u)); }
+    .svc-card-btn svg { width: calc(20 * var(--u)); height: calc(20 * var(--u)); }
+    .svc-card-save { width: calc(48 * var(--u)); height: calc(48 * var(--u)); }
+    .svc-card-save svg { width: calc(19 * var(--u)); height: calc(19 * var(--u)); }
+
+    .svc-copy { position: absolute; inset: 0; padding: 0; margin: 0; max-width: none; }
+    .svc-eyebrow { position: absolute; left: calc(120 * var(--u)); top: calc(163 * var(--u)); margin: 0; font-size: calc(14 * var(--u)); letter-spacing: 0.06em; gap: calc(15 * var(--u)); }
+    .svc-eyebrow span { width: calc(40 * var(--u)); }
+    .svc-h1 { position: absolute; left: calc(114 * var(--u)); top: calc(196 * var(--u)); margin: 0; font-size: calc(92 * var(--u)); line-height: calc(85 * var(--u)); letter-spacing: -0.022em; }
+    .svc-sub { position: absolute; left: calc(121 * var(--u)); top: calc(375 * var(--u)); margin: 0; font-size: calc(23 * var(--u)); line-height: calc(32 * var(--u)); max-width: calc(545 * var(--u)); }
+    .svc-ctas { position: absolute; left: calc(118 * var(--u)); top: calc(468 * var(--u)); margin: 0; gap: calc(24 * var(--u)); }
+    .svc-cta-main { height: calc(69 * var(--u)); padding: 0 calc(38 * var(--u)) 0 calc(44 * var(--u)); font-size: calc(20 * var(--u)); gap: calc(14 * var(--u)); }
+    .svc-cta-main svg { width: calc(24 * var(--u)); height: calc(24 * var(--u)); }
+    .svc-watch { gap: calc(21 * var(--u)); }
+    .svc-watch > span:first-child { width: calc(68 * var(--u)); height: calc(68 * var(--u)); }
+    .svc-watch > span:first-child svg { width: calc(22 * var(--u)); height: calc(22 * var(--u)); }
+    .svc-watch > span:last-child > span { font-size: calc(20 * var(--u)); line-height: calc(24 * var(--u)); }
+    .svc-hl { position: absolute; left: calc(122 * var(--u)); top: calc(578 * var(--u)); margin: 0; font-size: calc(18.5 * var(--u)); }
+    .svc-hl li { display: flex; align-items: center; height: calc(40 * var(--u)); padding: 0 calc(23 * var(--u)) 0 0; }
+    .svc-hl li + li { padding-left: calc(33 * var(--u)); }
+
+    .svc-strip-wrap { position: absolute; left: calc(62 * var(--u)); top: calc(650 * var(--u)); width: calc(1548 * var(--u)); height: calc(252 * var(--u)); padding: 0; margin: 0; max-width: none; }
+    .svc-strip { height: 100%; padding: calc(20 * var(--u)); gap: calc(20 * var(--u)); border-radius: calc(26 * var(--u)); grid-template-columns: 301fr 242fr 245fr 243fr 397fr; }
+    .svc-strip-intro { padding: 0 0 0 calc(18 * var(--u)); }
+    .svc-strip-intro > p { font-size: calc(13.5 * var(--u)); gap: calc(14 * var(--u)); letter-spacing: 0.06em; }
+    .svc-strip-intro > p span { width: calc(34 * var(--u)); }
+    .svc-strip-intro > h2 { font-size: calc(47 * var(--u)); line-height: calc(48 * var(--u)); margin-top: calc(10 * var(--u)); letter-spacing: -0.045em; }
+    .svc-strip-intro > a { margin-top: calc(22 * var(--u)); height: calc(56 * var(--u)); padding: 0 calc(30 * var(--u)) 0 calc(42 * var(--u)); font-size: calc(18 * var(--u)); gap: calc(16 * var(--u)); }
+    .svc-strip-intro > a svg { width: calc(22 * var(--u)); height: calc(22 * var(--u)); }
+    .svc-tile, .svc-journey { height: 100%; border-radius: calc(16 * var(--u)); }
+    .svc-tile-label { left: calc(20 * var(--u)); bottom: calc(18 * var(--u)); font-size: calc(21 * var(--u)); gap: calc(10 * var(--u)); }
+    .svc-tile-label svg { width: calc(25 * var(--u)); height: calc(25 * var(--u)); }
+    .svc-journey > div:last-child { padding: 0 calc(30 * var(--u)); }
+    .svc-journey > div:last-child > p:first-child { font-size: calc(31 * var(--u)); line-height: calc(33 * var(--u)); }
+    .svc-journey > div:last-child > p:nth-child(2) { font-size: calc(15.5 * var(--u)); line-height: calc(19 * var(--u)); margin-top: calc(14 * var(--u)); max-width: calc(220 * var(--u)); }
+    .svc-journey > div:last-child > button { margin-top: calc(16 * var(--u)); height: calc(46 * var(--u)); padding: 0 calc(22 * var(--u)) 0 calc(26 * var(--u)); font-size: calc(17 * var(--u)); gap: calc(12 * var(--u)); }
+    .svc-journey > div:last-child > button svg { width: calc(20 * var(--u)); height: calc(20 * var(--u)); }
+}
