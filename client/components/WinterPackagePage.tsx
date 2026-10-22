@@ -168,7 +168,7 @@ const Route: React.FC<{ d: WinterPackage }> = ({ d }) => {
           <p className="heading wp-h2" dangerouslySetInnerHTML={{ __html: d.routeHead }} />
           <p className="intro">{d.nights} nights split the way a local would split them, so you unpack less and see more.</p>
         </div>
-        <span className="x-total"><Icon k="plane" />Starts and ends at {d.ex}</span>
+        <span className="x-total"><Icon k="plane" />{d.startEnd}</span>
       </div>
       <div className="x-cards" style={{ '--n': d.stops.length } as React.CSSProperties}>
         {d.stops.map((s, i) => {
@@ -237,7 +237,7 @@ const Days: React.FC<{ d: WinterPackage }> = ({ d }) => {
         if (i !== last) tags.push(<span key="n" className="x-dtag"><Icon k="moon" />Night in {s.p}</span>);
         return (
           <div key={i} className={`x-panel${i === active ? ' is-on' : ''}`} role="tabpanel" id={`dp-${d.id}-${i}`} aria-labelledby={`dt-${d.id}-${i}`}>
-            <div className="x-pimg"><img src={s.img} alt={s.alt} loading="lazy" /><span className="x-where"><Icon k="pin" />{s.p}</span></div>
+            <div className="x-pimg"><img src={x.img || s.img} alt={x.alt || s.alt} loading="lazy" title={(x.img ? x.credit : s.credit) ? `Photo: ${x.img ? x.credit : s.credit} (Wikimedia Commons)` : undefined} /><span className="x-where"><Icon k="pin" />{x.place || s.p}</span></div>
             <div className="x-pbody">
               <div className="x-pnum"><b>{pad2(i + 1)}</b>/ {pad2(N)} days</div>
               <div className="x-dtags">{tags}</div>
@@ -313,7 +313,7 @@ const Price: React.FC<{ d: WinterPackage }> = ({ d }) => (
         </div>
       )}
       <div className="x-pk-foot">
-        <p><span className="x-pk-pl"><Icon k="plane" /></span>Starts and ends at {d.exShort || d.ex}. We match transfers to your flights.</p>
+        <p><span className="x-pk-pl"><Icon k="plane" /></span>{d.startEnd}. Transfers timed to your flights.</p>
         <div className="x-pk-acts">
           <button className="x-pk-btn" type="button" onClick={() => jump(`form-${d.id}`)}>Get the full plan <Icon k="arrow" /></button>
           <button className="x-pk-btn x-pk-wa" type="button" onClick={openWhatsApp}><Icon k="wa" />WhatsApp us</button>

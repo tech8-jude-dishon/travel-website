@@ -264,7 +264,8 @@ const App: React.FC = () => {
 
 
 
-        {location.pathname !== '/admin' && (
+        {/* floating call button: every page except admin and the /services landing page */}
+        {location.pathname !== '/admin' && location.pathname !== '/services' && (
           <a
             href={`tel:${CALL_NUMBER}`}
             className={`fixed bottom-[83px] right-1 w-14 h-14 rounded-full ${hideFloatingOnMobile ? 'hidden lg:flex' : 'flex'} items-center justify-center z-50 transition-transform duration-300 hover:-translate-y-1`}

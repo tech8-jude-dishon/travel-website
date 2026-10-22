@@ -32,6 +32,8 @@ export interface WinterPackage {
   price: string;
   ex: string;
   exShort?: string;
+  /** Short start/end line for the route badge and the price card, e.g. "Starts and ends at Port Blair". */
+  startEnd: string;
   /** Hero heading; the part in `headEm` is drawn in the script font. */
   headPre: string;
   headEm: string;
@@ -39,7 +41,8 @@ export interface WinterPackage {
   lede: string;
   stops: WinterStop[];
   /** `tab` overrides the place shown on that day's tab. */
-  days_list: { t: string; d: string; notes?: string[]; tab?: string }[];
+  /** Optional per-day `img`/`alt`/`credit` (and `place` for its pin label) replace the stop's photo for that day. */
+  days_list: { t: string; d: string; notes?: string[]; tab?: string; img?: string; alt?: string; credit?: string; place?: string }[];
   faq: { q: string; a: string }[];
   /** Package-specific terms; packages without them use the shared lists below. */
   inclusions?: string[];
@@ -61,7 +64,7 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     formTitle: 'Plan Your Sikkim Trip', ctaName: 'Sikkim',
     routeHead: 'Two hill towns, <em>one</em> easy route',
     feats: [{ i: 'doc', t: 'Permits', s: 'Included' }, { i: 'cloche', t: 'Breakfast', s: 'Daily' }, { i: 'plane', t: 'Return', s: 'Transfers' }, { i: 'shield', t: 'No Hidden', s: 'Cost' }],
-    name: 'Sikkim and Darjeeling', nights: 4, days: 5, price: '20,600', ex: 'Bagdogra Airport or NJP Railway Station', exShort: 'Bagdogra airport or NJP station',
+    name: 'Sikkim and Darjeeling', nights: 4, days: 5, price: '20,600', ex: 'Bagdogra Airport or NJP Railway Station', exShort: 'Bagdogra airport or NJP station', startEnd: 'Starts and ends at Bagdogra / NJP',
     headPre: 'Discover ', headEm: 'Sikkim', headLine2: '& Darjeeling',
     lede: 'Tsomgo Lake, sunrise at Tiger Hill and two easy hill towns, with hotels, transfers and permits already handled.',
     stops: [
@@ -70,6 +73,7 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     days_list: [
       {
         t: 'NJP Railway Station / Bagdogra (IXB) Airport to Gangtok',
+        img: IMG + 'skm-day1-mgmarg.webp', alt: 'MG Marg, the pedestrian promenade in the heart of Gangtok', credit: 'Bernard Gagnon, CC BY-SA 4.0', place: 'Gangtok',
         d: "About 125 km / 4 hrs. Our representative meets you at NJP or Bagdogra and transfers you to your Gangtok hotel.",
       },
       {
@@ -78,11 +82,13 @@ export const WINTER_PACKAGES: WinterPackage[] = [
       },
       {
         t: 'Gangtok Sightseeing and Gangtok to Darjeeling',
-        d: "Gangtok city tour (Banjhakri Falls, Do Drul Chorten, Tibetology), then a 120 km / 4 hrs drive to Darjeeling.", notes: ["The Institute of Tibetology is closed on Sundays."],
+        img: IMG + 'skm-day3-chorten.webp', alt: 'Do Drul Chorten stupa in Gangtok under a blue sky', credit: 'Amitabha Gupta, CC BY 4.0', place: 'Gangtok',
+        d: "Gangtok city tour (Banjhakri Falls, Do Drul Chorten, Tibetology), then a 120 km / 4 hrs drive to Darjeeling.",
       },
       {
         t: 'Darjeeling Local City Tour',
-        d: "Tiger Hill, Ghoom Monastery, HMI, the zoo, Peace Pagoda and a tea garden, then shopping on Mall Road.", notes: ["P.N. Zoological Park is closed on Thursdays.","Ropeway ticket is at your own cost."],
+        img: IMG + 'skm-day4-tigerhill.webp', alt: 'Kangchenjunga above the hills, seen from Tiger Hill, Darjeeling', credit: 'Owasim raja ahmed, CC BY-SA 4.0', place: 'Tiger Hill, Darjeeling',
+        d: "Tiger Hill, Ghoom Monastery, HMI, the zoo, Peace Pagoda and a tea garden, then shopping on Mall Road.",
       },
       {
         t: 'Darjeeling to NJP Railway Station / Bagdogra (IXB) Airport',
@@ -104,7 +110,7 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     formTitle: 'Plan Your Andaman Trip',
     routeHead: 'Two islands, <em>one</em> easy route',
     feats: [{ i: 'palm', t: '2 Islands', s: 'Port Blair + Havelock' }, { i: 'cloche', t: 'Breakfast', s: 'Daily' }, { i: 'plane', t: 'Airport', s: 'Transfers' }, { i: 'shield', t: 'Ferry', s: 'Tickets Included' }],
-    name: 'Port Blair & Havelock', nights: 4, days: 5, price: '22,300', ex: 'Port Blair',
+    name: 'Port Blair & Havelock', nights: 4, days: 5, price: '22,300', ex: 'Port Blair', startEnd: 'Starts and ends at Port Blair',
     headPre: 'Discover ', headEm: 'Andaman', headLine2: 'Like Never Before',
     lede: 'Port Blair 2 nights and Havelock 2 nights: Radhanagar and Elephant Beach, Cellular Jail and Chidiya Tapu sunsets, with ferries and transfers handled.',
     // In travel order: Port Blair → Havelock → back to Port Blair
@@ -123,10 +129,12 @@ export const WINTER_PACKAGES: WinterPackage[] = [
       },
       {
         t: 'Elephant Beach + Kalapathar Beach',
+        img: IMG + 'and-day3-elephant-beach.webp', alt: 'Clear turquoise water at Elephant Beach, Havelock Island', credit: 'Subro89, CC BY-SA 4.0', place: 'Elephant Beach, Havelock',
         d: "Half-day shared boat trip to Elephant Beach, then Kalapathar Beach in the afternoon. Overnight at Havelock.",
       },
       {
         t: 'Havelock to Port Blair + Chidiya Tapu Beach',
+        img: IMG + 'and-day4-chidiya-tapu.webp', alt: 'Boats on calm water at sunset, Chidiya Tapu near Port Blair', credit: 'Sivajiphotographer, CC0', place: 'Chidiya Tapu, Port Blair',
         d: "Ferry back to Port Blair and hotel check-in. Afternoon at Chidiya Tapu Beach to watch the sunset.",
       },
       {
@@ -142,24 +150,6 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     hotels: [
       { place: 'Port Blair', hotel: 'North Reef (Contemporary room) or similar', nights: 2, meal: 'Breakfast' },
       { place: 'Havelock', hotel: 'Havelock Gateways (Deluxe room) or similar', nights: 2, meal: 'Breakfast' },
-    ],
-    inclusions: [
-      'Accommodation on double sharing basis in an AC room',
-      'Meal plan CPAI (bed and breakfast only)',
-      'Exclusive AC vehicle for all transfers and sightseeing at Port Blair and Havelock. The vehicle is not at your disposal; it is available as per the itinerary only (point to point basis)',
-      'All ferry charges Port Blair – Havelock – Port Blair by Makruzz / Green Ocean / Nautika / ITT Majestic or similar. If private ferries do not operate, transfer by government ferry as per availability',
-      'All entry tickets for Port Blair sightseeing only',
-    ],
-    exclusions: [
-      'Cost of supplementary services, optional tours, upgrade charges, guide, snorkelling, glass-bottom boat ride, camera fees and entry fees to monuments and places',
-      'Any airfare, train fare or helicopter fare',
-      'Personal expenses (laundry, telephone, tips, mineral water, soft and hard drinks)',
-      'Additional sightseeing or extra use of the vehicle other than mentioned in the itinerary',
-      'Any cost arising from natural calamities like landslides, road blockages or political disturbances, to be borne by the client and paid directly on the spot',
-      'Any increase in taxes or fuel prices leading to higher surface transport and land costs, which may come into effect before departure',
-      'Travel insurance',
-      'Anything which is not included in the package inclusions',
-      '5% GST extra (not included in the package cost)',
     ],
     specialNotes: [
       'Travel dates: 1 October 2026 to 31 March 2027. Rates are not valid during peak season, 15 December 2026 to 15 January 2027.',
@@ -190,7 +180,7 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     formTitle: 'Plan Your Rajasthan Trip',
     routeHead: 'Three royal cities, <em>one</em> easy route',
     feats: [{ i: 'palm', t: '3 Cities', s: 'In One Trip' }, { i: 'cloche', t: 'Breakfast', s: 'Daily' }, { i: 'plane', t: 'All Road', s: 'Transfers' }, { i: 'shield', t: 'No Hidden', s: 'Cost' }],
-    name: 'Rajasthan', nights: 5, days: 6, price: '24,700', ex: 'Jaipur, ends in Udaipur', exShort: 'Jaipur and ends in Udaipur',
+    name: 'Rajasthan', nights: 5, days: 6, price: '24,700', ex: 'Jaipur, ends in Udaipur', exShort: 'Jaipur and ends in Udaipur', startEnd: 'Starts in Jaipur, ends in Udaipur',
     headPre: 'Discover ', headEm: 'Rajasthan', headLine2: 'Like Royalty',
     lede: 'The Pink City, holy Pushkar, the blue city of Jodhpur, Ranakpur’s marble temple and Udaipur’s lakes — three royal cities in one perfect trip.',
     stops: [
@@ -198,12 +188,12 @@ export const WINTER_PACKAGES: WinterPackage[] = [
       { p: 'Jodhpur', n: '1 night', note: 'Pushkar, Mehrangarh Fort', img: IMG + 'raj-jodhpur.webp', alt: 'Mehrangarh Fort ramparts over the blue city, Jodhpur', credit: 'Vyacheslav Argenberg, CC BY 4.0' },
       { p: 'Udaipur', n: '2 nights', note: 'Ranakpur, City Palace, Pichola', img: IMG + 'raj-udaipur.webp', alt: 'City Palace on Lake Pichola, Udaipur', credit: 'Jakub Hałun, CC BY-SA 4.0' }],
     days_list: [
-      { t: 'Arrival Jaipur', d: 'On arrival in Jaipur, transfer to your hotel and check in. Rest of the day at leisure. Night stay at Jaipur.' },
+      { t: 'Arrival Jaipur', img: IMG + 'raj-day1-jal-mahal.webp', alt: 'Jal Mahal water palace on Man Sagar Lake, Jaipur', credit: 'Jakub Hałun, CC BY-SA 4.0', place: 'Jal Mahal, Jaipur', d: 'On arrival in Jaipur, transfer to your hotel and check in. Rest of the day at leisure. Night stay at Jaipur.' },
       { t: 'Jaipur Sightseeing', d: 'A full day of Jaipur sightseeing in the Pink City. Night stay at Jaipur.' },
       { t: 'Jaipur – Pushkar – Jodhpur', tab: 'Jaipur to Jodhpur', d: "About 380 km / 7 hrs. Drive to Jodhpur via the holy town of Pushkar and check in. Night stay at Jodhpur." },
-      { t: 'Jodhpur – Ranakpur – Udaipur', tab: 'Jodhpur to Udaipur', d: 'About 260 km / 5 hrs drive. Check out and drive to Udaipur via Ranakpur. Check in to your hotel. Night stay at Udaipur.' },
+      { t: 'Jodhpur – Ranakpur – Udaipur', tab: 'Jodhpur to Udaipur', img: IMG + 'raj-day4-ranakpur.webp', alt: 'Marble Jain temple at Ranakpur under a blue sky', credit: 'Ingo Mehling, CC BY-SA 3.0', place: 'Ranakpur', d: 'About 260 km / 5 hrs drive. Check out and drive to Udaipur via Ranakpur. Check in to your hotel. Night stay at Udaipur.' },
       { t: 'Udaipur Sightseeing', d: 'A full day of Udaipur sightseeing in the City of Lakes. Night stay at Udaipur.' },
-      { t: 'Udaipur Drop', d: 'After breakfast, check out and transfer to Udaipur airport or railway station for your onward journey.' },
+      { t: 'Udaipur Drop', img: IMG + 'raj-day6-pichola.webp', alt: 'Sunset over Lake Pichola, Udaipur', credit: 'UnpetitproleX, CC BY-SA 4.0', place: 'Lake Pichola, Udaipur', d: 'After breakfast, check out and transfer to Udaipur airport or railway station for your onward journey.' },
     ],
     faq: [
       { q: 'Where does the trip start and end?', a: 'It starts in Jaipur and ends in Udaipur, so book your arrival into Jaipur and your departure from Udaipur. We match the transfers to your flight or train timings.' },
@@ -220,23 +210,22 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     formTitle: 'Plan Your Uttarakhand Trip',
     routeHead: 'Lakes and jungle, <em>one</em> easy route',
     feats: [{ i: 'palm', t: 'Lakes &', s: 'Jungle' }, { i: 'cloche', t: 'Breakfast', s: 'Daily' }, { i: 'plane', t: 'Delhi', s: 'Pickup' }, { i: 'shield', t: 'No Hidden', s: 'Cost' }],
-    name: 'Uttarakhand', nights: 5, days: 6, price: '24,500', ex: 'Delhi Airport or Railway Station', exShort: 'Delhi airport or railway station',
+    name: 'Uttarakhand', nights: 5, days: 6, price: '24,500', ex: 'Delhi Airport or Railway Station', exShort: 'Delhi airport or railway station', startEnd: 'Starts and ends in Delhi',
     headPre: 'Discover ', headEm: 'Uttarakhand', headLine2: 'Lakes & Jungle',
     lede: 'Three nights by the lakes and two inside Corbett country, picked up and dropped back in Delhi.',
     stops: [
       { p: 'Nainital', n: '3 nights', note: 'Naini Lake, Kainchi Dham', img: IMG + 'utk-nainital.webp', alt: 'Rowing boats on Naini Lake below the Nainital hills', credit: 'Praveen Singh Bisht, CC BY 2.0' },
       { p: 'Jim Corbett', n: '2 nights', note: 'Jungle safari', img: IMG + 'utk-corbett.webp', alt: 'Bengal tiger in the grassland of Jim Corbett National Park', credit: 'Soumyajit Nandy, CC BY-SA 4.0' }],
     days_list: [
-      { t: 'Arrive Delhi to Nainital', tab: 'Delhi to Nainital', d: 'About 310 km / 6–7 hrs drive. On arrival in Delhi, drive up to Nainital and check in to your hotel. Night stay at Nainital.' },
+      { t: 'Arrive Delhi to Nainital', tab: 'Delhi to Nainital', img: IMG + 'utk-day1-hill-road.webp', alt: 'Hill road winding down to Naini Lake, Nainital', credit: 'Suswa9498, CC BY-SA 4.0', place: 'Nainital', d: 'About 310 km / 6–7 hrs drive. On arrival in Delhi, drive up to Nainital and check in to your hotel. Night stay at Nainital.' },
       {
         t: 'Nainital Local Sightseeing',
         d: 'A day of Nainital local sightseeing around Naini Lake and the town. Night stay at Nainital.',
-        notes: ['Vehicles are not allowed on Mall Road, so this stretch is explored on foot.'],
       },
-      { t: 'Nainital: Shree Kainchi Dham', d: 'Visit Shree Kainchi Dham, the ashram of Param Pujya Baba Shri Neeb Karori Maharaj. Night stay at Nainital.' },
-      { t: 'Nainital to Corbett', tab: 'Nainital to Corbett', d: "About 120 km / 4 hrs. Drive from Nainital to your resort near Corbett and check in. Night stay at Corbett." },
+      { t: 'Nainital: Shree Kainchi Dham', img: IMG + 'utk-day3-kainchi-dham.webp', alt: 'Shree Kainchi Dham ashram beside the river in the morning sun', credit: '25 Cents FC, CC BY-SA 3.0', place: 'Kainchi Dham', d: 'Visit Shree Kainchi Dham, the ashram of Param Pujya Baba Shri Neeb Karori Maharaj. Night stay at Nainital.' },
+      { t: 'Nainital to Corbett', tab: 'Nainital to Corbett', img: IMG + 'utk-day4-dhikala.webp', alt: 'Golden grassland and a jungle trail at Dhikala, Jim Corbett National Park', credit: 'Atanudey83, CC BY-SA 4.0', place: 'Jim Corbett', d: "About 120 km / 4 hrs. Drive from Nainital to your resort near Corbett and check in. Night stay at Corbett." },
       { t: 'Corbett Jungle Safari', d: 'A jungle safari in Jim Corbett National Park, home of the Bengal tiger. Night stay at Corbett.' },
-      { t: 'Corbett to Delhi, Airport Drop', d: 'About 250 km / 5 hrs drive. Check out and drive back to Delhi for your airport drop.' },
+      { t: 'Corbett to Delhi, Airport Drop', img: IMG + 'utk-day6-corbett-falls.webp', alt: 'Corbett Falls in the forest near Jim Corbett National Park', credit: 'Pranav4321, CC BY-SA 4.0', place: 'Corbett Falls', d: 'About 250 km / 5 hrs drive. Check out and drive back to Delhi for your airport drop.' },
     ],
     faq: [
       { q: 'Is the jungle safari included?', a: 'No. Safari permits and jeep charges are paid separately and depend on the zone. We will help you book in advance since winter slots fill fast.' },
@@ -253,18 +242,18 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     formTitle: 'Plan Your Kashmir Trip',
     routeHead: 'Lakes and snow, <em>one</em> easy route',
     feats: [{ i: 'palm', t: 'Houseboat', s: 'Night' }, { i: 'cloche', t: 'Breakfast', s: 'Daily' }, { i: 'plane', t: 'Airport', s: 'Transfers' }, { i: 'shield', t: 'No Hidden', s: 'Cost' }],
-    name: 'Kashmir', nights: 4, days: 5, price: '15,300', ex: 'Srinagar', exShort: 'Srinagar airport',
+    name: 'Kashmir', nights: 4, days: 5, price: '15,300', ex: 'Srinagar', exShort: 'Srinagar airport', startEnd: 'Starts and ends at Srinagar',
     headPre: 'Discover ', headEm: 'Kashmir', headLine2: 'Snow & Shikaras',
     lede: 'Mughal gardens, a day each in Gulmarg and Pahalgam, and a shikara ride to your Dal Lake houseboat.',
     stops: [
       { p: 'Srinagar', n: '3 nights', note: 'Gardens, Gulmarg, Pahalgam', img: IMG + 'ksh-srinagar.webp', alt: 'Snow-covered cottage among pines in Gulmarg', credit: 'Zahoor Bhat, CC BY-SA 4.0' },
       { p: 'Houseboat', n: '1 night', note: 'Dal Lake', img: IMG + 'ksh-houseboat.webp', alt: 'Carved wooden houseboat on Dal Lake, Srinagar', credit: 'Slyronit, CC BY-SA 4.0' }],
     days_list: [
-      { t: 'Arrival in Srinagar', d: "Our representative meets you at Srinagar airport and transfers you to your hotel. Rest of the day at leisure." },
-      { t: 'Local Sightseeing in Srinagar', d: "The Mughal gardens of Nishat and Shalimar, the Shankaracharya temple viewpoint and Dal Lake." },
-      { t: 'Pahalgam Day Trip', tab: 'Pahalgam', d: "Full-day trip through saffron fields and apple orchards to Betaab Valley and the Lidder river." },
-      { t: 'Gulmarg Day Trip', tab: 'Gulmarg', d: "Full-day trip to the snowy meadows of Gulmarg, back to Srinagar in the evening.", notes: ["Gondola tickets and sledge rides are at your own cost."] },
-      { t: 'Srinagar Airport Drop', tab: 'Srinagar', d: 'After breakfast, check out and transfer to Srinagar airport for your onward journey.' },
+      { t: 'Arrival in Srinagar', img: '/images/india-pkg/ksh-shikara.webp', alt: 'Painted shikara boat on Dal Lake, Srinagar', place: 'Dal Lake, Srinagar', d: "Our representative meets you at Srinagar airport and transfers you to your hotel. Rest of the day at leisure." },
+      { t: 'Local Sightseeing in Srinagar', img: IMG + 'ksh-day2-nishat-bagh.webp', alt: 'Terraced lawns, flower beds and fountains of Nishat Bagh below the mountains', credit: 'McKay Savage, CC BY 2.0', place: 'Nishat Bagh, Srinagar', d: "The Mughal gardens of Nishat and Shalimar, the Shankaracharya temple viewpoint and Dal Lake." },
+      { t: 'Pahalgam Day Trip', tab: 'Pahalgam', img: IMG + 'ksh-day3-betaab-valley.webp', alt: 'Green meadows and pine forest in Betaab Valley, Pahalgam', credit: 'Nandanupadhyay, CC BY-SA 3.0', place: 'Betaab Valley, Pahalgam', d: "Full-day trip through saffron fields and apple orchards to Betaab Valley and the Lidder river." },
+      { t: 'Gulmarg Day Trip', tab: 'Gulmarg', img: IMG + 'ksh-day4-gulmarg.webp', alt: 'Snow-covered meadow below the peaks at Gulmarg', credit: 'Ask6626, CC BY-SA 4.0', place: 'Gulmarg', d: "Full-day trip to the snowy meadows of Gulmarg, back to Srinagar in the evening." },
+      { t: 'Srinagar Airport Drop', tab: 'Srinagar', place: 'Dal Lake, Srinagar', d: 'After breakfast, check out and transfer to Srinagar airport for your onward journey.' },
     ],
     faq: [
       { q: 'Is the Gulmarg gondola included?', a: 'No. Gondola phase 1 and 2 tickets, pony rides and sledges are paid locally. Everything else on those days is covered.' },
@@ -281,24 +270,24 @@ export const WINTER_PACKAGES: WinterPackage[] = [
     formTitle: 'Plan Your Himachal Trip',
     routeHead: 'Snow and hills, <em>one</em> easy route',
     feats: [{ i: 'palm', t: 'Snow Point', s: 'Day' }, { i: 'cloche', t: 'Breakfast', s: 'Daily' }, { i: 'plane', t: 'Private', s: 'Vehicle' }, { i: 'shield', t: 'No Hidden', s: 'Cost' }],
-    name: 'Splendid Himachal', nights: 5, days: 6, price: '15,600', ex: 'Chandigarh', exShort: 'Chandigarh airport or railway station',
+    name: 'Splendid Himachal', nights: 5, days: 6, price: '15,600', ex: 'Chandigarh', exShort: 'Chandigarh airport or railway station', startEnd: 'Starts and ends at Chandigarh',
     headPre: 'Discover ', headEm: 'Himachal', headLine2: 'Snow & Hills',
     lede: "Shimla's ridge, the Kullu valley drive, Manali sightseeing and a Rohtang Pass day, with a private vehicle through the whole loop from Chandigarh.",
     stops: [
       { p: 'Shimla', n: '2 nights', note: 'Ridge, Mall Road', img: IMG + 'him-shimla.webp', alt: 'Christ Church on the Ridge, Shimla', credit: 'Slyronit, CC BY-SA 4.0' },
       { p: 'Manali', n: '3 nights', note: 'Kullu, Manali, Rohtang Pass', img: IMG + 'him-manali.webp', alt: 'Solang Valley under snow near Manali', credit: 'Bleezebub, CC BY-SA 4.0' }],
     days_list: [
-      { t: 'Arrive Chandigarh – Shimla', tab: 'Chandigarh to Shimla', d: 'About 110 km / 4 hrs drive. On arrival in Chandigarh, drive up to Shimla and check in to your hotel. Night stay at Shimla.' },
+      { t: 'Arrive Chandigarh – Shimla', tab: 'Chandigarh to Shimla', img: IMG + 'him-day1-mall-road.webp', alt: 'Snow-dusted Mall Road and hills in Shimla', credit: 'UnpetitproleX, CC BY-SA 4.0', place: 'Mall Road, Shimla', d: 'About 110 km / 4 hrs drive. On arrival in Chandigarh, drive up to Shimla and check in to your hotel. Night stay at Shimla.' },
       { t: 'Shimla Sightseeing', d: 'A day of Shimla sightseeing around the Ridge, Christ Church and Mall Road. Night stay at Shimla.' },
-      { t: 'Shimla – Kullu – Manali', tab: 'Shimla to Manali', d: "About 285 km / 7 hrs. Drive to Manali through the Kullu valley and check in. Night stay at Manali." },
-      { t: 'Manali Local Sightseeing', d: 'A day of Manali local sightseeing. Night stay at Manali.' },
+      { t: 'Shimla – Kullu – Manali', tab: 'Shimla to Manali', img: IMG + 'him-day3-kullu-valley.webp', alt: 'Green Beas valley below snowy peaks at Palchan, Kullu', credit: 'Biswarup Ganguly (edit: UnpetitproleX), CC BY 3.0', place: 'Kullu Valley', d: "About 285 km / 7 hrs. Drive to Manali through the Kullu valley and check in. Night stay at Manali." },
+      { t: 'Manali Local Sightseeing', img: IMG + 'him-day4-hidimba.webp', alt: 'Wooden pagoda-roofed Hidimba Devi Temple among deodar trees, Manali', credit: 'Ganesh Mohan T, CC BY-SA 4.0', place: 'Hidimba Temple, Manali', d: 'A day of Manali local sightseeing. Night stay at Manali.' },
       {
         t: 'Manali – Rohtang Pass',
+        img: IMG + 'him-day5-rohtang.webp', alt: 'Snow-covered slopes at Rohtang Pass', credit: 'BIPROJYOTI, CC BY-SA 4.0', place: 'Rohtang Pass',
         tab: 'Rohtang Pass',
         d: 'A day trip from Manali to Rohtang Pass. Return to Manali in the evening. Night stay at Manali.',
-        notes: ['The Rohtang Pass trip is at your own cost.'],
       },
-      { t: 'Manali – Chandigarh Drop', tab: 'Manali to Chandigarh', d: 'About 290 km / 7 hrs drive. After breakfast, check out and drive back to Chandigarh for your drop.' },
+      { t: 'Manali – Chandigarh Drop', tab: 'Manali to Chandigarh', img: '/images/india-pkg/him-solang.webp', alt: 'Solang Valley under snow near Manali', place: 'Solang Valley, Manali', d: 'About 290 km / 7 hrs drive. After breakfast, check out and drive back to Chandigarh for your drop.' },
     ],
     faq: [
       { q: 'Is the Rohtang Pass trip included?', a: 'No. The Rohtang Pass trip is at your own cost. Rohtang usually closes in deep winter; when it is shut, the Atal Tunnel to Sissu or Solang Valley is the snow alternative, weather permitting.' },
