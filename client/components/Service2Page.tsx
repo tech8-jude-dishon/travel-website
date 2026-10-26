@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, Award, CalendarDays, Check, ChevronDown, Clock, Facebook, Instagram, Linkedin, Mail, MapPin, Menu,
-  Phone, Plane, Smile, Star, Users, X, Youtube, Globe2,
+  ArrowRight, Award, CalendarDays, ChevronDown, Clock, Facebook, Instagram, Linkedin, Mail, MapPin, Menu,
+  Phone, Plane, Smile, Star, Users, X, Youtube, Globe2, Route,
 } from 'lucide-react';
 import { servicePath } from '../data/winterPackages';
 import { enquiries } from '../lib/apiClient';
@@ -249,7 +249,15 @@ const BannerDoodles: React.FC = () => (
   </svg>
 );
 
-const PERKS = ['Customised itineraries', 'Stays & transfers sorted', 'Expert help on WhatsApp'];
+// Two stat cards under the hero buttons. Figures come from STATS so they stay in sync with the counters further down.
+const statValue = (label: string) => {
+  const s = STATS.find(x => x.label === label);
+  return s ? `${s.n.toLocaleString('en-IN')}${s.suffix}` : '';
+};
+const HERO_CARDS = [
+  { tone: 'blue', Icon: Smile, label: 'Happy customers', value: statValue('Happy customers'), FootIcon: Star, foot: '4.8/5 rated on Google', footTone: 'green' },
+  { tone: 'gold', Icon: Award, label: 'Years of experience', value: statValue('Years of experience'), FootIcon: Route, foot: 'Customised itineraries', footTone: 'blue' },
+];
 
 const Hero: React.FC<{ onBookClick: () => void }> = () => {
   // the photo cards drift a little with the pointer (desktop, motion allowed)
@@ -285,19 +293,24 @@ const Hero: React.FC<{ onBookClick: () => void }> = () => {
             <p className="s2-nb-p s2-rv" style={{ '--rd': '160ms' } as React.CSSProperties}>
               Handpicked holidays, beautiful destinations and local <br className="s2-nb-br" />experiences — thoughtfully planned around you.
             </p>
-            <div className="s2-nb-ctas s2-rv" style={{ '--rd': '240ms' } as React.CSSProperties}>
-              <a href="#s2-destinations" className="s2-nb-btn">Explore Packages <ArrowRight aria-hidden="true" /></a>
+            <ul className="s2-nb-stats s2-rv" style={{ '--rd': '240ms' } as React.CSSProperties}>
+              {HERO_CARDS.map(c => (
+                <li key={c.label} className={`s2-nb-stat is-${c.tone}`}>
+                  <div className="s2-nb-stat-top"><span className="s2-nb-stat-ic" aria-hidden="true"><c.Icon /></span>{c.label}</div>
+                  <strong className="s2-nb-stat-val">{c.value}</strong>
+                  <small className={`s2-nb-stat-foot is-${c.footTone}`}><c.FootIcon aria-hidden="true" />{c.foot}</small>
+                </li>
+              ))}
+            </ul>
+            <div className="s2-nb-ctas s2-rv" style={{ '--rd': '320ms' } as React.CSSProperties}>
               <a href={getWhatsAppLink('Hi! I would like to plan a trip in India.')} target="_blank" rel="noopener noreferrer" className="s2-nb-btn is-ghost">
                 <WhatsAppIcon />Chat on WhatsApp
               </a>
             </div>
-            <ul className="s2-nb-perks">
-              {PERKS.map(p => <li key={p}><span aria-hidden="true"><Check /></span>{p}</li>)}
-            </ul>
           </div>
           <div className="s2-nb-cards">
             <figure className="s2-nb-woman">
-              <img src={IMG + 'hero-woman-icons.webp'} alt="Smiling traveller with long hair and a backpack, surrounded by travel icons: plane, compass, passport, map pin and suitcase" width={1109} height={1169} fetchPriority="high" />
+              <img src="https://res.cloudinary.com/dekhukonj/image/upload/f_auto,q_auto/v1793011186/209865c3-38d8-4d90-8d4d-4178bb3cee4e.png" alt="Smiling traveller in a pink hoodie sitting on a suitcase, holding a passport and boarding pass" width={1212} height={1514} fetchPriority="high" />
             </figure>
           </div>
         </div>
