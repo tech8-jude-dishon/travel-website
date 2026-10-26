@@ -38,13 +38,13 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick, onNavigate }) => {
   // India's dropdown: India Tours, the services overview, then the winter package pages
   const indiaMenu = [
     { label: 'India Tours', path: '/india-tours' },
-    { label: 'All Destinations', path: '/services' },
+    { label: 'All Destinations', path: '/service1' },
     ...WINTER_PACKAGES.map((p) => ({ label: p.tab, path: servicePath(p.id) })),
   ];
 
   const isItemActive = (path: string) =>
     path === '/india-tours'
-      ? location.pathname.startsWith('/india-tours') || location.pathname.startsWith('/services')
+      ? location.pathname.startsWith('/india-tours') || location.pathname.startsWith('/services') || location.pathname === '/service1'
       : location.pathname === path;
 
   const menuItems: { label: string; path: string; icon: React.ElementType; hasPackages?: boolean }[] = [

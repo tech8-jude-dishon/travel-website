@@ -35,6 +35,7 @@ const TermsAndConditions = React.lazy(() => import('./components/TermsAndConditi
 const PrivacyPolicy = React.lazy(() => import('./components/PrivacyPolicy'));
 const WinterPackagePage = React.lazy(() => import('./components/WinterPackagePage'));
 const ServicesPage = React.lazy(() => import('./components/ServicesPage'));
+const Service2Page = React.lazy(() => import('./components/Service2Page'));
 
 
 function RouteSync() {
@@ -113,7 +114,7 @@ const App: React.FC = () => {
       <RouteSync />
       <div className="min-h-screen bg-brand-bg relative w-full overflow-x-clip">
         {/* /services draws its own floating header and footer */}
-        {location.pathname !== '/admin' && location.pathname !== '/services' && (
+        {location.pathname !== '/admin' && location.pathname !== '/service1' && location.pathname !== '/service2' && (
           <Navbar
             onNavigate={navigateTo}
             onBookClick={toggleBooking}
@@ -178,8 +179,18 @@ const App: React.FC = () => {
               />
 
               <Route
-                path="/services"
+                path="/service1"
                 element={<ServicesPage onBookClick={toggleBooking} />}
+              />
+              <Route
+                path="/service2"
+                element={<Service2Page onBookClick={toggleBooking} />}
+              />
+
+              {/* old address of the services landing page */}
+              <Route
+                path="/services"
+                element={<Navigate to="/service1" replace />}
               />
 
               <Route
@@ -256,7 +267,7 @@ const App: React.FC = () => {
           </React.Suspense>
         </main>
 
-        {location.pathname !== '/admin' && location.pathname !== '/services' && (
+        {location.pathname !== '/admin' && location.pathname !== '/service1' && location.pathname !== '/service2' && (
           <Footer onContactClick={toggleBooking} onNavigate={navigateTo} />
         )}
         <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
@@ -265,7 +276,7 @@ const App: React.FC = () => {
 
 
         {/* floating call button: every page except admin and the /services landing page */}
-        {location.pathname !== '/admin' && location.pathname !== '/services' && (
+        {location.pathname !== '/admin' && location.pathname !== '/service1' && location.pathname !== '/service2' && (
           <a
             href={`tel:${CALL_NUMBER}`}
             className={`fixed bottom-[83px] right-1 w-14 h-14 rounded-full ${hideFloatingOnMobile ? 'hidden lg:flex' : 'flex'} items-center justify-center z-50 transition-transform duration-300 hover:-translate-y-1`}

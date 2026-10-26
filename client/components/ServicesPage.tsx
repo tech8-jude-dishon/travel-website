@@ -23,18 +23,6 @@ const NAV = [
 
 const POPULAR = ['Santorini', 'Bali', 'Kyoto', 'Swiss Alps', 'Maldives'];
 
-// Pins on the hero's world map, in the hero artboard's design px. The map is equirectangular at
-// 8 px per degree: x = 690 + (lon - 68) * 8, y = 130 + (37 - lat) * 8 (see world-dots.svg).
-const mapXY = (lon: number, lat: number) => ({ x: 690 + (lon - 68) * 8, y: 130 + (37 - lat) * 8 });
-const MAP_PINS: { id: string; name: string; lon: number; lat: number; side: 'left' | 'right' | 'below' }[] = [
-  { id: 'kashmir', name: 'Kashmir', lon: 74.8, lat: 34.1, side: 'left' },
-  { id: 'himachal', name: 'Himachal', lon: 77.2, lat: 31.1, side: 'left' },
-  { id: 'uttarakhand', name: 'Uttarakhand', lon: 79.0, lat: 30.1, side: 'right' },
-  { id: 'rajasthan', name: 'Rajasthan', lon: 73.8, lat: 26.6, side: 'left' },
-  { id: 'sikkim', name: 'Sikkim + Darjeeling', lon: 88.4, lat: 27.4, side: 'below' },
-  { id: 'andaman', name: 'Andaman', lon: 92.7, lat: 11.7, side: 'left' },
-];
-
 const DESTINATIONS = [
   { id: 'sikkim', title: 'Sikkim + Darjeeling', sub: 'Tea gardens & Himalayan views', img: G + 'dest-sikkim.webp' },
   { id: 'andaman', title: 'Andaman', sub: 'Turquoise waters & island escapes', img: G + 'dest-andaman.webp' },
@@ -142,19 +130,6 @@ const Hero: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => {
         )}
       </header>
 
-      {/* dotted world map behind the traveller, with pins on our destinations (desktop) */}
-      <div className="gh-map" aria-hidden="true"><img src={G + 'world-dots.svg'} alt="" /></div>
-      <ul className="gh-pins" aria-label="Destinations we cover">
-        {MAP_PINS.map((p, i) => {
-          const { x, y } = mapXY(p.lon, p.lat);
-          return (
-            <li key={p.id} className={`gh-pin is-${p.side}`} style={{ left: x, top: y, '--d': `${i * -0.4}s` } as React.CSSProperties}>
-              <Link to={servicePath(p.id)}><span className="gh-pin-dot" aria-hidden="true" /><span className="gh-pin-label">{p.name}</span></Link>
-            </li>
-          );
-        })}
-      </ul>
-
       {/* LEFT COPY */}
       <div className="gh-copy">
         <span className="gh-eyebrow">EXPLORE · DREAM · DISCOVER</span>
@@ -173,8 +148,37 @@ const Hero: React.FC<{ onBookClick: () => void }> = ({ onBookClick }) => {
 
       {/* RIGHT VISUAL */}
       <div className="gh-visual">
+        <div className="gh-flight" aria-hidden="true">
+          <svg width="560" height="210" viewBox="0 0 560 210" fill="none"><circle cx="14" cy="168" r="5" fill="var(--warm)" /></svg>
+          <span className="gh-pulse"><span /></span>
+        </div>
+        <div className="gh-arch" aria-hidden="true" />
+        <div className="gh-arch-dash" aria-hidden="true" />
         <div className="gh-traveller">
-          <img src={G + 'hero-traveller-clean.webp'} alt="Smiling young woman traveller in a blue shirt with a backpack" fetchPriority="high" />
+          <img src={G + 'hero-traveller.webp'} alt="Smiling young woman traveller in a blue shirt with a backpack" fetchPriority="high" />
+        </div>
+        <Link to="/packages" className="gh-nextstop gh-float" style={{ animationDelay: '-2.5s' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
+          <span className="gh-nextstop-txt"><span>Next stop</span><span>Santorini, Greece</span></span>
+          <span className="gh-nextstop-go"><ArrowUpRight size={14} w={2.4} /></span>
+        </Link>
+        <div className="gh-orb gh-orb-a gh-float" style={{ animationDelay: '-2s' }} aria-hidden="true" />
+        <div className="gh-orb gh-orb-warm gh-orb-b gh-float" style={{ animationDelay: '-4s' }} aria-hidden="true" />
+        <svg aria-hidden="true" viewBox="0 0 190 190" className="gh-ring gh-float" style={{ animationDelay: '-5s' }}>
+          <defs><radialGradient id="ghRing" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stopColor="#FFFFFF" /><stop offset="0.45" stopColor="var(--ringMid)" /><stop offset="1" stopColor="var(--ringEdge)" /></radialGradient></defs>
+          <path fillRule="evenodd" d="M95 10 a85 85 0 1 1 0 170 a85 85 0 1 1 0 -170 Z M95 62 a33 33 0 1 0 0 66 a33 33 0 1 0 0 -66 Z" fill="url(#ghRing)" opacity="0.95" />
+          <path d="M50 42 C70 26 100 22 122 30" stroke="#FFFFFF" strokeWidth="7" strokeLinecap="round" fill="none" opacity="0.85" />
+        </svg>
+        <Cloud className="gh-cloud gh-cloud-a gh-drift" />
+        <Cloud className="gh-cloud gh-cloud-b gh-drift gh-delay6" />
+        <div className="gh-offer gh-float" style={{ animationDelay: '-1s' }}>
+          <span>EARLY BIRD</span>
+          <span>Deals on your first holiday</span>
+        </div>
+        <div className="gh-besttime gh-float" style={{ animationDelay: '-3s' }}>
+          <span className="gh-besttime-k"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>Best time to visit</span>
+          <span className="gh-besttime-v">April – October</span>
+          <span className="gh-besttime-s">Warm days, calm seas</span>
         </div>
       </div>
 
