@@ -140,7 +140,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) => {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3">
                   <div className="space-y-1">
                     <label className="text-[9px] font-bold text-[#8E95A5] uppercase tracking-widest ml-1">Full Name</label>
                     <input name="fullName" value={formData.fullName} onChange={handleChange} placeholder="name" className={`w-full bg-[#FFF8F1] rounded-xl px-4 py-2.5 text-brand-dark outline-none border ${errors.fullName ? 'border-red-400' : 'border-transparent'} focus:border-brand-gold/30 transition-all font-medium text-sm`} />

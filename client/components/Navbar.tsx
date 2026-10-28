@@ -4,7 +4,7 @@ import {
 } from './Icons';
 import {
   Home, Umbrella, Plane, Luggage, ShoppingBag,
-  MessageSquare, Send, ChevronDown
+  MessageSquare, Send, ChevronDown, BedDouble
 } from 'lucide-react';
 import { Link, useLocation } from "react-router-dom";
 import { WINTER_PACKAGES, servicePath } from '../data/winterPackages';
@@ -47,12 +47,14 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick, onNavigate }) => {
       ? location.pathname.startsWith('/india-tours') || location.pathname.startsWith('/services') || location.pathname === '/service1'
       : location.pathname === path;
 
-  const menuItems: { label: string; path: string; icon: React.ElementType; hasPackages?: boolean }[] = [
+  // `external` items are full URLs on partner sites and open in a new tab
+  const menuItems: { label: string; path: string; icon: React.ElementType; hasPackages?: boolean; external?: boolean }[] = [
     { label: 'Home', path: '/', icon: Home },
     // { label: 'Holidays', path: '/holidays', icon: Umbrella },
     { label: 'Dubai', path: '/dubai-tours', icon: Plane },
     { label: 'India', path: '/india-tours', icon: Luggage, hasPackages: true },
     // { label: 'Packages', path: '/packages', icon: ShoppingBag },
+    { label: 'Stay', path: 'https://flashrooms.in/', icon: BedDouble, external: true },
     { label: 'Contact', path: '/contact', icon: MessageSquare },
   ];
 
@@ -209,6 +211,20 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick, onNavigate }) => {
                   </div>
                 );
               }
+              if (item.external) {
+                return (
+                  <a
+                    key={item.path}
+                    href={item.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 border-2 bg-transparent border-[#00A9D7] text-[#00A9D7] hover:bg-[#00A9D7]/5"
+                  >
+                    <Icon className="w-5 h-5 shrink-0 text-[#00A9D7]" />
+                    <span className="leading-tight">{item.label}</span>
+                  </a>
+                );
+              }
               return (
                 <Link
                   key={item.path}
@@ -295,6 +311,21 @@ const Navbar: React.FC<NavbarProps> = ({ onBookClick, onNavigate }) => {
                     })}
                   </div>
                 </div>
+              );
+            }
+            if (item.external) {
+              return (
+                <a
+                  key={item.path}
+                  href={item.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-4 p-4 rounded-2xl font-bold border-2 border-slate-100 text-[#00A9D7]"
+                >
+                  <Icon className="w-6 h-6" />
+                  {item.label}
+                </a>
               );
             }
             return (

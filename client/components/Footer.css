@@ -1,0 +1,169 @@
+/* Site footer. From 1200px every size is the reference design's pixel value (drawn at 2169px wide) times --u,
+   so the layout keeps the reference proportions at any desktop width. Below 1200px the columns stack. */
+.gf { font-family: 'IBM Plex Sans', 'Inter', system-ui, sans-serif; color: #06195A; }
+.gf a { color: inherit; text-decoration: none; }
+.gf ul { list-style: none; margin: 0; padding: 0; }
+.gf p { margin: 0; }
+
+/* logo + socials row */
+.gf-brand { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 40px; margin-bottom: 28px; }
+.gf-logo { flex: none; }
+.gf-logo img { display: block; height: 96px; width: auto; }
+.gf-tag { font-size: 17px; line-height: 1.45; color: #06195A; }
+.gf-socials { display: flex; flex-wrap: wrap; gap: 10px; }
+.gf-vdiv { display: none; }
+.gf-socials a { width: 46px; height: 46px; border-radius: 50%; background: #fff; color: #0A9DFE; display: flex; align-items: center; justify-content: center; transition: background .2s, color .2s; }
+.gf-socials a:hover { background: #0A9DFE; color: #fff; }
+.gf-socials svg { width: 24px; height: 24px; }
+
+/* column headings with the short cyan bar */
+.gf-title { font-weight: 700; font-size: 24px; line-height: 1.2; color: #06195A; }
+.gf-title::after { content: ''; display: block; width: 62px; height: 4px; margin-top: 9px; border-radius: 2px; background: #05CDFC; }
+.gf-title.is-dark { color: #06195A; }
+
+/* navy band */
+.gf-main { background: #E0F1FE; color: #06195A; display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; padding: 36px 20px; }
+.gf-svc-cols { margin-top: 22px; display: grid; gap: 20px; }
+.gf-svc-cols > .gf-sdiv { display: none; }
+.gf-svc ul { display: flex; flex-direction: column; gap: 20px; }
+.gf-svc li { display: flex; align-items: center; gap: 18px; font-size: 17px; line-height: 1.4; }
+.gf-svc li svg { flex: none; width: 36px; height: 36px; color: #16B6FF; }
+.gf-svc .gf-sbox { flex: none; display: flex; }
+.gf-stxt { white-space: pre-line; }
+.gf-contact ul { margin-top: 20px; display: flex; flex-direction: column; gap: 18px; }
+.gf-contact li { font-size: 16px; line-height: 1.45; }
+.gf-contact li > * { display: flex; align-items: center; gap: 14px; }
+.gf-contact a:hover { color: #0A9DFE; }
+.gf-ic { flex: none; width: 40px; height: 40px; border-radius: 50%; background: #061974; display: flex; align-items: center; justify-content: center; color: #0AA0FE; }
+.gf-ic svg { width: 20px; height: 20px; }
+.gf-contact .gf-txt { overflow-wrap: anywhere; }
+.gf-contact a .gf-txt { white-space: nowrap; }
+@media (max-width: 420px) { .gf-contact li { font-size: 14.5px; } .gf-contact li > * { gap: 10px; } .gf-ic { width: 36px; height: 36px; } }
+@media (max-width: 359px) { .gf-contact li { font-size: 13px; } .gf-contact li > * { gap: 8px; } .gf-ic { width: 32px; height: 32px; } }
+
+/* branches */
+.gf-branches { background: #E0F1FE; display: flex; flex-direction: column; gap: 18px; padding: 24px 20px; }
+.gf-bhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; }
+.gf-cards { display: grid; gap: 14px; }
+.gf-card { background: #fff; border-radius: 6px; display: flex; align-items: center; padding: 16px 18px; gap: 18px; }
+.gf-pin { flex: none; width: 56px; height: 56px; border-radius: 50%; background: #E4F3FE; color: #0AA0FE; display: flex; align-items: center; justify-content: center; }
+.gf-pin svg { width: 28px; height: 28px; }
+.gf-cdiv { flex: none; align-self: stretch; width: 1px; background: #D5E6F5; }
+.gf-city { display: block; font-weight: 700; font-size: 17px; color: #06195A; }
+.gf-addr { display: block; margin-top: 4px; font-size: 15px; line-height: 1.5; color: #3A4D78; }
+
+/* phones: pin on top, then city and address with the set line breaks */
+@media (max-width: 767px) {
+  .gf-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px 26px; border-radius: 10px; }
+  .gf-cdiv { display: none; }
+  .gf-addr { margin-top: 8px; white-space: pre-line; }
+  /* keep the bar text clear of the floating WhatsApp button */
+  .gf-bottom { padding-bottom: 84px; }
+}
+@media (max-width: 439px) {
+  .gf-addr { white-space: normal; }
+  .gf-card { padding: 22px 20px; }
+  .gf-socials { gap: 8px; }
+  .gf-socials a { width: 42px; height: 42px; }
+  .gf-socials svg { width: 21px; height: 21px; }
+}
+
+/* bottom bar */
+.gf-bottom { background: #E0F1FE; border-top: 1px solid #D5E6F5; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 20px; font-size: 15px; color: #4A5878; }
+.gf-legal { display: flex; align-items: center; gap: 22px; }
+.gf-legal a:hover { color: #0A9DFE; }
+.gf-legal span { color: #8DA0B8; }
+
+@media (min-width: 768px) {
+  .gf-branches { padding-left: 32px; padding-right: 32px; }
+  .gf-main { gap: 40px; padding: 40px 32px; }
+  .gf-svc-cols { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 40px; }
+  .gf-bottom { flex-direction: row; justify-content: space-between; padding: 14px 32px; }
+}
+@media (min-width: 1024px) {
+  .gf-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1200px) {
+  .gf { --u: clamp(0.7px, calc(100vw / 2169), 1px); }
+
+  .gf-vdiv { display: block; flex: none; width: 1px; }
+  .gf-brand { gap: calc(56 * var(--u)); margin-bottom: calc(34 * var(--u)); }
+  .gf-logo img { height: calc(124 * var(--u)); }
+  .gf-tag { font-size: calc(25 * var(--u)); line-height: calc(35 * var(--u)); white-space: nowrap; }
+  .gf-socials { gap: calc(11 * var(--u)); }
+  .gf-socials a { width: calc(56 * var(--u)); height: calc(56 * var(--u)); }
+  .gf-socials svg { width: calc(30 * var(--u)); height: calc(30 * var(--u)); }
+
+  .gf-title { font-size: calc(32 * var(--u)); line-height: calc(38 * var(--u)); }
+  .gf-title::after { width: calc(70 * var(--u)); height: calc(4 * var(--u)); margin-top: calc(9 * var(--u)); }
+
+  .gf-main { grid-template-columns: minmax(0, 1fr) 1px calc(560 * var(--u)); gap: 0 calc(69 * var(--u));
+    padding: calc(26 * var(--u)) calc(91 * var(--u)) calc(36 * var(--u)) calc(98 * var(--u)); }
+  .gf-main > .gf-vdiv { height: auto; align-self: stretch; margin: calc(2 * var(--u)) 0 calc(-4 * var(--u)); background: #D5E6F5; }
+
+
+  .gf-svc-cols { margin-top: calc(18 * var(--u)); grid-template-columns: minmax(0, 426fr) 1px minmax(0, 412fr); gap: 0; }
+  .gf-svc-cols > .gf-sdiv { display: block; background: #D5E6F5; margin: calc(-6 * var(--u)) 0 calc(-10 * var(--u)); }
+  .gf-svc-cols > ul:last-child { padding-left: calc(60 * var(--u)); }
+  .gf-svc ul { gap: calc(22 * var(--u)); }
+  .gf-svc li { gap: calc(38 * var(--u)); font-size: calc(20 * var(--u)); line-height: calc(28 * var(--u)); min-height: calc(40 * var(--u)); }
+  .gf-stxt { white-space: pre; }
+  .gf-addr { white-space: pre-line; }
+  .gf-svc .gf-sbox { width: calc(58 * var(--u)); justify-content: center; }
+  .gf-svc li svg { width: calc(40 * var(--u)); height: calc(40 * var(--u)); }
+
+  .gf-contact ul { margin-top: calc(14 * var(--u)); gap: calc(16 * var(--u)); }
+  .gf-contact li.is-addr { margin-top: calc(7 * var(--u)); }
+  .gf-contact li { font-size: calc(20.5 * var(--u)); line-height: calc(29 * var(--u)); }
+  .gf-contact li > * { gap: calc(37 * var(--u)); }
+  .gf-ic { width: calc(44 * var(--u)); height: calc(44 * var(--u)); }
+  .gf-ic svg { width: calc(24 * var(--u)); height: calc(24 * var(--u)); }
+  .gf-ic { margin: calc(-3 * var(--u)) 0; }
+
+  .gf-branches { gap: calc(24 * var(--u)); padding: calc(30 * var(--u)) calc(91 * var(--u)) calc(34 * var(--u)) calc(98 * var(--u)); }
+  .gf-branches .gf-title { font-size: calc(31 * var(--u)); }
+  .gf-branches .gf-title::after { width: calc(62 * var(--u)); }
+  .gf-cards { grid-template-columns: 523fr 555fr 622fr; gap: calc(28 * var(--u)); }
+  .gf-card { height: calc(112 * var(--u)); padding: 0 calc(20 * var(--u)) 0 calc(29 * var(--u)); gap: 0; }
+  .gf-pin { width: calc(64 * var(--u)); height: calc(64 * var(--u)); }
+  .gf-pin svg { width: calc(32 * var(--u)); height: calc(32 * var(--u)); }
+  .gf-cdiv { align-self: center; height: calc(64 * var(--u)); margin: 0 calc(29 * var(--u)) 0 calc(31 * var(--u)); }
+  .gf-city { font-size: calc(19 * var(--u)); line-height: calc(26 * var(--u)); }
+  .gf-addr { margin-top: calc(2 * var(--u)); font-size: calc(17.5 * var(--u)); line-height: calc(23 * var(--u)); }
+
+  .gf-bottom { height: calc(48 * var(--u)); padding: 0 calc(67 * var(--u)) 0 calc(56 * var(--u)); font-size: calc(18 * var(--u)); }
+  .gf-legal { gap: calc(30 * var(--u)); }
+}
+
+/* 1200-1799px: same layout, but let text wrap instead of holding the reference line breaks and heights */
+@media (min-width: 1200px) and (max-width: 1799px) {
+  .gf-branches { padding: 24px clamp(24px, 3vw, 60px) 28px; }
+  .gf-stxt, .gf-addr { white-space: normal; }
+  .gf-brand { gap: 28px; flex-wrap: nowrap; }
+  .gf-logo img { height: clamp(76px, 6vw, 108px); }
+  .gf-tag { font-size: clamp(13.5px, 1.12vw, 17px); line-height: 1.4; }
+  .gf-main { grid-template-columns: minmax(0, 2fr) 1px minmax(0, 1.3fr); gap: 0 clamp(26px, 2.6vw, 44px); padding: calc(26 * var(--u)) clamp(24px, 3vw, 60px) 30px; }
+  .gf-svc li { gap: calc(18 * var(--u)); }
+  .gf-svc .gf-sbox { width: calc(46 * var(--u)); }
+  .gf-svc-cols > ul:last-child { padding-left: calc(36 * var(--u)); }
+  .gf-svc-cols > ul:first-child { padding-right: 16px; }
+  .gf-contact li > * { gap: 14px; }
+  .gf-card { height: auto; min-height: calc(112 * var(--u)); padding-top: 12px; padding-bottom: 12px; }
+}
+
+/* phones: sizes as requested (kept last so they win over the earlier phone rules) */
+@media (max-width: 767px) {
+  .gf-svc li { font-size: 13px; }
+  .gf-stxt { white-space: pre-wrap; }
+  .gf-svc li svg { width: 25px; height: 25px; }
+  .gf-title { font-size: 20px; }
+  .gf-ic svg { width: 12px; height: 12px; }
+  .gf-socials a { width: 35px; height: 35px; }
+  .gf-socials svg { width: 16px; height: 16px; }
+  .gf-pin { width: 36px; height: 36px; }
+  .gf-pin svg { width: 18px; height: 18px; }
+  .gf-addr { font-size: 13px; }
+  .gf-bottom { font-size: 14px; }
+  .gf-tag { font-size: 15px; }
+}

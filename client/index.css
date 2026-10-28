@@ -7,6 +7,8 @@
   --color-brand-gold: #0fb7fb;
   --color-brand-dark: #02285b;
   --color-brand-bg: #ffff;
+  /* footer: full three-column layout from 1360px */
+  --breakpoint-wide: 85rem;
 }
 
 /* Site-wide fonts: Karla for text, Fraunces for titles, Dancing Script for script accents */

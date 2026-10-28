@@ -114,7 +114,7 @@ const App: React.FC = () => {
       <RouteSync />
       <div className="min-h-screen bg-brand-bg relative w-full overflow-x-clip">
         {/* /services draws its own floating header and footer */}
-        {location.pathname !== '/admin' && location.pathname !== '/service1' && location.pathname !== '/service2' && (
+        {location.pathname !== '/admin' && location.pathname !== '/service1' && (
           <Navbar
             onNavigate={navigateTo}
             onBookClick={toggleBooking}
@@ -267,7 +267,7 @@ const App: React.FC = () => {
           </React.Suspense>
         </main>
 
-        {location.pathname !== '/admin' && location.pathname !== '/service1' && location.pathname !== '/service2' && (
+        {location.pathname !== '/admin' && location.pathname !== '/service1' && (
           <Footer onContactClick={toggleBooking} onNavigate={navigateTo} />
         )}
         <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
